@@ -1,0 +1,64 @@
+package saga;
+
+public class Facade {
+
+	private ClienteController clienteController;
+	private FornecedorController fornecedorController;
+	
+	public Facade() {
+		this.clienteController = new ClienteController();
+		this.fornecedorController = new FornecedorController();
+	}
+	
+	public String cadastraCliente(String nome, String cpf, String email, String localizacao) {
+		return clienteController.cadastraCliente(nome, cpf, email, localizacao);
+	}
+	
+	public String exibirCliente(String cpf) {
+		return clienteController.exibirCliente(cpf);
+	}
+	
+	public String listarClientes() {
+		return clienteController.listarClientes();
+	}
+	
+	public void mudarNomeCliente(String cpf, String nome) {
+		clienteController.mudarNome(cpf, nome);
+	}
+	
+	public void mudarEmailCliente(String cpf, String email) {
+		clienteController.mudarEmail(cpf, email);
+	}
+	
+	public void mudarLocalizacaoCliente(String cpf, String localizacao) {
+		clienteController.mudarLocalizacao(cpf, localizacao);
+	}
+	
+	public void removeCliente(String cpf) {
+		clienteController.removeCliente(cpf);
+	}
+	
+	public String cadastraFornecedor(String nome, String email, String telefone) {
+		return fornecedorController.cadastraFornecedor(nome, email, telefone);
+	}
+	
+	public String exibirFornecedor(String nome) {
+		return fornecedorController.exibirFornecedor(nome);
+	}
+	
+	public String listarFornecedores() {
+		return fornecedorController.listarFornecedores();
+	}
+	
+	public void mudarEmailFornecedor(String nome, String email) {
+		fornecedorController.mudarEmail(nome, email);
+	}
+	
+	public void mudarTelefoneFornecedor(String nome, String telefone) {
+		fornecedorController.mudarTelefone(nome, telefone);
+	}
+	
+	public void removerFornecedor(String nome) {
+		fornecedorController.removeFornecedor(nome);
+	}
+}

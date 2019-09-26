@@ -6,7 +6,7 @@ public class Cliente {
 	private String cpf;
 	private String email;
 	private String localizacao;
-	
+
 	public Cliente(String nome, String cpf, String email, String localizacao) {
 		this.nome = nome;
 		this.cpf = cpf;
@@ -71,7 +71,5 @@ public class Cliente {
 	public String getCpf() {
 		return cpf;
 	}
-	
-	
-	
+
 }

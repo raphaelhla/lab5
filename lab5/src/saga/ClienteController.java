@@ -8,29 +8,25 @@ public class ClienteController {
 
 	public ClienteController() {
 		this.clientes = new HashMap<String, Cliente>();
-	} 
-	
+	}
+
 	public String cadastraCliente(String nome, String cpf, String email, String localizacao) {
 		if (cpf == null) {
 			throw new NullPointerException("CPF NULO.");
-		}else if ("".equals(cpf.trim())) {
+		} else if ("".equals(cpf.trim())) {
 			throw new IllegalArgumentException("CPF INVALIDO.");
-		}else if (!this.clientes.containsKey(cpf)) {
-			this.clientes.put(cpf, new Cliente(nome,cpf,email,localizacao));
+		} else if (!this.clientes.containsKey(cpf)) {
+			this.clientes.put(cpf, new Cliente(nome, cpf, email, localizacao));
 			return cpf;
-		}else {
+		} else {
 			throw new IllegalArgumentException("Cliente ja cadastrado.");
 		}
 	}
-	
+
 	public String exibirCliente(String cpf) {
-		if(clientes.containsKey(cpf)) {
-			return clientes.get(cpf).toString();
-		}else {
-			return "Cliente nao cadastrado";
-		}
+		return clientes.get(cpf).toString();
 	}
-	
+
 	public String listarClientes() {
 		String msg = "";
 		int contador = 0;
@@ -38,16 +34,26 @@ public class ClienteController {
 			contador += 1;
 			if (contador < clientes.size()) {
 				msg += e.toString() + " | ";
-			}else {
+			} else {
 				msg += e.toString();
 			}
 		}
 		return msg;
 	}
+
+	public void mudarNome(String cpf, String nome) {
+		clientes.get(cpf).setNome(nome);
+	}
+	
+	public void mudarEmail(String cpf, String email) {
+		clientes.get(cpf).setEmail(email);
+	}
+	
+	public void mudarLocalizacao(String cpf, String localizacao) {
+		clientes.get(cpf).setLocalizacao(localizacao);
+	}
 	
 	public void removeCliente(String cpf) {
 		this.clientes.remove(cpf);
 	}
-	
-
 }
