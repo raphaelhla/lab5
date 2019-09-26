@@ -19,8 +19,4 @@ public class Facade {
 	public String listarClientes() {
 		return clienteController.listarClientes();
 	}
-	
-	public void removeCliente(String cpf) {
-		clienteController.removeCliente(cpf);
-	}
 }
