@@ -230,3 +230,14 @@ Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was STRING
 	at com.google.gson.stream.JsonReader.beginObject(JsonReader.java:385)
 	at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.read(ReflectiveTypeAdapterFactory.java:213)
 	... 9 more
+
+!ENTRY org.eclipse.ui.navigator 4 0 2019-09-26 10:38:33.339
+!MESSAGE Cannot find navigator content extension (using triggerPoints) for object "<null>" parent path: "src [in lab5]
+  <default> (not open)
+  saga (not open)".  Check that you have an expression for this object in a navigatorContent triggerPoints or enablement.
+
+!ENTRY org.eclipse.jface.text 2 0 2019-09-26 10:40:01.205
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.boolean'
+
+!ENTRY org.eclipse.jface.text 2 0 2019-09-26 10:40:01.379
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.boolean'
