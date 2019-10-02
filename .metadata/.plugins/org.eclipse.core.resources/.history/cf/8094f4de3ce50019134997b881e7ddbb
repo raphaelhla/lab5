@@ -1,0 +1,22 @@
+package saga;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+class FornecedorControllerTest {
+
+	private FornecedorController fornecedorController;
+	
+	@BeforeEach
+	public void criaController() {
+		fornecedorController = new FornecedorController();
+	}
+	
+	@Test
+	public void testCadastraFornecedorValido() {
+		assertEquals("Seu Olavo", fornecedorController.cadastraFornecedor("Seu Olavo", "olavo@gmail.com", "83 99999-8888"));
+	}
+
+}

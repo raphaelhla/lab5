@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="FornecedorTest" project="lab5" tests="10" started="10" failures="0" errors="0" ignored="0">
+  <testsuite name="saga.FornecedorTest" time="0.302" displayname="FornecedorTest" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorTest]">
+    <testcase name="testCadastraFornecedorNomeNulo" classname="saga.FornecedorTest" time="0.132" displayname="testCadastraFornecedorNomeNulo()" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorTest]/[method:testCadastraFornecedorNomeNulo()]"/>
+    <testcase name="testGetTelefoneFornecedor" classname="saga.FornecedorTest" time="0.022" displayname="testGetTelefoneFornecedor()" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorTest]/[method:testGetTelefoneFornecedor()]"/>
+    <testcase name="testCadastraFornecedorNomeVazio" classname="saga.FornecedorTest" time="0.019" displayname="testCadastraFornecedorNomeVazio()" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorTest]/[method:testCadastraFornecedorNomeVazio()]"/>
+    <testcase name="testGetEmailFornecedor2" classname="saga.FornecedorTest" time="0.016" displayname="testGetEmailFornecedor2()" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorTest]/[method:testGetEmailFornecedor2()]"/>
+    <testcase name="testCadastraFornecedorEmailVazio" classname="saga.FornecedorTest" time="0.008" displayname="testCadastraFornecedorEmailVazio()" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorTest]/[method:testCadastraFornecedorEmailVazio()]"/>
+    <testcase name="testGetTelefoneFornecedor2" classname="saga.FornecedorTest" time="0.028" displayname="testGetTelefoneFornecedor2()" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorTest]/[method:testGetTelefoneFornecedor2()]"/>
+    <testcase name="testGetEmailFornecedor" classname="saga.FornecedorTest" time="0.006" displayname="testGetEmailFornecedor()" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorTest]/[method:testGetEmailFornecedor()]"/>
+    <testcase name="testCadastraFornecedorTelefoneNulo" classname="saga.FornecedorTest" time="0.011" displayname="testCadastraFornecedorTelefoneNulo()" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorTest]/[method:testCadastraFornecedorTelefoneNulo()]"/>
+    <testcase name="testCadastraFornecedorEmailNulo" classname="saga.FornecedorTest" time="0.002" displayname="testCadastraFornecedorEmailNulo()" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorTest]/[method:testCadastraFornecedorEmailNulo()]"/>
+    <testcase name="testCadastraFornecedorTelefoneVazio" classname="saga.FornecedorTest" time="0.058" displayname="testCadastraFornecedorTelefoneVazio()" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorTest]/[method:testCadastraFornecedorTelefoneVazio()]"/>
+  </testsuite>
+</testrun>

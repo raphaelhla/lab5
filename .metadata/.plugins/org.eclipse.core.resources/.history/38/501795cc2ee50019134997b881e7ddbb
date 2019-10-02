@@ -1,0 +1,14 @@
+package saga;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class FornecedorTest {
+
+	@Test
+	void test() {
+		fail("Not yet implemented");
+	}
+
+}

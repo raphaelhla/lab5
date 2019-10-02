@@ -65,8 +65,13 @@ public class Fornecedor {
 		return this.nome + " - " + this.email + " - " + this.telefone;
 	}
 	
-	public void cadastraProduto(double preco, String nome, String descricao) {
-		Produto p1 = new Produto(preco, nome, descricao);
+	public void cadastraProduto(double preco, String nomeProduto, String descricao) {
+		Validador.validaEntrada(nomeProduto, "Erro no cadastro de produto: nome nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(descricao, "Erro no cadastro de produto: descricao nao pode ser vazia ou nula.");
+		if(preco < 0) {
+			throw new IllegalArgumentException("Erro no cadastro de produto: preco invalido.");
+		}
+		Produto p1 = new Produto(preco, nomeProduto, descricao);
 		if (!produtos.containsKey(p1.getIdProduto())) {
 			this.produtos.put(p1.getIdProduto(), p1);
 		}else {
@@ -75,7 +80,9 @@ public class Fornecedor {
 		
 	}
 	
-	public String exibirProduto(String nomeProduto, String descricao) {
+	public String exibeProduto(String nomeProduto, String descricao) {
+		Validador.validaEntrada(nomeProduto, "Erro na exibicao de produto: nome nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(descricao, "Erro na exibicao de produto: descricao nao pode ser vazia ou nula.");
 		IdProduto idProduto = new IdProduto(nomeProduto, descricao);
 		if (produtos.containsKey(idProduto)) {
 			return produtos.get(idProduto).toString();
@@ -91,15 +98,20 @@ public class Fornecedor {
 		for (Produto e : produtos.values()) {
 			contador += 1;
 			if (contador < produtos.size()) {
-				msg += e.toString() + " | ";
+				msg += this.nome + " - " + e.toString() + " | ";
 			}else {
-				msg += e.toString();
+				msg += this.nome + " - " + e.toString();
 			}
 		}
 		return msg;
 	}
 	
 	public void editaProduto(String nomeProduto, String descricao, double precoNovo) {
+		Validador.validaEntrada(nomeProduto, "Erro na edicao de produto: nome nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(descricao, "Erro na edicao de produto: descricao nao pode ser vazia ou nula.");
+		if(precoNovo < 0) {
+			throw new IllegalArgumentException("Erro na edicao de produto: preco invalido.");
+		}
 		IdProduto idProduto = new IdProduto(nomeProduto, descricao);
 		if (produtos.containsKey(idProduto)) {
 			produtos.get(idProduto).setPreco(precoNovo);
@@ -109,6 +121,8 @@ public class Fornecedor {
 	}
 
 	public void removeProduto(String nomeProduto, String descricao) {
+		Validador.validaEntrada(nomeProduto, "Erro na remocao de produto: nome nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(descricao, "Erro na remocao de produto: descricao nao pode ser vazia ou nula.");
 		IdProduto idProduto = new IdProduto(nomeProduto, descricao);
 		if (produtos.containsKey(idProduto)) {
 			produtos.remove(idProduto);

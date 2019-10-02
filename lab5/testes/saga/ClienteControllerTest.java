@@ -1,6 +1,9 @@
 package saga;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+import java.util.HashSet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -161,14 +164,24 @@ class ClienteControllerTest {
 
 	@Test
 	public void testListarClientes() {
-		/**
-		 * clienteController.cadastraCliente("Raphael Agra", "12345678900",
-		 * "raphael.agra@ccc.ufcg.edu.br", "CAA");
-		 * clienteController.cadastraCliente("Ana Amari", "11111111100",
-		 * "ana_amari@ccc.ufcg.edu.br", "SPG"); assertEquals("Raphael Agra - CAA -
-		 * raphael.agra@ccc.ufcg.edu.br | Ana Amari - SPG - ana_amari@ccc.ufcg.edu.br",
-		 * clienteController.listarClientes());
-		 */
+		HashSet<String> listaClientes = new HashSet<String>();
+		HashSet<String> listaClientes2 = new HashSet<String>();
+		
+		clienteController.cadastraCliente("Raphael Agra", "12345678900","raphael.agra@ccc.ufcg.edu.br", "CAA");
+		clienteController.cadastraCliente("Ana Amari", "11111111100","ana_amari@ccc.ufcg.edu.br", "SPG");
+		listaClientes.add(clienteController.exibeCliente("12345678900"));
+		listaClientes.add(clienteController.exibeCliente("11111111100"));
+		
+		String[] x = clienteController.listarClientes().split(" \\| ");
+		for (int i = 0; i < x.length; i++) {
+			listaClientes2.add(x[i]);
+		}
+		assertEquals(listaClientes,listaClientes2);
+	}
+	
+	@Test
+	public void testListarClientesSemNenhumCliente() {
+		assertEquals("",clienteController.listarClientes());
 	}
 
 	@Test

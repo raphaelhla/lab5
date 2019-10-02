@@ -6,6 +6,8 @@ public class IdProduto {
 	private String descricao;
 	
 	public IdProduto(String nome, String descricao) {
+		Validador.validaEntrada(nome, "Erro no cadastro de idProduto: nome nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(descricao, "Erro no cadastro de idProduto: descricao nao pode ser vazia ou nula.");
 		this.nome = nome;
 		this.descricao = descricao;
 	}

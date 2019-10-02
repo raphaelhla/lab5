@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ProdutoTest" project="lab5" tests="4" started="4" failures="0" errors="0" ignored="0">
+  <testsuite name="saga.ProdutoTest" time="0.064" displayname="ProdutoTest" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]">
+    <testcase name="testCadastraProdutoNomeNulo" classname="saga.ProdutoTest" time="0.041" displayname="testCadastraProdutoNomeNulo()" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]/[method:testCadastraProdutoNomeNulo()]"/>
+    <testcase name="testCadastraProdutoDescricaoVazia" classname="saga.ProdutoTest" time="0.004" displayname="testCadastraProdutoDescricaoVazia()" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]/[method:testCadastraProdutoDescricaoVazia()]"/>
+    <testcase name="testCadastraProdutoDescricaoNula" classname="saga.ProdutoTest" time="0.003" displayname="testCadastraProdutoDescricaoNula()" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]/[method:testCadastraProdutoDescricaoNula()]"/>
+    <testcase name="testCadastraProdutoNomeVazio" classname="saga.ProdutoTest" time="0.016" displayname="testCadastraProdutoNomeVazio()" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]/[method:testCadastraProdutoNomeVazio()]"/>
+  </testsuite>
+</testrun>

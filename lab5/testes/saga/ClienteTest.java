@@ -7,9 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class ClienteTest {
 
-	private Cliente cliente1;
-	private Cliente cliente2;
-	private Cliente cliente3;
+	private Cliente cliente1, cliente2, cliente3;
 	
 	@BeforeEach
 	public void criandoCliente() {
@@ -119,22 +117,22 @@ class ClienteTest {
 	}
 	
 	@Test
-	public void testEquals() {
+	public void testEqualsClienteDiferente() {
 		assertFalse(cliente1.equals(cliente2));
 	}
 	
 	@Test
-	public void testEquals2() {
+	public void testEqualsClienteComMesmoCpf() {
 		assertTrue(cliente2.equals(cliente3));
 	}
 	
 	@Test
-	public void testEquals3() {
+	public void testEqualsComNull() {
 		assertFalse(cliente2.equals(null));
 	}
 	
 	@Test
-	public void testEquals4() {
+	public void testEqualsComEleMesmo() {
 		assertTrue(cliente2.equals(cliente2));
 	}
 	

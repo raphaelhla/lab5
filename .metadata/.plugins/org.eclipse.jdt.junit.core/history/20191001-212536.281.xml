@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="ClienteControllerTest" project="lab5" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="saga.ClienteControllerTest" time="0.069" displayname="ClienteControllerTest" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteControllerTest]">
-    <testcase name="testCadastraClienteValido" classname="saga.ClienteControllerTest" time="0.069" displayname="testCadastraClienteValido()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteControllerTest]/[method:testCadastraClienteValido()]"/>
-  </testsuite>
-</testrun>

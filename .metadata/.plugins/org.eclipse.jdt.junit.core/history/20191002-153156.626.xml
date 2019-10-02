@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="FornecedorControllerTest.testRemoveFornecedorInexistente" project="lab5" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="saga.FornecedorControllerTest" time="0.074" displayname="FornecedorControllerTest" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorControllerTest]">
+    <testcase name="testRemoveFornecedorInexistente" classname="saga.FornecedorControllerTest" time="0.074" displayname="testRemoveFornecedorInexistente()" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorControllerTest]/[method:testRemoveFornecedorInexistente()]"/>
+  </testsuite>
+</testrun>

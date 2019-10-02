@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="FornecedorControllerTest.testEditaProdutoValido" project="lab5" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="saga.FornecedorControllerTest" time="0.092" displayname="FornecedorControllerTest" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorControllerTest]">
+    <testcase name="testEditaProdutoValido" classname="saga.FornecedorControllerTest" time="0.092" displayname="testEditaProdutoValido()" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorControllerTest]/[method:testEditaProdutoValido()]"/>
+  </testsuite>
+</testrun>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="IdProdutoTest" project="lab5" tests="8" started="8" failures="0" errors="0" ignored="0">
+  <testsuite name="saga.IdProdutoTest" time="0.169" displayname="IdProdutoTest" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]">
+    <testcase name="testCadastraIdProdutoDescricaoVazia" classname="saga.IdProdutoTest" time="0.072" displayname="testCadastraIdProdutoDescricaoVazia()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testCadastraIdProdutoDescricaoVazia()]"/>
+    <testcase name="testGetDescricao" classname="saga.IdProdutoTest" time="0.01" displayname="testGetDescricao()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testGetDescricao()]"/>
+    <testcase name="testCadastraIdProdutoNomeNulo" classname="saga.IdProdutoTest" time="0.011" displayname="testCadastraIdProdutoNomeNulo()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testCadastraIdProdutoNomeNulo()]"/>
+    <testcase name="testCadastraIdProdutoNomeVazio" classname="saga.IdProdutoTest" time="0.012" displayname="testCadastraIdProdutoNomeVazio()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testCadastraIdProdutoNomeVazio()]"/>
+    <testcase name="testGetNome2" classname="saga.IdProdutoTest" time="0.01" displayname="testGetNome2()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testGetNome2()]"/>
+    <testcase name="testGetNome" classname="saga.IdProdutoTest" time="0.007" displayname="testGetNome()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testGetNome()]"/>
+    <testcase name="testCadastraIdProdutoDescricaoNula" classname="saga.IdProdutoTest" time="0.012" displayname="testCadastraIdProdutoDescricaoNula()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testCadastraIdProdutoDescricaoNula()]"/>
+    <testcase name="testGetDescricao2" classname="saga.IdProdutoTest" time="0.035" displayname="testGetDescricao2()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testGetDescricao2()]"/>
+  </testsuite>
+</testrun>

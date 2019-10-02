@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="IdProdutoTest" project="lab5" tests="13" started="13" failures="0" errors="0" ignored="0">
+  <testsuite name="saga.IdProdutoTest" time="0.16" displayname="IdProdutoTest" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]">
+    <testcase name="testCadastraIdProdutoDescricaoVazia" classname="saga.IdProdutoTest" time="0.033" displayname="testCadastraIdProdutoDescricaoVazia()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testCadastraIdProdutoDescricaoVazia()]"/>
+    <testcase name="testGetDescricao" classname="saga.IdProdutoTest" time="0.021" displayname="testGetDescricao()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testGetDescricao()]"/>
+    <testcase name="testCadastraIdProdutoNomeNulo" classname="saga.IdProdutoTest" time="0.009" displayname="testCadastraIdProdutoNomeNulo()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testCadastraIdProdutoNomeNulo()]"/>
+    <testcase name="testCadastraIdProdutoNomeVazio" classname="saga.IdProdutoTest" time="0.018" displayname="testCadastraIdProdutoNomeVazio()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testCadastraIdProdutoNomeVazio()]"/>
+    <testcase name="testGetNome2" classname="saga.IdProdutoTest" time="0.009" displayname="testGetNome2()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testGetNome2()]"/>
+    <testcase name="testGetNome" classname="saga.IdProdutoTest" time="0.011" displayname="testGetNome()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testGetNome()]"/>
+    <testcase name="testCadastraIdProdutoDescricaoNula" classname="saga.IdProdutoTest" time="0.003" displayname="testCadastraIdProdutoDescricaoNula()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testCadastraIdProdutoDescricaoNula()]"/>
+    <testcase name="testEqualsMesmoObjeto" classname="saga.IdProdutoTest" time="0.004" displayname="testEqualsMesmoObjeto()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testEqualsMesmoObjeto()]"/>
+    <testcase name="testEqualsComOutraClasse" classname="saga.IdProdutoTest" time="0.009" displayname="testEqualsComOutraClasse()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testEqualsComOutraClasse()]"/>
+    <testcase name="testGetDescricao2" classname="saga.IdProdutoTest" time="0.006" displayname="testGetDescricao2()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testGetDescricao2()]"/>
+    <testcase name="testHashCode" classname="saga.IdProdutoTest" time="0.002" displayname="testHashCode()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testHashCode()]"/>
+    <testcase name="testEqualsObjetoDiferente" classname="saga.IdProdutoTest" time="0.002" displayname="testEqualsObjetoDiferente()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testEqualsObjetoDiferente()]"/>
+    <testcase name="testEqualsComNull" classname="saga.IdProdutoTest" time="0.033" displayname="testEqualsComNull()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testEqualsComNull()]"/>
+  </testsuite>
+</testrun>

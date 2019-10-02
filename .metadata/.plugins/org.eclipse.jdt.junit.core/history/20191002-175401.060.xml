@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ProdutoTest" project="lab5" tests="17" started="17" failures="0" errors="0" ignored="0">
+  <testsuite name="saga.ProdutoTest" time="0.218" displayname="ProdutoTest" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]">
+    <testcase name="testGetDescricao" classname="saga.ProdutoTest" time="0.074" displayname="testGetDescricao()" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]/[method:testGetDescricao()]"/>
+    <testcase name="testGetNome2" classname="saga.ProdutoTest" time="0.01" displayname="testGetNome2()" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]/[method:testGetNome2()]"/>
+    <testcase name="testGetPreco" classname="saga.ProdutoTest" time="0.009" displayname="testGetPreco()" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]/[method:testGetPreco()]"/>
+    <testcase name="testCadastraProdutoNomeNulo" classname="saga.ProdutoTest" time="0.007" displayname="testCadastraProdutoNomeNulo()" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]/[method:testCadastraProdutoNomeNulo()]"/>
+    <testcase name="testToString" classname="saga.ProdutoTest" time="0.012" displayname="testToString()" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]/[method:testToString()]"/>
+    <testcase name="testGetNome" classname="saga.ProdutoTest" time="0.002" displayname="testGetNome()" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]/[method:testGetNome()]"/>
+    <testcase name="testGetIdProduto" classname="saga.ProdutoTest" time="0.005" displayname="testGetIdProduto()" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]/[method:testGetIdProduto()]"/>
+    <testcase name="testCadastraProdutoDescricaoVazia" classname="saga.ProdutoTest" time="0.002" displayname="testCadastraProdutoDescricaoVazia()" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]/[method:testCadastraProdutoDescricaoVazia()]"/>
+    <testcase name="testCadastraProdutoDescricaoNula" classname="saga.ProdutoTest" time="0.002" displayname="testCadastraProdutoDescricaoNula()" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]/[method:testCadastraProdutoDescricaoNula()]"/>
+    <testcase name="testCadastraProdutoPrecoInvalido" classname="saga.ProdutoTest" time="0.007" displayname="testCadastraProdutoPrecoInvalido()" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]/[method:testCadastraProdutoPrecoInvalido()]"/>
+    <testcase name="testCadastraProdutoNomeVazio" classname="saga.ProdutoTest" time="0.002" displayname="testCadastraProdutoNomeVazio()" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]/[method:testCadastraProdutoNomeVazio()]"/>
+    <testcase name="testGetDescricao2" classname="saga.ProdutoTest" time="0.011" displayname="testGetDescricao2()" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]/[method:testGetDescricao2()]"/>
+    <testcase name="testHashCode" classname="saga.ProdutoTest" time="0.026" displayname="testHashCode()" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]/[method:testHashCode()]"/>
+    <testcase name="testGetIdProduto2" classname="saga.ProdutoTest" time="0.011" displayname="testGetIdProduto2()" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]/[method:testGetIdProduto2()]"/>
+    <testcase name="testGetPreco2" classname="saga.ProdutoTest" time="0.004" displayname="testGetPreco2()" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]/[method:testGetPreco2()]"/>
+    <testcase name="testToString2" classname="saga.ProdutoTest" time="0.01" displayname="testToString2()" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]/[method:testToString2()]"/>
+    <testcase name="testSetPreco" classname="saga.ProdutoTest" time="0.023" displayname="testSetPreco()" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]/[method:testSetPreco()]"/>
+  </testsuite>
+</testrun>

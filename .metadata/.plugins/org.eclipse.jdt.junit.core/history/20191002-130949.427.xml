@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="FornecedorTest" project="lab5" tests="4" started="4" failures="0" errors="0" ignored="0">
+  <testsuite name="saga.FornecedorTest" time="0.108" displayname="FornecedorTest" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorTest]">
+    <testcase name="testCadastraFornecedorNomeNulo" classname="saga.FornecedorTest" time="0.052" displayname="testCadastraFornecedorNomeNulo()" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorTest]/[method:testCadastraFornecedorNomeNulo()]"/>
+    <testcase name="testCadastraFornecedorNomeVazio" classname="saga.FornecedorTest" time="0.01" displayname="testCadastraFornecedorNomeVazio()" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorTest]/[method:testCadastraFornecedorNomeVazio()]"/>
+    <testcase name="testCadastraFornecedorEmailVazio" classname="saga.FornecedorTest" time="0.014" displayname="testCadastraFornecedorEmailVazio()" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorTest]/[method:testCadastraFornecedorEmailVazio()]"/>
+    <testcase name="testCadastraFornecedorEmailNulo" classname="saga.FornecedorTest" time="0.032" displayname="testCadastraFornecedorEmailNulo()" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorTest]/[method:testCadastraFornecedorEmailNulo()]"/>
+  </testsuite>
+</testrun>
