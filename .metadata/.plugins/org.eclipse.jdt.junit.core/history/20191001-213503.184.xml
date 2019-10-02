@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="src" project="lab5" tests="38" started="38" failures="0" errors="0" ignored="0">
+  <testsuite name="saga.ClienteTest" time="0.148" displayname="ClienteTest" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]">
+    <testcase name="testCadastraClienteLocalizacaoVazia" classname="saga.ClienteTest" time="0.0" displayname="testCadastraClienteLocalizacaoVazia()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testCadastraClienteLocalizacaoVazia()]"/>
+    <testcase name="testEquals2" classname="saga.ClienteTest" time="0.0" displayname="testEquals2()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testEquals2()]"/>
+    <testcase name="testEquals3" classname="saga.ClienteTest" time="0.0" displayname="testEquals3()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testEquals3()]"/>
+    <testcase name="testEquals4" classname="saga.ClienteTest" time="0.0" displayname="testEquals4()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testEquals4()]"/>
+    <testcase name="testEquals5" classname="saga.ClienteTest" time="0.0" displayname="testEquals5()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testEquals5()]"/>
+    <testcase name="testGetEmail" classname="saga.ClienteTest" time="0.0" displayname="testGetEmail()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testGetEmail()]"/>
+    <testcase name="testGetNome2" classname="saga.ClienteTest" time="0.0" displayname="testGetNome2()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testGetNome2()]"/>
+    <testcase name="testSetLocalizacao" classname="saga.ClienteTest" time="0.0" displayname="testSetLocalizacao()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testSetLocalizacao()]"/>
+    <testcase name="testToString" classname="saga.ClienteTest" time="0.0" displayname="testToString()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testToString()]"/>
+    <testcase name="testCadastraClienteEmailVazio" classname="saga.ClienteTest" time="0.0" displayname="testCadastraClienteEmailVazio()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testCadastraClienteEmailVazio()]"/>
+    <testcase name="testCadastraClienteCpfInvalido" classname="saga.ClienteTest" time="0.007" displayname="testCadastraClienteCpfInvalido()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testCadastraClienteCpfInvalido()]"/>
+    <testcase name="testGetCpf2" classname="saga.ClienteTest" time="0.004" displayname="testGetCpf2()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testGetCpf2()]"/>
+    <testcase name="testGetNome" classname="saga.ClienteTest" time="0.006" displayname="testGetNome()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testGetNome()]"/>
+    <testcase name="testCadastraClienteCpfNulo" classname="saga.ClienteTest" time="0.007" displayname="testCadastraClienteCpfNulo()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testCadastraClienteCpfNulo()]"/>
+    <testcase name="testCadastraClienteEmailNulo" classname="saga.ClienteTest" time="0.008" displayname="testCadastraClienteEmailNulo()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testCadastraClienteEmailNulo()]"/>
+    <testcase name="testGetLocalizacao" classname="saga.ClienteTest" time="0.009" displayname="testGetLocalizacao()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testGetLocalizacao()]"/>
+    <testcase name="testCadastraClienteCpfVazio" classname="saga.ClienteTest" time="0.003" displayname="testCadastraClienteCpfVazio()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testCadastraClienteCpfVazio()]"/>
+    <testcase name="testGetLocalizacao2" classname="saga.ClienteTest" time="0.018" displayname="testGetLocalizacao2()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testGetLocalizacao2()]"/>
+    <testcase name="testHashCode" classname="saga.ClienteTest" time="0.013" displayname="testHashCode()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testHashCode()]"/>
+    <testcase name="testHashCode2" classname="saga.ClienteTest" time="0.011" displayname="testHashCode2()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testHashCode2()]"/>
+    <testcase name="testGetEmail2" classname="saga.ClienteTest" time="0.009" displayname="testGetEmail2()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testGetEmail2()]"/>
+    <testcase name="testCadastraClienteLocalizacaoNula" classname="saga.ClienteTest" time="0.006" displayname="testCadastraClienteLocalizacaoNula()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testCadastraClienteLocalizacaoNula()]"/>
+    <testcase name="testEquals" classname="saga.ClienteTest" time="0.008" displayname="testEquals()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testEquals()]"/>
+    <testcase name="testGetCpf" classname="saga.ClienteTest" time="0.002" displayname="testGetCpf()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testGetCpf()]"/>
+    <testcase name="testCadastraClienteNomeNulo" classname="saga.ClienteTest" time="0.004" displayname="testCadastraClienteNomeNulo()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testCadastraClienteNomeNulo()]"/>
+    <testcase name="testSetNome" classname="saga.ClienteTest" time="0.008" displayname="testSetNome()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testSetNome()]"/>
+    <testcase name="testCadastraClienteNomeVazio" classname="saga.ClienteTest" time="0.01" displayname="testCadastraClienteNomeVazio()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testCadastraClienteNomeVazio()]"/>
+    <testcase name="testSetEmail" classname="saga.ClienteTest" time="0.015" displayname="testSetEmail()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testSetEmail()]"/>
+  </testsuite>
+  <testsuite name="saga.ClienteControllerTest" time="0.048" displayname="ClienteControllerTest" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteControllerTest]">
+    <testcase name="testCadastraClienteLocalizacaoVazia" classname="saga.ClienteControllerTest" time="0.005" displayname="testCadastraClienteLocalizacaoVazia()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteControllerTest]/[method:testCadastraClienteLocalizacaoVazia()]"/>
+    <testcase name="testCadastraClienteEmailVazio" classname="saga.ClienteControllerTest" time="0.004" displayname="testCadastraClienteEmailVazio()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteControllerTest]/[method:testCadastraClienteEmailVazio()]"/>
+    <testcase name="testCadastraClienteCpfInvalido" classname="saga.ClienteControllerTest" time="0.002" displayname="testCadastraClienteCpfInvalido()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteControllerTest]/[method:testCadastraClienteCpfInvalido()]"/>
+    <testcase name="testCadastraClienteValido" classname="saga.ClienteControllerTest" time="0.002" displayname="testCadastraClienteValido()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteControllerTest]/[method:testCadastraClienteValido()]"/>
+    <testcase name="testCadastraClienteCpfNulo" classname="saga.ClienteControllerTest" time="0.004" displayname="testCadastraClienteCpfNulo()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteControllerTest]/[method:testCadastraClienteCpfNulo()]"/>
+    <testcase name="testCadastraClienteEmailNulo" classname="saga.ClienteControllerTest" time="0.005" displayname="testCadastraClienteEmailNulo()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteControllerTest]/[method:testCadastraClienteEmailNulo()]"/>
+    <testcase name="testCadastraClienteCpfVazio" classname="saga.ClienteControllerTest" time="0.003" displayname="testCadastraClienteCpfVazio()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteControllerTest]/[method:testCadastraClienteCpfVazio()]"/>
+    <testcase name="testCadastraClienteLocalizacaoNula" classname="saga.ClienteControllerTest" time="0.005" displayname="testCadastraClienteLocalizacaoNula()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteControllerTest]/[method:testCadastraClienteLocalizacaoNula()]"/>
+    <testcase name="testCadastraClienteNomeNulo" classname="saga.ClienteControllerTest" time="0.001" displayname="testCadastraClienteNomeNulo()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteControllerTest]/[method:testCadastraClienteNomeNulo()]"/>
+    <testcase name="testCadastraClienteNomeVazio" classname="saga.ClienteControllerTest" time="0.017" displayname="testCadastraClienteNomeVazio()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteControllerTest]/[method:testCadastraClienteNomeVazio()]"/>
+  </testsuite>
+</testrun>

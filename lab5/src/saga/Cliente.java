@@ -8,6 +8,13 @@ public class Cliente {
 	private String localizacao;
 
 	public Cliente(String nome, String cpf, String email, String localizacao) {
+		Validador.validaEntrada(nome, "Erro no cadastro do cliente: nome nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(cpf, "Erro no cadastro do cliente: cpf nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(email, "Erro no cadastro do cliente: email nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(localizacao, "Erro no cadastro do cliente: localizacao nao pode ser vazia ou nula.");
+		if (cpf.length() != 11) {
+			throw new IllegalArgumentException("Erro no cadastro do cliente: cpf invalido.");
+		}
 		this.nome = nome;
 		this.cpf = cpf;
 		this.email = email;
@@ -18,7 +25,7 @@ public class Cliente {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		result = prime * result + cpf.hashCode();
 		return result;
 	}
 
@@ -31,10 +38,7 @@ public class Cliente {
 		if (getClass() != obj.getClass())
 			return false;
 		Cliente other = (Cliente) obj;
-		if (cpf == null) {
-			if (other.cpf != null)
-				return false;
-		} else if (!cpf.equals(other.cpf))
+		if (!cpf.equals(other.cpf))
 			return false;
 		return true;
 	}
@@ -71,5 +75,4 @@ public class Cliente {
 	public String getCpf() {
 		return cpf;
 	}
-
 }

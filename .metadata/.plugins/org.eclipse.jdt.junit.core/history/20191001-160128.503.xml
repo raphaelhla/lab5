@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ClienteTest" project="lab5" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="saga.ClienteTest" time="0.1" displayname="ClienteTest" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]">
+    <testcase name="testGetNome" classname="saga.ClienteTest" time="0.1" displayname="testGetNome()" uniqueid="[engine:junit-jupiter]/[class:saga.ClienteTest]/[method:testGetNome()]"/>
+  </testsuite>
+</testrun>

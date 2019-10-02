@@ -1,0 +1,122 @@
+package saga;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+class ClienteControllerTest {
+
+	private ClienteController clienteController;
+	
+	@BeforeEach
+	public void criaController() {
+		clienteController = new ClienteController();
+	}
+
+	@Test
+	public void testCadastraClienteValido() {
+		assertEquals("12345678900", clienteController.cadastraCliente("Raphael Agra", "12345678900", "raphael.agra@ccc.ufcg.edu.br", "CAA"));
+	}
+	
+	@Test
+	public void testCadastraClienteNomeNulo() {
+		try {
+			clienteController.cadastraCliente(null, "12345678900", "raphael.agra@ccc.ufcg.edu.br", "CAA");
+			fail("Deveria lancar excecao");
+		} catch (NullPointerException e) {
+			assertEquals("Erro no cadastro do cliente: nome nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testCadastraClienteNomeVazio() {
+		try {
+			clienteController.cadastraCliente("", "12345678900", "raphael.agra@ccc.ufcg.edu.br", "CAA");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro do cliente: nome nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testCadastraClienteCpfNulo() {
+		try {
+			clienteController.cadastraCliente("Raphael Agra", null, "raphael.agra@ccc.ufcg.edu.br", "CAA");
+			fail("Deveria lancar excecao");
+		} catch (NullPointerException e) {
+			assertEquals("Erro no cadastro do cliente: cpf nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testCadastraClienteCpfVazio() {
+		try {
+			clienteController.cadastraCliente("Raphael Agra", "", "raphael.agra@ccc.ufcg.edu.br", "CAA");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro do cliente: cpf nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testCadastraClienteCpfInvalido() {
+		try {
+			clienteController.cadastraCliente("Raphael Agra", "1234", "raphael.agra@ccc.ufcg.edu.br", "CAA");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro do cliente: cpf invalido.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testCadastraClienteEmailNulo() {
+		try {
+			clienteController.cadastraCliente("Raphael Agra", "12345678900", null, "CAA");
+			fail("Deveria lancar excecao");
+		} catch (NullPointerException e) {
+			assertEquals("Erro no cadastro do cliente: email nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testCadastraClienteEmailVazio() {
+		try {
+			clienteController.cadastraCliente("Raphael Agra", "12345678900", "", "CAA");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro do cliente: email nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testCadastraClienteLocalizacaoNula() {
+		try {
+			clienteController.cadastraCliente("Raphael Agra", "12345678900", "raphael.agra@ccc.ufcg.edu.br", null);
+			fail("Deveria lancar excecao");
+		} catch (NullPointerException e) {
+			assertEquals("Erro no cadastro do cliente: localizacao nao pode ser vazia ou nula.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testCadastraClienteLocalizacaoVazia() {
+		try {
+			clienteController.cadastraCliente("Raphael Agra", "12345678900", "raphael.agra@ccc.ufcg.edu.br", "");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro do cliente: localizacao nao pode ser vazia ou nula.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testCadastraClienteExistente() {
+		try {
+			clienteController.cadastraCliente("Raphael Agra", "12345678900", "raphael.agra@ccc.ufcg.edu.br", "CAA");
+			clienteController.cadastraCliente("Raphael Agra", "12345678900", "raphael.agra@ccc.ufcg.edu.br", "CAA");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro do cliente: cliente ja existe.", e.getMessage());
+		}
+	}
+}
