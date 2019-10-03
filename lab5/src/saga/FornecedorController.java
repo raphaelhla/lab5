@@ -1,6 +1,10 @@
 package saga;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Representacao de um controller de fornecedores.
@@ -77,7 +81,21 @@ public class FornecedorController {
 				msg += e.toString();
 			}
 		}
-		return msg;
+		//return msg;
+		
+		String msgOrdenada = "";
+		String[] x = msg.split(" \\| ");
+		Arrays.sort(x);
+		int contador2 = 0;
+		for (String e : x) {
+			contador2 += 1;
+			if (contador2 < x.length) {
+				msgOrdenada += e + " | ";
+			} else {
+				msgOrdenada += e;
+			}
+		}
+		return msgOrdenada;
 	}
 
 	/**
@@ -181,16 +199,23 @@ public class FornecedorController {
 	 *         fornecedores do sistema.
 	 */
 	public String listarProdutosDeTodosFornecedores() {
+//		int contador = 0;
+//		for (Fornecedor e : fornecedores.values()) {
+//			contador += 1;
+//			if (contador < fornecedores.size()) {
+//				msg += e.listarProdutos() + " | ";
+//			} else {
+//				msg += e.listarProdutos();
+//			}
+//		}
+//		return msg;
 		String msg = "";
-		int contador = 0;
+		List<String> listaProdutosDosFonecedores = new ArrayList<>();
 		for (Fornecedor e : fornecedores.values()) {
-			contador += 1;
-			if (contador < fornecedores.size()) {
-				msg += e.listarProdutos() + " | ";
-			} else {
-				msg += e.listarProdutos();
-			}
+			listaProdutosDosFonecedores.add(e.listarProdutos());
 		}
+		Collections.sort(listaProdutosDosFonecedores);
+		msg = String.join(" | ", listaProdutosDosFonecedores);
 		return msg;
 	}
 

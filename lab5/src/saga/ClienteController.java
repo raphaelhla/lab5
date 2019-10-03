@@ -1,6 +1,12 @@
 package saga;
 
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Representacao de um controller de clientes.
@@ -72,15 +78,13 @@ public class ClienteController {
 	 */
 	public String listarClientes() {
 		String msg = "";
-		int contador = 0;
-		for (Cliente e : clientes.values()) {
-			contador += 1;
-			if (contador < clientes.size()) {
-				msg += e.toString() + " | ";
-			} else {
-				msg += e.toString();
-			}
-		}
+		List<Cliente> listaClientes = new ArrayList<>(clientes.values());
+		Collections.sort(listaClientes);
+		List<String> nomes = new ArrayList<>();
+		for(Cliente cliente: listaClientes)
+			nomes.add(cliente.toString());
+		
+		msg = String.join(" | ", nomes);
 		return msg;
 	}
 

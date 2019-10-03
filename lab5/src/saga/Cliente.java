@@ -7,7 +7,7 @@ package saga;
  * @author Raphael Agra
  *
  */
-public class Cliente {
+public class Cliente implements Comparable<Cliente>{
 
 	/**
 	 * Nome do cliente.
@@ -160,5 +160,10 @@ public class Cliente {
 	 */
 	public String getCpf() {
 		return cpf;
+	}
+
+	@Override
+	public int compareTo(Cliente o) {
+		return this.toString().compareTo(o.toString());
 	}
 }

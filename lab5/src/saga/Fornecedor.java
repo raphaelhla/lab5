@@ -1,6 +1,9 @@
 package saga;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Representacao de um fornecedor. Todo fornecedor precisa ter um seus produtos
@@ -192,15 +195,13 @@ public class Fornecedor {
 	 */
 	public String listarProdutos() {
 		String msg = "";
-		int contador = 0;
-		for (Produto e : produtos.values()) {
-			contador += 1;
-			if (contador < produtos.size()) {
-				msg += this.nome + " - " + e.toString() + " | ";
-			} else {
-				msg += this.nome + " - " + e.toString();
-			}
+		List<Produto> listaProdutos = new ArrayList<>(produtos.values());
+		Collections.sort(listaProdutos);
+		List<String> produtosToString = new ArrayList<>();
+		for (Produto e : listaProdutos) {
+			produtosToString.add(this.nome + " - " + e.toString());
 		}
+		msg = String.join(" | ", produtosToString);
 		return msg;
 	}
 

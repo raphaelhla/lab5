@@ -7,7 +7,7 @@ package saga;
  * @author Raphael Agra
  *
  */
-public class Produto {
+public class Produto implements Comparable<Produto> {
 
 	/**
 	 * Preco do produto.
@@ -127,5 +127,10 @@ public class Produto {
 		if (!idProduto.equals(other.idProduto))
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(Produto o) {
+		return this.toString().compareTo(o.toString());
 	}
 }
