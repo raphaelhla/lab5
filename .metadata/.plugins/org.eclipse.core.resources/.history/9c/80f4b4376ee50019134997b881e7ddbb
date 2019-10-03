@@ -1,0 +1,43 @@
+package saga;
+
+public class IdProduto {
+
+	private String nome;
+	private String descricao;
+	
+	public IdProduto(String nome, String descricao) {
+		Validador.validaEntrada(nome, "Erro no cadastro de idProduto: nome nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(descricao, "Erro no cadastro de idProduto: descricao nao pode ser vazia ou nula.");
+		this.nome = nome;
+		this.descricao = descricao;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public String getDescricao() {
+		return descricao;
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + descricao.hashCode();
+		result = prime * result + nome.hashCode();
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		IdProduto other = (IdProduto) obj;
+		if (!nome.equals(other.nome))
+			return false;
+		return true;
+	}
+	
+	
+}
