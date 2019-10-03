@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="FornecedorControllerTest.testEditaProdutoDescricaoVazia" project="lab5" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="saga.FornecedorControllerTest" time="0.108" displayname="FornecedorControllerTest" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorControllerTest]">
-    <testcase name="testEditaProdutoDescricaoVazia" classname="saga.FornecedorControllerTest" time="0.108" displayname="testEditaProdutoDescricaoVazia()" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorControllerTest]/[method:testEditaProdutoDescricaoVazia()]"/>
-  </testsuite>
-</testrun>

@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="FornecedorControllerTest" project="lab5" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="saga.FornecedorControllerTest" time="0.165" displayname="FornecedorControllerTest" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorControllerTest]">
-    <testcase name="testCadastraFornecedorValido" classname="saga.FornecedorControllerTest" time="0.165" displayname="testCadastraFornecedorValido()" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorControllerTest]/[method:testCadastraFornecedorValido()]"/>
-  </testsuite>
-</testrun>

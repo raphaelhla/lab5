@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="IdProdutoTest" project="lab5" tests="4" started="4" failures="0" errors="0" ignored="0">
-  <testsuite name="saga.IdProdutoTest" time="0.091" displayname="IdProdutoTest" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]">
-    <testcase name="testCadastraIdProdutoDescricaoVazia" classname="saga.IdProdutoTest" time="0.034" displayname="testCadastraIdProdutoDescricaoVazia()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testCadastraIdProdutoDescricaoVazia()]"/>
-    <testcase name="testCadastraIdProdutoNomeNulo" classname="saga.IdProdutoTest" time="0.012" displayname="testCadastraIdProdutoNomeNulo()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testCadastraIdProdutoNomeNulo()]"/>
-    <testcase name="testCadastraIdProdutoNomeVazio" classname="saga.IdProdutoTest" time="0.014" displayname="testCadastraIdProdutoNomeVazio()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testCadastraIdProdutoNomeVazio()]"/>
-    <testcase name="testCadastraIdProdutoDescricaoNula" classname="saga.IdProdutoTest" time="0.031" displayname="testCadastraIdProdutoDescricaoNula()" uniqueid="[engine:junit-jupiter]/[class:saga.IdProdutoTest]/[method:testCadastraIdProdutoDescricaoNula()]"/>
-  </testsuite>
-</testrun>

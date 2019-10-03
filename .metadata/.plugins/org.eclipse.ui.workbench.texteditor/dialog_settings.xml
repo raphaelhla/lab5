@@ -6,11 +6,13 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value=""/>
+		<item key="selection" value="exibeProduto"/>
 		<list key="findhistory">
+			<item value="exibirProduto"/>
 			<item value=".toLowerCase()"/>
 		</list>
 		<list key="replacehistory">
+			<item value="exibeProduto"/>
 			<item value=""/>
 		</list>
 	</section>

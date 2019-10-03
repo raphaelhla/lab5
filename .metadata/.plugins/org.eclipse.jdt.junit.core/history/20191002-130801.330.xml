@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="FornecedorTest" project="lab5" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="saga.FornecedorTest" time="0.07" displayname="FornecedorTest" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorTest]">
-    <testcase name="testCadastraFornecedorNomeNulo" classname="saga.FornecedorTest" time="0.07" displayname="testCadastraFornecedorNomeNulo()" uniqueid="[engine:junit-jupiter]/[class:saga.FornecedorTest]/[method:testCadastraFornecedorNomeNulo()]"/>
-  </testsuite>
-</testrun>

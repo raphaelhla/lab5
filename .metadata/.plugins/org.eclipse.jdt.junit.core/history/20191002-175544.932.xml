@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="ProdutoTest.testHashCode3" project="lab5" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="saga.ProdutoTest" time="0.074" displayname="ProdutoTest" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]">
-    <testcase name="testHashCode3" classname="saga.ProdutoTest" time="0.074" displayname="testHashCode3()" uniqueid="[engine:junit-jupiter]/[class:saga.ProdutoTest]/[method:testHashCode3()]"/>
-  </testsuite>
-</testrun>
