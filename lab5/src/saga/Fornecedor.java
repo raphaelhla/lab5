@@ -12,7 +12,7 @@ import java.util.List;
  * @author Raphael Agra
  *
  */
-public class Fornecedor {
+public class Fornecedor implements Comparable<Fornecedor> {
 
 	/**
 	 * Nome do fornecedor.
@@ -140,6 +140,7 @@ public class Fornecedor {
 	 * 
 	 * @return a representacao em string do fornecedor
 	 */
+	@Override
 	public String toString() {
 		return this.nome + " - " + this.email + " - " + this.telefone;
 	}
@@ -191,16 +192,23 @@ public class Fornecedor {
 	 * Metodo que retorna a representacao em string da lista de todos os produtos do
 	 * fornecedor.
 	 * 
-	 * @return a representacao em string da lista de todos os produtos do fornecedor.
+	 * @return a representacao em string da lista de todos os produtos do
+	 *         fornecedor.
 	 */
 	public String listarProdutos() {
 		String msg = "";
 		List<Produto> listaProdutos = new ArrayList<>(produtos.values());
 		Collections.sort(listaProdutos);
 		List<String> produtosToString = new ArrayList<>();
-		for (Produto e : listaProdutos) {
-			produtosToString.add(this.nome + " - " + e.toString());
+
+		if (listaProdutos.size() != 0) {
+			for (Produto e : listaProdutos) {
+				produtosToString.add(this.nome + " - " + e.toString());
+			}
+		}else {
+			produtosToString.add(this.nome + " -");
 		}
+
 		msg = String.join(" | ", produtosToString);
 		return msg;
 	}
@@ -243,5 +251,10 @@ public class Fornecedor {
 		} else {
 			throw new IllegalArgumentException("Erro na remocao de produto: produto nao existe.");
 		}
+	}
+
+	@Override
+	public int compareTo(Fornecedor o) {
+		return this.toString().compareTo(o.toString());
 	}
 }

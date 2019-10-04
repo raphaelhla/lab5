@@ -17,7 +17,7 @@ public class Facade {
 	 */
 	public static void main(String[] args) {
 		args = new String[] { "saga.Facade", "TestesAceitacao/use_case_1.txt", "TestesAceitacao/use_case_2.txt",
-				"TestesAceitacao/use_case_3.txt" };
+				"TestesAceitacao/use_case_3.txt", "TestesAceitacao/use_case_4.txt" };
 		EasyAccept.main(args);
 	}
 
@@ -70,8 +70,8 @@ public class Facade {
 	 * @return a representacao em string da lista de todos os clientes cadastrados
 	 *         no sistema
 	 */
-	public String listarClientes() {
-		return clienteController.listarClientes();
+	public String exibeClientes() {
+		return clienteController.exibeClientes();
 	}
 
 	/**
@@ -128,8 +128,8 @@ public class Facade {
 	 * @return a representacao em string da lista de todos os fornecedores
 	 *         cadastrados no sistema
 	 */
-	public String listarFornecedores() {
-		return fornecedorController.listarFornecedores();
+	public String exibeFornecedores() {
+		return fornecedorController.exibeFornecedores();
 	}
 
 	/**
@@ -188,8 +188,8 @@ public class Facade {
 	 * @return a representacao em string da lista de todos os produtos do
 	 *         fornecedor.
 	 */
-	public String listarProdutosDeUmFornecedor(String nomeFornecedor) {
-		return fornecedorController.listarProdutosDeUmFornecedor(nomeFornecedor);
+	public String exibeProdutosFornecedor(String nomeFornecedor) {
+		return fornecedorController.exibeProdutosFornecedor(nomeFornecedor);
 	}
 
 	/**
@@ -199,8 +199,8 @@ public class Facade {
 	 * @return a representacao em string da lista de todos os produtos de todos os
 	 *         fornecedores do sistema.
 	 */
-	public String listarProdutosDeTodosFornecedores() {
-		return fornecedorController.listarProdutosDeTodosFornecedores();
+	public String exibeProdutos() {
+		return fornecedorController.exibeProdutos();
 	}
 
 	/**
@@ -227,5 +227,9 @@ public class Facade {
 	 */
 	public void removeProduto(String nomeProduto, String descricao, String nomeFornecedor) {
 		fornecedorController.removeProduto(nomeFornecedor, nomeProduto, descricao);
+	}
+	
+	public void adicionaCompra(String cpf, String fornecedor, String data, String nomeProd, String descricao) {
+		
 	}
 }

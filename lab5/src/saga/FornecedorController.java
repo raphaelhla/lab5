@@ -1,7 +1,6 @@
 package saga;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -70,32 +69,16 @@ public class FornecedorController {
 	 * @return a representacao em string da lista de todos os fornecedores
 	 *         cadastrados no sistema
 	 */
-	public String listarFornecedores() {
+	public String exibeFornecedores() {
 		String msg = "";
-		int contador = 0;
-		for (Fornecedor e : fornecedores.values()) {
-			contador += 1;
-			if (contador < fornecedores.size()) {
-				msg += e.toString() + " | ";
-			} else {
-				msg += e.toString();
-			}
+		List<Fornecedor> listaFornecedores = new ArrayList<Fornecedor>(fornecedores.values());
+		Collections.sort(listaFornecedores);
+		List<String> fornecedoresToString = new ArrayList<String>();
+		for (Fornecedor e : listaFornecedores) {
+			fornecedoresToString.add(e.toString());
 		}
-		//return msg;
-		
-		String msgOrdenada = "";
-		String[] x = msg.split(" \\| ");
-		Arrays.sort(x);
-		int contador2 = 0;
-		for (String e : x) {
-			contador2 += 1;
-			if (contador2 < x.length) {
-				msgOrdenada += e + " | ";
-			} else {
-				msgOrdenada += e;
-			}
-		}
-		return msgOrdenada;
+		msg = String.join(" | ", fornecedoresToString);
+		return msg;
 	}
 
 	/**
@@ -187,7 +170,11 @@ public class FornecedorController {
 	 * @return a representacao em string da lista de todos os produtos do
 	 *         fornecedor.
 	 */
-	public String listarProdutosDeUmFornecedor(String nomeFornecedor) {
+	public String exibeProdutosFornecedor(String nomeFornecedor) {
+		Validador.validaEntrada(nomeFornecedor, "Erro na exibicao de produto: fornecedor nao pode ser vazio ou nulo.");
+		if (!fornecedores.containsKey(nomeFornecedor)) {
+			throw new IllegalArgumentException("Erro na exibicao de produto: fornecedor nao existe.");
+		}
 		return fornecedores.get(nomeFornecedor).listarProdutos();
 	}
 
@@ -198,23 +185,14 @@ public class FornecedorController {
 	 * @return a representacao em string da lista de todos os produtos de todos os
 	 *         fornecedores do sistema.
 	 */
-	public String listarProdutosDeTodosFornecedores() {
-//		int contador = 0;
-//		for (Fornecedor e : fornecedores.values()) {
-//			contador += 1;
-//			if (contador < fornecedores.size()) {
-//				msg += e.listarProdutos() + " | ";
-//			} else {
-//				msg += e.listarProdutos();
-//			}
-//		}
-//		return msg;
+	public String exibeProdutos() {
 		String msg = "";
+		List<Fornecedor> listaFornecedores = new ArrayList<Fornecedor>(fornecedores.values());
+		Collections.sort(listaFornecedores);
 		List<String> listaProdutosDosFonecedores = new ArrayList<>();
-		for (Fornecedor e : fornecedores.values()) {
+		for (Fornecedor e : listaFornecedores) {
 			listaProdutosDosFonecedores.add(e.listarProdutos());
 		}
-		Collections.sort(listaProdutosDosFonecedores);
 		msg = String.join(" | ", listaProdutosDosFonecedores);
 		return msg;
 	}
@@ -258,5 +236,13 @@ public class FornecedorController {
 			throw new IllegalArgumentException("Erro na remocao de produto: fornecedor nao existe.");
 		}
 		fornecedores.get(nomeFornecedor).removeProduto(nomeProduto, descricao);
+	}
+	
+	public boolean existeFornecedor(String fornecedor) {
+		if (fornecedores.containsKey(fornecedor)) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 }

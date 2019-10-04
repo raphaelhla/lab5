@@ -2,8 +2,6 @@ package saga;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -76,7 +74,7 @@ public class ClienteController {
 	 * @return a representacao em string da lista de todos os clientes cadastrados
 	 *         no sistema
 	 */
-	public String listarClientes() {
+	public String exibeClientes() {
 		String msg = "";
 		List<Cliente> listaClientes = new ArrayList<>(clientes.values());
 		Collections.sort(listaClientes);
@@ -128,5 +126,13 @@ public class ClienteController {
 			throw new IllegalArgumentException("Erro na remocao do cliente: cliente nao existe.");
 		}
 		this.clientes.remove(cpf);
+	}
+	
+	public boolean existeCliente(String cpf) {
+		if (clientes.containsKey(cpf)) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 }

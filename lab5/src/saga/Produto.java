@@ -42,6 +42,7 @@ public class Produto implements Comparable<Produto> {
 	 * 
 	 * @return a representacao em string do produto.
 	 */
+	@Override
 	public String toString() {
 		return String.format("%s - %s - R$%.2f", idProduto.getNome(), idProduto.getDescricao(), this.preco);
 	}

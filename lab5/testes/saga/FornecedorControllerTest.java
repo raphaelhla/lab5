@@ -139,7 +139,7 @@ class FornecedorControllerTest {
 		listaFornecedores1.add(fornecedorController.exibeFornecedor("Seu Olavo"));
 		listaFornecedores1.add(fornecedorController.exibeFornecedor("Raphael"));
 		
-		String[] x = fornecedorController.listarFornecedores().split(" \\| ");
+		String[] x = fornecedorController.exibeFornecedores().split(" \\| ");
 		for (int i = 0; i < x.length; i++) {
 			listaFornecedores2.add(x[i]);
 		}
@@ -148,7 +148,7 @@ class FornecedorControllerTest {
 	
 	@Test
 	public void testListarFornecedoresSemNenhumFornecedor() {
-		assertEquals("",fornecedorController.listarFornecedores());
+		assertEquals("",fornecedorController.exibeFornecedores());
 	}
 	
 	@Test
@@ -495,7 +495,7 @@ class FornecedorControllerTest {
 		listaProdutos1.add("Seu Olavo - " + fornecedorController.exibeProduto("X-frango", "Hamburguer de frango com queijo e calabresa", "Seu Olavo"));
 		listaProdutos1.add("Seu Olavo - " + fornecedorController.exibeProduto("X-burguer", "Hamburguer de carne com queijo e calabresa", "Seu Olavo"));
 		
-		String[] x = fornecedorController.listarProdutosDeUmFornecedor("Seu Olavo").split(" \\| ");
+		String[] x = fornecedorController.exibeProdutosFornecedor("Seu Olavo").split(" \\| ");
 		for (int i = 0; i < x.length; i++) {
 			listaProdutos2.add(x[i]);
 		}
@@ -520,7 +520,7 @@ class FornecedorControllerTest {
 		listaProdutos1.add("Raphael - " + fornecedorController.exibeProduto("X-burguer", "Hamburguer de carne com queijo e calabresa", "Raphael"));
 		listaProdutos1.add("Raphael - " + fornecedorController.exibeProduto("Cachorro Quente","Pao com salsicha e carne moida", "Raphael"));
 		
-		String[] x = fornecedorController.listarProdutosDeTodosFornecedores().split(" \\| ");
+		String[] x = fornecedorController.exibeProdutos().split(" \\| ");
 		for (int i = 0; i < x.length; i++) {
 			listaProdutos2.add(x[i]);
 		}

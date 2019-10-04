@@ -172,7 +172,7 @@ class ClienteControllerTest {
 		listaClientes.add(clienteController.exibeCliente("12345678900"));
 		listaClientes.add(clienteController.exibeCliente("11111111100"));
 		
-		String[] x = clienteController.listarClientes().split(" \\| ");
+		String[] x = clienteController.exibeClientes().split(" \\| ");
 		for (int i = 0; i < x.length; i++) {
 			listaClientes2.add(x[i]);
 		}
@@ -181,7 +181,7 @@ class ClienteControllerTest {
 	
 	@Test
 	public void testListarClientesSemNenhumCliente() {
-		assertEquals("",clienteController.listarClientes());
+		assertEquals("",clienteController.exibeClientes());
 	}
 
 	@Test
