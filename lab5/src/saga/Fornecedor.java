@@ -205,7 +205,7 @@ public class Fornecedor implements Comparable<Fornecedor> {
 			for (Produto e : listaProdutos) {
 				produtosToString.add(this.nome + " - " + e.toString());
 			}
-		}else {
+		} else {
 			produtosToString.add(this.nome + " -");
 		}
 
@@ -256,5 +256,53 @@ public class Fornecedor implements Comparable<Fornecedor> {
 	@Override
 	public int compareTo(Fornecedor o) {
 		return this.toString().compareTo(o.toString());
+	}
+
+	public void adicionaCombo(String nome, String descricao, double fator, String produtos) {
+		Validador.validaEntrada(nome, "Erro no cadastro de combo: nome nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(descricao, "Erro no cadastro de combo: descricao nao pode ser vazia ou nula.");
+		Validador.validaEntrada(produtos, "Erro no cadastro de combo: combo deve ter produtos.");
+		if (fator < 0 || fator >= 1) {
+			throw new IllegalArgumentException("Erro no cadastro de combo: fator invalido.");
+		}
+		IdProduto idCombo = new IdProduto(nome, descricao);
+		if (this.produtos.containsKey(idCombo)) {
+			throw new IllegalArgumentException("Erro no cadastro de combo: combo ja existe.");
+		}
+
+		String[] listaDeProdutos = produtos.split(", ");
+		double precoCombo = 0;
+		for (String e : listaDeProdutos) {
+			String nomeProduto = e.split(" - ")[0];
+			String descricaoProduto = e.split(" - ")[1];
+			IdProduto idProduto = new IdProduto(nomeProduto, descricaoProduto);
+			if (!this.produtos.containsKey(idProduto)) {
+				throw new IllegalArgumentException("Erro no cadastro de combo: produto nao existe.");
+			}
+			Combo combo = new Combo("Teste", "Combo teste usado para verificar a classe", 10.0, 0.5);
+			if (this.produtos.get(idProduto).getClass().equals(combo.getClass())) {
+				throw new IllegalArgumentException(
+						"Erro no cadastro de combo: um combo nao pode possuir combos na lista de produtos.");
+			}
+			precoCombo += this.produtos.get(idProduto).getPreco();
+		}
+
+		Combo c1 = new Combo(nome, descricao, precoCombo, fator);
+		this.produtos.put(idCombo, c1);
+	}
+
+	public void editaCombo(String nome, String descricao, double novoFator) {
+		Validador.validaEntrada(nome, "Erro na edicao de combo: nome nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(descricao, "Erro na edicao de combo: descricao nao pode ser vazia ou nula.");
+		if (novoFator <= 0 || novoFator >= 1) {
+			throw new IllegalArgumentException("Erro na edicao de combo: fator invalido.");
+		}
+
+		IdProduto idCombo = new IdProduto(nome, descricao);
+		if (!produtos.containsKey(idCombo)) {
+			throw new IllegalArgumentException("Erro na edicao de combo: produto nao existe.");
+		}
+		
+//		produtos.get(idCombo).get
 	}
 }

@@ -17,7 +17,7 @@ public class Facade {
 	 */
 	public static void main(String[] args) {
 		args = new String[] { "saga.Facade", "TestesAceitacao/use_case_1.txt", "TestesAceitacao/use_case_2.txt",
-				"TestesAceitacao/use_case_3.txt", "TestesAceitacao/use_case_4.txt" };
+				"TestesAceitacao/use_case_3.txt", "TestesAceitacao/use_case_4.txt", "TestesAceitacao/use_case_5.txt" };
 		EasyAccept.main(args);
 	}
 
@@ -229,7 +229,12 @@ public class Facade {
 		fornecedorController.removeProduto(nomeFornecedor, nomeProduto, descricao);
 	}
 	
-	public void adicionaCompra(String cpf, String fornecedor, String data, String nomeProd, String descricao) {
+	public void adicionaCombo(String fornecedor, String nome, String descricao, double fator, String produtos) {
+		fornecedorController.adicionaCombo(fornecedor, nome, descricao, fator, produtos);
+	}
+	
+	public void editaCombo(String nome, String descricao, String fornecedor, double novoFator) {
+		fornecedorController.editaCombo(nome, descricao, fornecedor, novoFator);
 		
 	}
 }

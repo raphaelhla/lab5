@@ -1,0 +1,19 @@
+package saga;
+
+public class Combo extends Produto{
+
+	private double fator;
+	
+	public Combo(String nome, String descricao, double preco, double fator) {
+		super(preco, nome, descricao);
+		this.fator = fator;
+		
+		double precoCombo = preco * (1 - fator);
+		this.setPreco(precoCombo);
+		
+	}
+	
+	public double getFator() {
+		return this.fator;
+	}
+}

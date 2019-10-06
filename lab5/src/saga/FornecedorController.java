@@ -245,4 +245,33 @@ public class FornecedorController {
 			return false;
 		}
 	}
+
+	public void adicionaCombo(String fornecedor, String nome, String descricao, double fator, String produtos) {
+		Validador.validaEntrada(fornecedor, "Erro no cadastro de combo: fornecedor nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(nome, "Erro no cadastro de combo: nome nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(descricao, "Erro no cadastro de combo: descricao nao pode ser vazia ou nula.");
+		Validador.validaEntrada(produtos, "Erro no cadastro de combo: combo deve ter produtos.");
+		if (fator < 0 || fator >= 1) {
+			throw new IllegalArgumentException("Erro no cadastro de combo: fator invalido.");
+		}
+		if (!fornecedores.containsKey(fornecedor)) {
+			throw new IllegalArgumentException("Erro no cadastro de combo: fornecedor nao existe.");
+		}
+			
+		fornecedores.get(fornecedor).adicionaCombo(nome, descricao, fator, produtos);
+	}
+
+	public void editaCombo(String nome, String descricao, String fornecedor, double novoFator) {
+		Validador.validaEntrada(nome, "Erro na edicao de combo: nome nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(descricao, "Erro na edicao de combo: descricao nao pode ser vazia ou nula.");
+		Validador.validaEntrada(fornecedor, "Erro na edicao de combo: fornecedor nao pode ser vazio ou nulo.");
+		if (!fornecedores.containsKey(fornecedor)) {
+			throw new IllegalArgumentException("Erro na edicao de combo: fornecedor nao existe.");
+		}
+		if (novoFator <= 0 || novoFator >= 1) {
+			throw new IllegalArgumentException("Erro na edicao de combo: fator invalido.");
+		}
+		
+		fornecedores.get(fornecedor).editaCombo(nome, descricao, novoFator);
+	}
 }

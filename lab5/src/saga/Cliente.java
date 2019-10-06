@@ -1,6 +1,5 @@
 package saga;
 
-import java.util.HashMap;
 
 /**
  * Representacao de um cliente. Todo cliente precisa ter um nome, cpf, email e
@@ -31,8 +30,6 @@ public class Cliente implements Comparable<Cliente>{
 	 */
 	private String localizacao;
 	
-	private HashMap<String, Conta> contasClientes;
-
 	/**
 	 * Constroi um cliente a partir de seu nome, cpf, email e localizacao.
 	 * 
@@ -53,7 +50,6 @@ public class Cliente implements Comparable<Cliente>{
 		this.cpf = cpf;
 		this.email = email;
 		this.localizacao = localizacao;
-		this.contasClientes = new HashMap<String, Conta>();
 	}
 
 	/**
