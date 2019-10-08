@@ -1,0 +1,9 @@
+package saga;
+
+public class Main {
+
+	public static void main(String[] args) {
+		args = new String[] { "saga.Facade", "testes_aceitacao/teste1.txt", "testes_aceitacao/teste2.txt"};
+		EasyAcept.main(args);
+	}
+}

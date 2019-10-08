@@ -1,0 +1,72 @@
+package saga;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+class FornecedorTest {
+
+	private Fornecedor fornecedor1, fornecedor2, fornecedor3;
+
+	@BeforeEach
+	public void criandoFornecedor() {
+		fornecedor1 = new Fornecedor("Seu Olavo", "olavo@gmail.com", "83 99348-1092");
+		fornecedor2 = new Fornecedor("Raphael", "raphael@gmail.com", "83 98737-2109");
+		fornecedor3 = new Fornecedor("Dona Alba", "alba@gmail.com", "83 99945-1294");
+	}
+
+	@Test
+	public void testCadastraFornecedorNomeNulo() {
+		try {
+			new Fornecedor(null, "olavo@gmail.com", "83 99348-1092");
+		} catch (NullPointerException e) {
+			assertEquals("Erro no cadastro do fornecedor: nome nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testCadastraFornecedorNomeVazio() {
+		try {
+			new Fornecedor("", "olavo@gmail.com", "83 99348-1092");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro do fornecedor: nome nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testCadastraFornecedorEmailNulo() {
+		try {
+			new Fornecedor("Seu Olavo", null, "83 99348-1092");
+		} catch (NullPointerException e) {
+			assertEquals("Erro no cadastro do fornecedor: email nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testCadastraFornecedorEmailVazio() {
+		try {
+			new Fornecedor("Seu Olavo", "", "83 99348-1092");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro do fornecedor: email nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testCadastraFornecedorTelefoneNulo() {
+		try {
+			new Fornecedor("Seu Olavo", "olavo@gmail.com", null);
+		} catch (NullPointerException e) {
+			assertEquals("Erro no cadastro do fornecedor: telefone nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testCadastraFornecedorTelefoneVazio() {
+		try {
+			new Fornecedor("Seu Olavo", "olavo@gmail.com", "");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro do fornecedor: telefone nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+}

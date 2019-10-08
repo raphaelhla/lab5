@@ -1,0 +1,34 @@
+package saga;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Facade facade = new Facade();
+		facade.adicionaCliente("11122233300", "Ana Silva", "anasilva@ccc.ufcg.edu.br", "Embedded");
+		facade.adicionaCliente("99988877700", "Washington", "washington@ccc.ufcg.edu.br", "SPLAB");
+		facade.adicionaCliente("10290935474", "Raphael", "raphael@ccc.ufcg.edu.br", "LCC3");
+		facade.adicionaCliente("10290935494", "Carlos", "carlos@ccc.ufcg.edu.br", "LCC5");
+		System.out.println(facade.exibeClientes());
+//		System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXX");
+
+		facade.adicionaFornecedor("Dona Ines", "dines@gmail.com", "83 9999-5050");
+		facade.adicionaFornecedor("Josenilda", "nilda@computacao.ufcg.edu.br", "83 98736-5050");
+		facade.adicionaFornecedor("Alan Weasley", "alaweasley@splab.ufcg.edu.br", "83 99936-5050");
+		System.out.println(facade.exibeFornecedores());
+//		System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+
+		facade.adicionaProduto("Dona Ines", "Tapioca simples", "Tapioca com manteiga", 3.00);
+		facade.adicionaProduto("Dona Ines", "Tapioca completa", "Tapioca com coco, queijo e manteiga", 3.50);
+		facade.adicionaProduto("Dona Ines", "Bolo", "Bolo de chocolate", 3.00);
+		facade.adicionaProduto("Josenilda", "Mousse", "Mousse de Limão", 4.00);
+		facade.adicionaProduto("Josenilda", "Salada", "Salada de frutas com leite condensado", 4.50);
+		facade.adicionaProduto("Alan Weasley", "X-tudo", "hamburguer de carne", 10.00);
+		System.out.println(facade.exibeProdutos());
+
+//		Expected <Ana Julia - Coca-cola - Garrafa de coca-cola de 1L - R$5,50 | Dona Alba - Rubacao - Feijao com arroz e queijo coalho - R$17,00 | Guilherme Lanches - Acai - Acai de 300mL - R$5,00 | Guilherme Lanches - Acaraje - O sabor da Bahia - R$10,00 | Lanchonete do Fabio - | Marcos - Coxao de Frango - Coxao de frango com cheddar - R$2,50 | Marcos - Coxao de Pizza - Coxao de frango com presunto e queijo - R$2,50 | Maria Eduarda - Agua - Garrafa de agua de 500mL - R$1,00 | Maria Eduarda - Cafe com Leite - Um copo de 150mL com cafe e leite - R$1,00 | Pedro - Lasanha - Lasanha a bolonhesa - R$4,00 | Pedro - Pastel de Frango com Catupiry - Um pastel com recheio de frango e catupiry - R$2,50 | Pedro - Pastel de Frango com Cheddar - Um pastel com recheio de frango e cheddar - R$2,50 | Pedro - Tapioca - Tapioca com queijo e frango - R$3,00 | Seu Olavo - X-burguer - Hamburguer de carne com queijo e calabresa - R$4,50>
+//		but was <Ana Julia - Coca-cola - Garrafa de coca-cola de 1L - R$5,50 | Dona Alba - Rubacao - Feijao com arroz e queijo coalho - R$17,00 | Guilherme Lanches - Acai - Acai de 300mL - R$5,00 | Guilherme Lanches - Acaraje - O sabor da Bahia - R$10,00 |  | Marcos - Coxao de Frango - Coxao de frango com cheddar - R$2,50 | Marcos - Coxao de Pizza - Coxao de frango com presunto e queijo - R$2,50 | Maria Eduarda - Agua - Garrafa de agua de 500mL - R$1,00 | Maria Eduarda - Cafe com Leite - Um copo de 150mL com cafe e leite - R$1,00 | Pedro - Lasanha - Lasanha a bolonhesa - R$4,00 | Pedro - Pastel de Frango com Catupiry - Um pastel com recheio de frango e catupiry - R$2,50 | Pedro - Pastel de Frango com Cheddar - Um pastel com recheio de frango e cheddar - R$2,50 | Pedro - Tapioca - Tapioca com queijo e frango - R$3,00 | Seu Olavo - X-burguer - Hamburguer de carne com queijo e calabresa - R$4,50>
+
+		Expected <Ana Julia - Coca-cola - Garrafa de coca-cola de 1L - R$5,50 | Dona Alba - Rubacao - Feijao com arroz e queijo coalho - R$17,00 | Guilherme Lanches - Acai - Acai de 300mL - R$5,00 | Guilherme Lanches - Acaraje - O sabor da Bahia - R$10,00 | Lanchonete do Fabio - | Marcos - Coxao de Frango - Coxao de frango com cheddar - R$2,50 | Marcos - Coxao de Pizza - Coxao de frango com presunto e queijo - R$2,50 | Maria Eduarda - Agua - Garrafa de agua de 500mL - R$1,00 | Maria Eduarda - Cafe com Leite - Um copo de 150mL com cafe e leite - R$1,00 | Pedro - Lasanha - Lasanha a bolonhesa - R$4,00 | Pedro - Pastel de Frango com Catupiry - Um pastel com recheio de frango e catupiry - R$2,50 | Pedro - Pastel de Frango com Cheddar - Um pastel com recheio de frango e cheddar - R$2,50 | Pedro - Tapioca - Tapioca com queijo e frango - R$3,00 | Seu Olavo - X-burguer - Hamburguer de carne com queijo e calabresa - R$4,50>
+		but was <Coca-cola - Garrafa de coca-cola de 1L - R$5,50 | Rubacao - Feijao com arroz e queijo coalho - R$17,00 | Acai - Acai de 300mL - R$5,00 | Guilherme Lanches - Acaraje - O sabor da Bahia - R$10,00 |  | Coxao de Frango - Coxao de frango com cheddar - R$2,50 | Marcos - Coxao de Pizza - Coxao de frango com presunto e queijo - R$2,50 | Agua - Garrafa de agua de 500mL - R$1,00 | Maria Eduarda - Cafe com Leite - Um copo de 150mL com cafe e leite - R$1,00 | Lasanha - Lasanha a bolonhesa - R$4,00 | Pedro - Pastel de Frango com Catupiry - Um pastel com recheio de frango e catupiry - R$2,50 | Pedro - Pastel de Frango com Cheddar - Um pastel com recheio de frango e cheddar - R$2,50 | Pedro - Tapioca - Tapioca com queijo e frango - R$3,00 | X-burguer - Hamburguer de carne com queijo e calabresa - R$4,50>
+	}
+}
