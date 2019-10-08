@@ -132,6 +132,9 @@ public class Produto implements Comparable<Produto> {
 
 	@Override
 	public int compareTo(Produto o) {
-		return this.toString().compareTo(o.toString());
+		if (!this.getNome().equals(o.getNome())) {
+			return this.getNome().compareTo(o.getNome());
+		}
+		return this.getDescricao().compareTo(o.getDescricao());
 	}
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Representacao de um controller de fornecedores.
@@ -17,7 +18,7 @@ public class FornecedorController {
 	 * Mapa com todos os fornecedores cadastrados no sistema, identificados
 	 * unicamente pelo seu nome
 	 */
-	private HashMap<String, Fornecedor> fornecedores;
+	private Map<String, Fornecedor> fornecedores;
 
 	/**
 	 * Constroi um controller de fornecedores.
@@ -237,14 +238,6 @@ public class FornecedorController {
 		}
 		fornecedores.get(nomeFornecedor).removeProduto(nomeProduto, descricao);
 	}
-	
-	public boolean existeFornecedor(String fornecedor) {
-		if (fornecedores.containsKey(fornecedor)) {
-			return true;
-		}else {
-			return false;
-		}
-	}
 
 	public void adicionaCombo(String fornecedor, String nome, String descricao, double fator, String produtos) {
 		Validador.validaEntrada(fornecedor, "Erro no cadastro de combo: fornecedor nao pode ser vazio ou nulo.");
@@ -257,7 +250,7 @@ public class FornecedorController {
 		if (!fornecedores.containsKey(fornecedor)) {
 			throw new IllegalArgumentException("Erro no cadastro de combo: fornecedor nao existe.");
 		}
-			
+
 		fornecedores.get(fornecedor).adicionaCombo(nome, descricao, fator, produtos);
 	}
 
@@ -271,7 +264,12 @@ public class FornecedorController {
 		if (novoFator <= 0 || novoFator >= 1) {
 			throw new IllegalArgumentException("Erro na edicao de combo: fator invalido.");
 		}
-		
+
 		fornecedores.get(fornecedor).editaCombo(nome, descricao, novoFator);
 	}
+
+	public Fornecedor pegaFornecedor(String fornecedor) {
+		return this.fornecedores.get(fornecedor);
+	}
+
 }

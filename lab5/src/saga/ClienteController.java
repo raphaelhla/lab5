@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Representacao de um controller de clientes.
@@ -18,7 +19,7 @@ public class ClienteController {
 	 * Mapa com todos os clientes do sistema, identificados unicamente por seu cpf.
 	 * 
 	 */
-	private HashMap<String, Cliente> clientes;
+	private Map<String, Cliente> clientes;
 
 	/**
 	 * Controi um controller de clientes.
@@ -128,11 +129,62 @@ public class ClienteController {
 		this.clientes.remove(cpf);
 	}
 	
-	public boolean existeCliente(String cpf) {
-		if (clientes.containsKey(cpf)) {
-			return true;
-		}else {
-			return false;
+	public Cliente pegaCliente(String cpf) {
+		return this.clientes.get(cpf);
+	}
+
+	public void adicionaCompra(String cpf, Fornecedor fornecedor, String data, String nome, String descricao) {
+//		Validador.validaEntrada(fornecedor, "Erro ao cadastrar compra: fornecedor nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(cpf, "Erro ao cadastrar compra: cpf nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(data, "Erro ao cadastrar compra: data nao pode ser vazia ou nula.");
+		Validador.validaEntrada(nome, "Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(descricao, "Erro ao cadastrar compra: descricao do produto nao pode ser vazia ou nula.");
+		if (cpf.length() != 11) {
+			throw new IllegalArgumentException("Erro ao cadastrar compra: cpf invalido.");
 		}
+		if (!clientes.containsKey(cpf)) {
+			throw new IllegalArgumentException("Erro ao cadastrar compra: cliente nao existe.");
+		}
+		if (data.length() != 10) {
+			throw new IllegalArgumentException("Erro ao cadastrar compra: data invalida.");
+		}
+		
+		this.clientes.get(cpf).adicionaCompra(fornecedor, data, nome, descricao);
+	}
+	
+	public String exibeContas(String cpf, String fornecedor) {
+		Validador.validaEntrada(fornecedor, "Erro ao exibir conta do cliente: fornecedor nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(cpf, "Erro ao exibir conta do cliente: cpf nao pode ser vazio ou nulo.");
+		if (cpf.length() != 11) {
+			throw new IllegalArgumentException("Erro ao exibir conta do cliente: cpf invalido.");
+		}
+		if (!clientes.containsKey(cpf)) {
+			throw new IllegalArgumentException("Erro ao exibir conta do cliente: cliente nao existe.");
+		}
+		return this.clientes.get(cpf).exibeContas(fornecedor);
+	}
+
+	public String exibeContasClientes(String cpf) {
+		Validador.validaEntrada(cpf, "Erro ao exibir contas do cliente: cpf nao pode ser vazio ou nulo.");
+		if (cpf.length() != 11) {
+			throw new IllegalArgumentException("Erro ao exibir contas do cliente: cpf invalido.");
+		}
+		if (!clientes.containsKey(cpf)) {
+			throw new IllegalArgumentException("Erro ao exibir contas do cliente: cliente nao existe.");
+		}
+		return this.clientes.get(cpf).exibeContasClientes();
+	}
+
+	public String getDebito(String cpf, String fornecedor) {
+		Validador.validaEntrada(cpf, "Erro ao recuperar debito: cpf nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(fornecedor, "Erro ao recuperar debito: fornecedor nao pode ser vazio ou nulo.");
+		if (cpf.length() != 11) {
+			throw new IllegalArgumentException("Erro ao recuperar debito: cpf invalido.");
+		}
+		if (!clientes.containsKey(cpf)) {
+			throw new IllegalArgumentException("Erro ao recuperar debito: cliente nao existe.");
+		}
+		
+		return this.clientes.get(cpf).getDebito(fornecedor);
 	}
 }

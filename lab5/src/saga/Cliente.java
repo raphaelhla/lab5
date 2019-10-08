@@ -1,5 +1,10 @@
 package saga;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Representacao de um cliente. Todo cliente precisa ter um nome, cpf, email e
@@ -8,7 +13,7 @@ package saga;
  * @author Raphael Agra
  *
  */
-public class Cliente implements Comparable<Cliente>{
+public class Cliente implements Comparable<Cliente> {
 
 	/**
 	 * Nome do cliente.
@@ -29,7 +34,9 @@ public class Cliente implements Comparable<Cliente>{
 	 * Localizacao do cliente.
 	 */
 	private String localizacao;
-	
+
+	private Map<String, Conta> contas;
+
 	/**
 	 * Constroi um cliente a partir de seu nome, cpf, email e localizacao.
 	 * 
@@ -50,6 +57,7 @@ public class Cliente implements Comparable<Cliente>{
 		this.cpf = cpf;
 		this.email = email;
 		this.localizacao = localizacao;
+		this.contas = new HashMap<String, Conta>();
 	}
 
 	/**
@@ -66,9 +74,9 @@ public class Cliente implements Comparable<Cliente>{
 	}
 
 	/**
-	 * Metodo que verifica a se dois clientes sao iguais. Retorna um valor
-	 * booleano verdade caso sejam iguais, caso contrario retorna falso. Para dois
-	 * clientes serem iguais eles devem possuir o mesmo cpf.
+	 * Metodo que verifica a se dois clientes sao iguais. Retorna um valor booleano
+	 * verdade caso sejam iguais, caso contrario retorna falso. Para dois clientes
+	 * serem iguais eles devem possuir o mesmo cpf.
 	 * 
 	 * @return Retorna um valor booleano verdade caso os clientes sejam iguais, caso
 	 *         contrario retorna falso.
@@ -88,7 +96,8 @@ public class Cliente implements Comparable<Cliente>{
 	}
 
 	/**
-	 * Retorna a representacao em string de um cliente. A representacao segue o formato: "NOME - LOCALIZACAO - EMAIL".
+	 * Retorna a representacao em string de um cliente. A representacao segue o
+	 * formato: "NOME - LOCALIZACAO - EMAIL".
 	 * 
 	 * @return a representacao em string de um cliente.
 	 */
@@ -145,8 +154,8 @@ public class Cliente implements Comparable<Cliente>{
 	}
 
 	/**
-	 * Metodo que altera a localizacao do cliente a partir de uma nova localizacao passada como
-	 * parametro
+	 * Metodo que altera a localizacao do cliente a partir de uma nova localizacao
+	 * passada como parametro
 	 * 
 	 * @param localizacao Localizacao nova que o cliente ira receber.
 	 */
@@ -165,6 +174,48 @@ public class Cliente implements Comparable<Cliente>{
 
 	@Override
 	public int compareTo(Cliente o) {
-		return this.toString().compareTo(o.toString());
+		return this.getNome().compareTo(o.getNome());
+	}
+
+	public void adicionaCompra(Fornecedor fornecedor, String data, String nome, String descricao) {
+		String nomeFornecedor = fornecedor.getNome();
+		if (!contas.containsKey(nomeFornecedor)) {
+			contas.put(nomeFornecedor, new Conta(nomeFornecedor));
+		}
+		Produto produto = fornecedor.pegaProduto(nome, descricao);
+		contas.get(nomeFornecedor).adicionaCompra(nome, data, produto.getPreco());
+	}
+
+	public String exibeContas(String fornecedor) {
+		if (!contas.containsKey(fornecedor)) {
+			throw new IllegalArgumentException("Erro ao exibir conta do cliente: cliente nao tem nenhuma conta com o fornecedor.");
+		}
+		String msg = "Cliente: " + this.nome + " | ";
+		msg += contas.get(fornecedor).toString();
+		return msg;
+	}
+
+	public String exibeContasClientes() {
+		if (contas.size() == 0) {
+			throw new IllegalArgumentException("Erro ao exibir contas do cliente: cliente nao tem nenhuma conta.");
+		}
+		String msg = "Cliente: " + this.nome + " | ";
+		List<Conta> listaContas = new ArrayList<>(contas.values());
+		Collections.sort(listaContas);
+		List<String> toStringDasContas = new ArrayList<String>();
+		for (Conta e : listaContas) {
+			if (e.getQtdCompras() != 0)
+				toStringDasContas.add(e.toString());
+		}
+		msg += String.join(" | ", toStringDasContas);
+		return msg;
+	}
+
+	public String getDebito(String fornecedor) {
+		Validador.validaEntrada(fornecedor, "Erro ao recuperar debito: fornecedor nao pode ser vazio ou nulo.");
+		if (!contas.containsKey(fornecedor)) {
+			throw new IllegalArgumentException("Erro ao recuperar debito: cliente nao tem debito com fornecedor.");
+		}
+		return contas.get(fornecedor).getDebito();
 	}
 }

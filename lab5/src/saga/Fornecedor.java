@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Representacao de um fornecedor. Todo fornecedor precisa ter um seus produtos
@@ -33,7 +34,8 @@ public class Fornecedor implements Comparable<Fornecedor> {
 	 * Mapa com todos os produtos do fornecedor, identificados unicamente por um ID
 	 * com seu nome e sua descricao.
 	 */
-	private HashMap<IdProduto, Produto> produtos;
+	private Map<IdProduto, Produto> produtos;
+	
 
 	/**
 	 * Controi um fornecedor a partir de seu nome, email e telefone.
@@ -255,7 +257,7 @@ public class Fornecedor implements Comparable<Fornecedor> {
 
 	@Override
 	public int compareTo(Fornecedor o) {
-		return this.toString().compareTo(o.toString());
+		return this.getNome().compareTo(o.getNome());
 	}
 
 	public void adicionaCombo(String nome, String descricao, double fator, String produtos) {
@@ -303,6 +305,14 @@ public class Fornecedor implements Comparable<Fornecedor> {
 			throw new IllegalArgumentException("Erro na edicao de combo: produto nao existe.");
 		}
 		
-//		produtos.get(idCombo).get
+		Combo combo = (Combo) produtos.get(idCombo);
+		double precoNovo = combo.getPrecoSemDesconto() * (1 - novoFator);
+		combo.setPreco(precoNovo);
+		combo.setFator(novoFator);
+		produtos.put(idCombo, combo);
+	}
+	
+	public Produto pegaProduto(String nome, String descricao) {
+		return this.produtos.get(new IdProduto(nome, descricao));
 	}
 }
