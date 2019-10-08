@@ -17,7 +17,8 @@ public class Facade {
 	 */
 	public static void main(String[] args) {
 		args = new String[] { "saga.Facade", "TestesAceitacao/use_case_1.txt", "TestesAceitacao/use_case_2.txt",
-				"TestesAceitacao/use_case_3.txt", "TestesAceitacao/use_case_4.txt", "TestesAceitacao/use_case_5.txt", "TestesAceitacao/use_case_6.txt" };
+				"TestesAceitacao/use_case_3.txt", "TestesAceitacao/use_case_4.txt", "TestesAceitacao/use_case_5.txt",
+				"TestesAceitacao/use_case_6.txt" };
 		EasyAccept.main(args);
 	}
 
@@ -35,8 +36,8 @@ public class Facade {
 	 * Constroi uma facade.
 	 */
 	public Facade() {
-		this.clienteController = new ClienteController();
 		this.fornecedorController = new FornecedorController();
+		this.clienteController = new ClienteController(fornecedorController);
 	}
 
 	/**
@@ -228,28 +229,28 @@ public class Facade {
 	public void removeProduto(String nomeProduto, String descricao, String nomeFornecedor) {
 		fornecedorController.removeProduto(nomeFornecedor, nomeProduto, descricao);
 	}
-	
+
 	public void adicionaCombo(String fornecedor, String nome, String descricao, double fator, String produtos) {
 		fornecedorController.adicionaCombo(fornecedor, nome, descricao, fator, produtos);
 	}
-	
+
 	public void editaCombo(String nome, String descricao, String fornecedor, double novoFator) {
 		fornecedorController.editaCombo(nome, descricao, fornecedor, novoFator);
-		
+
 	}
-	
+
 	public void adicionaCompra(String cpf, String fornecedor, String data, String nome, String descricao) {
-		clienteController.adicionaCompra(cpf, fornecedorController.pegaFornecedor(fornecedor), data, nome, descricao);
+		clienteController.adicionaCompra(cpf, fornecedor, data, nome, descricao);
 	}
-	
+
 	public String exibeContas(String cpf, String fornecedor) {
 		return clienteController.exibeContas(cpf, fornecedor);
 	}
-	
+
 	public String exibeContasClientes(String cpf) {
 		return clienteController.exibeContasClientes(cpf);
 	}
-	
+
 	public String getDebito(String cpf, String fornecedor) {
 		return clienteController.getDebito(cpf, fornecedor);
 	}

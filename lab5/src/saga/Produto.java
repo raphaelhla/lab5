@@ -137,4 +137,8 @@ public class Produto implements Comparable<Produto> {
 		}
 		return this.getDescricao().compareTo(o.getDescricao());
 	}
+
+	public boolean verificaSeEhCombo() {
+		return false;
+	}
 }

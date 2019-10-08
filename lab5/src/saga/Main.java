@@ -1,9 +1,5 @@
 package saga;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -35,14 +31,13 @@ public class Main {
 
 //		System.out.println(c1.getClass());
 //		
-		facade.adicionaProduto("Josenilda", "Biscoito Salgado", "Bolachinha de cebola", 3.00);
-		facade.adicionaProduto("Josenilda", "Sobremesa", "Mousse de limão", 4.00);
-		facade.adicionaCombo("Josenilda", "Promo 1", "Bolachinha de cebola + Mousse de limão", 0.10, "Biscoito Salgado - Bolachinha de cebola, Sobremesa - Mousse de limão");
-//		System.out.println(facade.exibeProdutosFornecedor("Josenilda"));
+//		facade.adicionaProduto("Josenilda", "Biscoito Salgado", "Bolachinha de cebola", 3.00);
+//		facade.adicionaProduto("Josenilda", "Sobremesa", "Mousse de limão", 4.00);
+//		facade.adicionaCombo("Josenilda", "Promo 1", "Bolachinha de cebola + Mousse de limão", 0.10,
+//				"Biscoito Salgado - Bolachinha de cebola, Sobremesa - Mousse de limão");
+		System.out.println(facade.exibeProdutosFornecedor("Josenilda"));
 
-//		Expected <Cliente: Amigao Fernandes | Marcos | Coxao com batata - 03-12-2013 | Refrigerante - 03-06-2017>
-//		 but was <Cliente: Amigao Fernandes | Marcos | Coxao com batata - 03-12-2013 | Refrigerante - 03-06-2017 | >
+		
 
-	
 	}
 }

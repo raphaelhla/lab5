@@ -268,8 +268,18 @@ public class FornecedorController {
 		fornecedores.get(fornecedor).editaCombo(nome, descricao, novoFator);
 	}
 
-	public Fornecedor pegaFornecedor(String fornecedor) {
-		return this.fornecedores.get(fornecedor);
+	public boolean existeFornecedor(String fornecedor) {
+		if (!fornecedores.containsKey(fornecedor)) {
+			return false;
+		}
+		return true;
 	}
 
+	public boolean existeProdutoFornecedor(String fornecedor, String nome, String descricao) {
+		return fornecedores.get(fornecedor).existeProduto(nome, descricao);
+	}
+
+	public double getPrecoProdutoFornecedor(String fornecedor, String nome, String descricao) {
+		return fornecedores.get(fornecedor).getPrecoProduto(nome, descricao);
+	}
 }

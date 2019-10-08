@@ -35,7 +35,6 @@ public class Fornecedor implements Comparable<Fornecedor> {
 	 * com seu nome e sua descricao.
 	 */
 	private Map<IdProduto, Produto> produtos;
-	
 
 	/**
 	 * Controi um fornecedor a partir de seu nome, email e telefone.
@@ -202,7 +201,7 @@ public class Fornecedor implements Comparable<Fornecedor> {
 		List<Produto> listaProdutos = new ArrayList<>(produtos.values());
 		Collections.sort(listaProdutos);
 		List<String> produtosToString = new ArrayList<>();
-
+		
 		if (listaProdutos.size() != 0) {
 			for (Produto e : listaProdutos) {
 				produtosToString.add(this.nome + " - " + e.toString());
@@ -210,7 +209,6 @@ public class Fornecedor implements Comparable<Fornecedor> {
 		} else {
 			produtosToString.add(this.nome + " -");
 		}
-
 		msg = String.join(" | ", produtosToString);
 		return msg;
 	}
@@ -281,8 +279,7 @@ public class Fornecedor implements Comparable<Fornecedor> {
 			if (!this.produtos.containsKey(idProduto)) {
 				throw new IllegalArgumentException("Erro no cadastro de combo: produto nao existe.");
 			}
-			Combo combo = new Combo("Teste", "Combo teste usado para verificar a classe", 10.0, 0.5);
-			if (this.produtos.get(idProduto).getClass().equals(combo.getClass())) {
+			if (this.produtos.get(idProduto).verificaSeEhCombo()) {
 				throw new IllegalArgumentException(
 						"Erro no cadastro de combo: um combo nao pode possuir combos na lista de produtos.");
 			}
@@ -304,15 +301,24 @@ public class Fornecedor implements Comparable<Fornecedor> {
 		if (!produtos.containsKey(idCombo)) {
 			throw new IllegalArgumentException("Erro na edicao de combo: produto nao existe.");
 		}
-		
+
 		Combo combo = (Combo) produtos.get(idCombo);
 		double precoNovo = combo.getPrecoSemDesconto() * (1 - novoFator);
 		combo.setPreco(precoNovo);
 		combo.setFator(novoFator);
-		produtos.put(idCombo, combo);
 	}
-	
-	public Produto pegaProduto(String nome, String descricao) {
-		return this.produtos.get(new IdProduto(nome, descricao));
+
+	public double getPrecoProduto(String nome, String descricao) {
+		IdProduto idProduto = new IdProduto(nome, descricao);
+		return produtos.get(idProduto).getPreco();
+	}
+
+	public boolean existeProduto(String nome, String descricao) {
+		IdProduto idProduto = new IdProduto(nome, descricao);
+		if (!produtos.containsKey(idProduto)) {
+			return false;
+		}
+
+		return true;
 	}
 }

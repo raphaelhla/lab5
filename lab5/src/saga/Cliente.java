@@ -177,16 +177,23 @@ public class Cliente implements Comparable<Cliente> {
 		return this.getNome().compareTo(o.getNome());
 	}
 
-	public void adicionaCompra(Fornecedor fornecedor, String data, String nome, String descricao) {
-		String nomeFornecedor = fornecedor.getNome();
-		if (!contas.containsKey(nomeFornecedor)) {
-			contas.put(nomeFornecedor, new Conta(nomeFornecedor));
+	public void adicionaCompra(String fornecedor, String data, String nome, String descricao, double preco) {
+		Validador.validaEntrada(fornecedor, "Erro ao cadastrar compra: fornecedor nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(data, "Erro ao cadastrar compra: data nao pode ser vazia ou nula.");
+		Validador.validaEntrada(nome, "Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(descricao,
+				"Erro ao cadastrar compra: descricao do produto nao pode ser vazia ou nula.");
+		if (data.length() != 10) {
+			throw new IllegalArgumentException("Erro ao cadastrar compra: data invalida.");
 		}
-		Produto produto = fornecedor.pegaProduto(nome, descricao);
-		contas.get(nomeFornecedor).adicionaCompra(nome, data, produto.getPreco());
+		if (!contas.containsKey(fornecedor)) {
+			contas.put(fornecedor, new Conta(fornecedor));
+		}
+		contas.get(fornecedor).adicionaCompra(nome, data, preco);
 	}
 
 	public String exibeContas(String fornecedor) {
+		Validador.validaEntrada(fornecedor, "Erro ao exibir conta do cliente: fornecedor nao pode ser vazio ou nulo.");
 		if (!contas.containsKey(fornecedor)) {
 			throw new IllegalArgumentException("Erro ao exibir conta do cliente: cliente nao tem nenhuma conta com o fornecedor.");
 		}

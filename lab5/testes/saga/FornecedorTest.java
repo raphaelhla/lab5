@@ -305,7 +305,7 @@ class FornecedorTest {
 	
 	@Test
 	public void testListarProdutosListaVazia() {
-		assertEquals("",fornecedor3.listarProdutos());
+		assertEquals("Dona Alba -",fornecedor3.listarProdutos());
 	}
 	
 	@Test

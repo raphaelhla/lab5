@@ -27,5 +27,7 @@ public class Combo extends Produto{
 		return precoSemDesconto;
 	}
 	
-	
+	public boolean verificaSeEhCombo() {
+		return true;
+	}
 }

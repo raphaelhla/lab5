@@ -1,6 +1,14 @@
 package saga;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -203,5 +211,196 @@ class ClienteTest {
 	@Test
 	public void testToString() {
 		assertEquals("Victor Emanuel - Labarc - vitao@ccc.ufcg.edu.br", cliente3.toString());
+	}
+	
+	@Test
+	public void testCompareTo() {
+		List<Cliente> clientes = new ArrayList<Cliente>();
+		clientes.add(cliente1);
+		clientes.add(cliente2);
+		assertEquals("[Raphael Agra - CAA - raphael.agra@ccc.ufcg.edu.br, Ana Amari - SPG - ana_amari@ccc.ufcg.edu.br]", clientes.toString());
+		Collections.sort(clientes);
+		assertEquals("[Ana Amari - SPG - ana_amari@ccc.ufcg.edu.br, Raphael Agra - CAA - raphael.agra@ccc.ufcg.edu.br]", clientes.toString());
+	}
+	
+	@Test
+	public void testAdicionaCompraFornecedorNulo() {
+		try {
+			cliente1.adicionaCompra(null, "10/10/2019", "Tapioca", "Tapioca com frango", 5.00);
+			fail("Deveria lancar excecao");
+		} catch (NullPointerException e) {
+			assertEquals("Erro ao cadastrar compra: fornecedor nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaCompraFornecedorVazio() {
+		try {
+			cliente1.adicionaCompra("", "10/10/2019", "Tapioca", "Tapioca com frango", 5.00);
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro ao cadastrar compra: fornecedor nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaCompraDataNula() {
+		try {
+			cliente1.adicionaCompra("Josenilda", null, "Tapioca", "Tapioca com frango", 5.00);
+			fail("Deveria lancar excecao");
+		} catch (NullPointerException e) {
+			assertEquals("Erro ao cadastrar compra: data nao pode ser vazia ou nula.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaCompraDataVazia() {
+		try {
+			cliente1.adicionaCompra("Josenilda", "", "Tapioca", "Tapioca com frango", 5.00);
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro ao cadastrar compra: data nao pode ser vazia ou nula.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaCompraNomeNulo() {
+		try {
+			cliente1.adicionaCompra("Josenilda", "10/10/2019", null, "Tapioca com frango", 5.00);
+			fail("Deveria lancar excecao");
+		} catch (NullPointerException e) {
+			assertEquals("Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaCompraNomeVazio() {
+		try {
+			cliente1.adicionaCompra("Josenilda", "10/10/2019", "", "Tapioca com frango", 5.00);
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaCompraDescricaoNula() {
+		try {
+			cliente1.adicionaCompra("Josenilda", "10/10/2019", "Tapioca", null, 5.00);
+			fail("Deveria lancar excecao");
+		} catch (NullPointerException e) {
+			assertEquals("Erro ao cadastrar compra: descricao do produto nao pode ser vazia ou nula.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaCompraDescricaoVazia() {
+		try {
+			cliente1.adicionaCompra("Josenilda", "10/10/2019", "Tapioca", "", 5.00);
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro ao cadastrar compra: descricao do produto nao pode ser vazia ou nula.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaCompraDataInvalida() {
+		try {
+			cliente1.adicionaCompra("Josenilda", "10/103/2019", "Tapioca", "Tapioca com frango", 5.00);
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro ao cadastrar compra: data invalida.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testExibeContasFornecedorNulo() {
+		try {
+			cliente1.exibeContas(null);
+			fail("Deveria lancar excecao");
+		} catch (NullPointerException e) {
+			assertEquals("Erro ao exibir conta do cliente: fornecedor nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testExibeContasFornecedorVazio() {
+		try {
+			cliente1.exibeContas("");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro ao exibir conta do cliente: fornecedor nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testExibeContasClienteSemConta() {
+		try {
+			cliente1.exibeContas("Josenilda");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro ao exibir conta do cliente: cliente nao tem nenhuma conta com o fornecedor.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testExibeContasFeliz() {
+		cliente1.adicionaCompra("Josenilda", "12/10/2019", "Tapioca", "Tapioca com frango", 5.00);
+		cliente1.adicionaCompra("Josenilda", "20/10/2019", "Suco", "Suco de maracuja", 3.00);
+		assertEquals("Cliente: Raphael Agra | Josenilda | Tapioca - 12-10-2019 | Suco - 20-10-2019", cliente1.exibeContas("Josenilda"));
+	}
+	
+	@Test
+	public void testExibeContasClientesSemConta() {
+		try {
+			cliente1.exibeContasClientes();
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro ao exibir contas do cliente: cliente nao tem nenhuma conta.", e.getMessage());
+		}
+	}
+	@Test
+	public void testExibeContasClientesFeliz() {
+		cliente1.adicionaCompra("Josenilda", "01/04/2019", "Biscoito salgado", "Biscoito com sal", 5.00);
+		cliente1.adicionaCompra("Dona Ines", "01/03/2019", "Lanche FIT", "Lanche saudavel", 3.00);
+		cliente1.adicionaCompra("Dona Ines", "29/04/2019", "Salada", "Salada de frutas", 3.00);
+		assertEquals("Cliente: Raphael Agra | Dona Ines | Lanche FIT - 01-03-2019 | Salada - 29-04-2019 | Josenilda | Biscoito salgado - 01-04-2019", cliente1.exibeContasClientes());
+	}
+	
+	@Test
+	public void testGetDebitoFornecedorNulo() {
+		try {
+			cliente1.getDebito(null);
+			fail("Deveria lancar excecao");
+		} catch (NullPointerException e) {
+			assertEquals("Erro ao recuperar debito: fornecedor nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetDebitoFornecedorVazio() {
+		try {
+			cliente1.getDebito("");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro ao recuperar debito: fornecedor nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetDebitoClienteSemDebito() {
+		try {
+			cliente1.getDebito("Josenilda");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro ao recuperar debito: cliente nao tem debito com fornecedor.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetDebitoFeliz() {
+		cliente1.adicionaCompra("Dona Ines", "01/03/2019", "Lanche FIT", "Lanche saudavel", 3.00);
+		cliente1.adicionaCompra("Dona Ines", "29/04/2019", "Salada", "Salada de frutas", 3.00);
+		assertEquals("6.00", cliente1.getDebito("Dona Ines"));
 	}
 }

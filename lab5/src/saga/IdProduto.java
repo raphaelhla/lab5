@@ -69,8 +69,8 @@ public class IdProduto {
 	 * booleano verdade caso sejam iguais, caso contrario retorna falso. Para dois
 	 * produtos ID serem iguais eles devem possuir o mesmo nome e descricao.
 	 * 
-	 * @return Retorna um valor booleano verdade caso os produtos ID sejam iguais, caso
-	 *         contrario retorna falso.
+	 * @return Retorna um valor booleano verdade caso os produtos ID sejam iguais,
+	 *         caso contrario retorna falso.
 	 */
 	@Override
 	public boolean equals(Object obj) {
