@@ -4,7 +4,7 @@ package saga;
  * Representacao de um ID de um produto. Todo IdProduto precisa de um nome e uma
  * descricao.
  * 
- * @author Raphael Agra
+ * @author Raphael Agra - 119110413
  *
  */
 public class IdProduto {

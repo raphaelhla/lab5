@@ -3,7 +3,7 @@ package saga;
 /**
  * Representaçao de um verificador de entradas nulas ou vazias.
  * 
- * @author Raphael Agra
+ * @author Raphael Agra - 119110413
  *
  */
 public class Validador {

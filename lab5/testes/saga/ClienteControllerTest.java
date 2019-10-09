@@ -166,19 +166,9 @@ class ClienteControllerTest {
 
 	@Test
 	public void testListarClientes() {
-		HashSet<String> listaClientes = new HashSet<String>();
-		HashSet<String> listaClientes2 = new HashSet<String>();
-		
 		clienteController.cadastraCliente("Raphael Agra", "12345678900","raphael.agra@ccc.ufcg.edu.br", "CAA");
 		clienteController.cadastraCliente("Ana Amari", "11111111100","ana_amari@ccc.ufcg.edu.br", "SPG");
-		listaClientes.add(clienteController.exibeCliente("12345678900"));
-		listaClientes.add(clienteController.exibeCliente("11111111100"));
-		
-		String[] x = clienteController.exibeClientes().split(" \\| ");
-		for (int i = 0; i < x.length; i++) {
-			listaClientes2.add(x[i]);
-		}
-		assertEquals(listaClientes,listaClientes2);
+		assertEquals("Ana Amari - SPG - ana_amari@ccc.ufcg.edu.br | Raphael Agra - CAA - raphael.agra@ccc.ufcg.edu.br", clienteController.exibeClientes());
 	}
 	
 	@Test
@@ -598,5 +588,128 @@ class ClienteControllerTest {
 		fornecedorController.cadastraProduto("Diniz", "Bolo", "Bolo de chocolate", 5.00);
 		clienteController.adicionaCompra("10290935474", "Diniz", "01/10/2019", "Bolo", "Bolo de chocolate");
 		assertEquals("Cliente: Raphael Agra | Diniz | Bolo - 01-10-2019 | Josenilda | Tapioca - 12-10-2019 | Suco - 15-10-2019", clienteController.exibeContasClientes("10290935474"));
+	}
+	
+	@Test
+	public void testExibeContasClientesCpfNulo() {
+		try {
+			clienteController.exibeContasClientes(null);
+			fail("Deveria lancar excecao");
+		} catch (NullPointerException e) {
+			assertEquals("Erro ao exibir contas do cliente: cpf nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testExibeContasClientesCpfVazio() {
+		try {
+			clienteController.exibeContasClientes("");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro ao exibir contas do cliente: cpf nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testExibeContasClientesClienteInexistente() {
+		try {
+			clienteController.exibeContasClientes("22233333399");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro ao exibir contas do cliente: cliente nao existe.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testExibeContasClientesCpfInvalido() {
+		try {
+			clienteController.exibeContasClientes("2223333339559");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro ao exibir contas do cliente: cpf invalido.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetDebitoFornecedorNulo() {
+		try {
+			clienteController.getDebito("12345678900", null);
+			fail("Deveria lancar excecao");
+		} catch (NullPointerException e) {
+			assertEquals("Erro ao recuperar debito: fornecedor nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetDebitoFornecedorVazio() {
+		try {
+			clienteController.getDebito("12345678900", "");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro ao recuperar debito: fornecedor nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetDebitoCpfInvalido() {
+		try {
+			clienteController.getDebito("1239998887766", "Josenilda");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro ao recuperar debito: cpf invalido.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetDebitoCpfNulo() {
+		try {
+			clienteController.getDebito(null, "Josenilda");
+			fail("Deveria lancar excecao");
+		} catch (NullPointerException e) {
+			assertEquals("Erro ao recuperar debito: cpf nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetDebitoCpfVazio() {
+		try {
+			clienteController.getDebito("", "Josenilda");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro ao recuperar debito: cpf nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetDebitoClienteInexistente() {
+		try {
+			fornecedorController.cadastraFornecedor("Josenilda", "josenilda@example.com", "83 93322-1199");
+			clienteController.getDebito("00099988877", "Josenilda");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro ao recuperar debito: cliente nao existe.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetDebitoFornecedorInexistente() {
+		try {
+			clienteController.cadastraCliente("Raphael Agra", "10290935474", "raphael.agra@gmail.com", "LCC3");
+			clienteController.getDebito("10290935474", "Irineu");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro ao recuperar debito: fornecedor nao existe.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetDebitoFeliz() {
+		clienteController.cadastraCliente("Raphael Agra", "10290935474", "raphael.agra@gmail.com", "LCC3");
+		fornecedorController.cadastraFornecedor("Josenilda", "josenilda@example.com", "83 93322-1199");
+		fornecedorController.cadastraProduto("Josenilda", "Tapioca", "Tapioca com frango", 5.00);
+		fornecedorController.cadastraProduto("Josenilda", "Suco", "Suco de maracuja", 3.00);
+		clienteController.adicionaCompra("10290935474", "Josenilda", "12/10/2019", "Tapioca", "Tapioca com frango");
+		clienteController.adicionaCompra("10290935474", "Josenilda", "15/10/2019", "Suco", "Suco de maracuja");
+		assertEquals("8.00", clienteController.getDebito("10290935474", "Josenilda"));
 	}
 }

@@ -1,6 +1,14 @@
 package saga;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -165,5 +173,28 @@ class ProdutoTest {
 	@Test
 	public void testEqualsComNull() {
 		assertFalse(p3.equals(null));
+	}
+	
+	@Test
+	public void testCompareToNomeDiferente() {
+		List<Produto> listaProdutos = new ArrayList<Produto>();
+		listaProdutos.add(p2);
+		listaProdutos.add(p1);
+		Collections.sort(listaProdutos);
+		assertEquals("[Cachorro quente - Pao com salsicha e carne moida - R$5,00, Tapioca - Tapioca com frango - R$3,50]", listaProdutos.toString());
+	}
+	
+	@Test
+	public void testCompareToNomeIgual() {
+		List<Produto> listaProdutos = new ArrayList<Produto>();
+		listaProdutos.add(p2);
+		listaProdutos.add(new Produto(6.00, "Tapioca", "A tapioca das galaxias"));
+		Collections.sort(listaProdutos);
+		assertEquals("[Tapioca - A tapioca das galaxias - R$6,00, Tapioca - Tapioca com frango - R$3,50]", listaProdutos.toString());
+	}
+	
+	@Test
+	public void testVerificaSeEhCombo() {
+		assertFalse(p1.verificaSeEhCombo());
 	}
 }

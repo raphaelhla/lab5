@@ -10,7 +10,7 @@ import java.util.Map;
  * Representacao de um fornecedor. Todo fornecedor precisa ter um seus produtos
  * e um nome, email e telefone.
  * 
- * @author Raphael Agra
+ * @author Raphael Agra - 119110413
  *
  */
 public class Fornecedor implements Comparable<Fornecedor> {
@@ -201,7 +201,7 @@ public class Fornecedor implements Comparable<Fornecedor> {
 		List<Produto> listaProdutos = new ArrayList<>(produtos.values());
 		Collections.sort(listaProdutos);
 		List<String> produtosToString = new ArrayList<>();
-		
+
 		if (listaProdutos.size() != 0) {
 			for (Produto e : listaProdutos) {
 				produtosToString.add(this.nome + " - " + e.toString());
@@ -253,11 +253,27 @@ public class Fornecedor implements Comparable<Fornecedor> {
 		}
 	}
 
+	/**
+	 * Metodo da interface comparable que é utilizado na ordenacao de fornecedores e
+	 * utiliza o nome do fornecedor para ordenacao em ordem alfabetica.
+	 * 
+	 * @param um fornecedor que vai ser comparado com o fornecedor atual.
+	 */
 	@Override
 	public int compareTo(Fornecedor o) {
 		return this.getNome().compareTo(o.getNome());
 	}
 
+	/**
+	 * Metodo que adiciona um novo combo de produtos para o fornecedor, a partir do
+	 * nome do combo, descricao do combo, fator de desconto e dos produtos que vao
+	 * fazer parte do combo.
+	 * 
+	 * @param nome      Nome do combo.
+	 * @param descricao Descricao do combo.
+	 * @param fator     Fator de desconto do combo.
+	 * @param produtos  Produtos que vao fazer parte do combo.
+	 */
 	public void adicionaCombo(String nome, String descricao, double fator, String produtos) {
 		Validador.validaEntrada(nome, "Erro no cadastro de combo: nome nao pode ser vazio ou nulo.");
 		Validador.validaEntrada(descricao, "Erro no cadastro de combo: descricao nao pode ser vazia ou nula.");
@@ -290,6 +306,14 @@ public class Fornecedor implements Comparable<Fornecedor> {
 		this.produtos.put(idCombo, c1);
 	}
 
+	/**
+	 * Metodo que edita o preco de um combo a partir de seu nome, descricao e seu
+	 * novo fator de desconto.
+	 * 
+	 * @param nome      Nome do combo.
+	 * @param descricao Descricao do combo.
+	 * @param novoFator Novo fator de desconto do combo.
+	 */
 	public void editaCombo(String nome, String descricao, double novoFator) {
 		Validador.validaEntrada(nome, "Erro na edicao de combo: nome nao pode ser vazio ou nulo.");
 		Validador.validaEntrada(descricao, "Erro na edicao de combo: descricao nao pode ser vazia ou nula.");
@@ -303,16 +327,33 @@ public class Fornecedor implements Comparable<Fornecedor> {
 		}
 
 		Combo combo = (Combo) produtos.get(idCombo);
-		double precoNovo = combo.getPrecoSemDesconto() * (1 - novoFator);
-		combo.setPreco(precoNovo);
-		combo.setFator(novoFator);
+		combo.setPreco(novoFator);
 	}
 
+	/**
+	 * Metodo que retorna um valor double que representa o preco de um determinado
+	 * produto do fornecedor, a partir do nome do produto e da sua descricao.
+	 * 
+	 * @param nome      Nome do produto.
+	 * @param descricao Descricao do produto.
+	 * @return um valor double que representa o preco de um determinado produto do
+	 *         fornecedor.
+	 */
 	public double getPrecoProduto(String nome, String descricao) {
 		IdProduto idProduto = new IdProduto(nome, descricao);
 		return produtos.get(idProduto).getPreco();
 	}
 
+	/**
+	 * Metodo que verifica se o fornecedor possui um determinado produto, a partir
+	 * do seu nome e sua descricao. Retorna um valor booleano verdade caso o produto
+	 * exista, caso contrario retorna falso.
+	 * 
+	 * @param nome      Nome do produto.
+	 * @param descricao Descricao do produto.
+	 * @return um valor booleano verdade caso o produto exista, caso contrario
+	 *         retorna falso.
+	 */
 	public boolean existeProduto(String nome, String descricao) {
 		IdProduto idProduto = new IdProduto(nome, descricao);
 		if (!produtos.containsKey(idProduto)) {

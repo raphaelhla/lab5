@@ -4,7 +4,7 @@ package saga;
  * Representacao de um produto. Todo produto precisa de um preco, um nome e uma
  * descricao.
  * 
- * @author Raphael Agra
+ * @author Raphael Agra - 119110413
  *
  */
 public class Produto implements Comparable<Produto> {
@@ -12,7 +12,7 @@ public class Produto implements Comparable<Produto> {
 	/**
 	 * Preco do produto.
 	 */
-	private double preco;
+	protected double preco;
 
 	/**
 	 * Classe de identificacao do produto que contem o seu nome e sua descricao.
@@ -130,6 +130,14 @@ public class Produto implements Comparable<Produto> {
 		return true;
 	}
 
+	/**
+	 * Metodo da interface comparable que é utilizado na ordenacao de produtos e
+	 * utiliza o nome do produto para ordenacao em ordem alfabetica. Caso o nome dos
+	 * produtos que estao sendo comparados forem iguais, o metodo utilizará a
+	 * descricao do produto para ordena-los.
+	 * 
+	 * @param o produto que vai ser comparado com o produto atual.
+	 */
 	@Override
 	public int compareTo(Produto o) {
 		if (!this.getNome().equals(o.getNome())) {
@@ -138,6 +146,13 @@ public class Produto implements Comparable<Produto> {
 		return this.getDescricao().compareTo(o.getDescricao());
 	}
 
+	/**
+	 * Metodo que retorna o valor booeano verdade se o produto for um combo, caso
+	 * contrario retorna falso.
+	 * 
+	 * @return Retorna um valor booleano verdade caso o produto for um combo, caso
+	 *         contrario retorna falso.
+	 */
 	public boolean verificaSeEhCombo() {
 		return false;
 	}

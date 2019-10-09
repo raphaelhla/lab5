@@ -5,7 +5,7 @@ import easyaccept.EasyAccept;
 /**
  * Representacao de uma facade.
  * 
- * @author Raphael Agra
+ * @author Raphael Agra - 119110413
  *
  */
 public class Facade {
@@ -230,27 +230,83 @@ public class Facade {
 		fornecedorController.removeProduto(nomeFornecedor, nomeProduto, descricao);
 	}
 
+	/**
+	 * Metodo que adiciona um novo combo de produtos para um fornecedor, a partir do
+	 * nome do fornecedor, do nome do combo, descricao do combo, fator de desconto
+	 * do comboe dos produtos que vao fazer parte do combo.
+	 * 
+	 * @param fornecedor Nome do fornecedor.
+	 * @param nome       Nome do combo.
+	 * @param descricao  Descricao do combo.
+	 * @param fator      Fator de desconto do combo.
+	 * @param produtos   Produtos que vao fazer parte do combo.
+	 */
 	public void adicionaCombo(String fornecedor, String nome, String descricao, double fator, String produtos) {
 		fornecedorController.adicionaCombo(fornecedor, nome, descricao, fator, produtos);
 	}
 
+	/**
+	 * Metodo que edita o preco do combo de um fornecedor, a partir do nome do
+	 * fornecedor, do nome do produto, descricao do produto e seu novo fator de
+	 * desconto.
+	 * 
+	 * @param nome       Nome do combo.
+	 * @param descricao  Descricao do combo.
+	 * @param fornecedor Nome do fornecedor.
+	 * @param novoFator  Novo fator de desconto do combo.
+	 */
 	public void editaCombo(String nome, String descricao, String fornecedor, double novoFator) {
 		fornecedorController.editaCombo(nome, descricao, fornecedor, novoFator);
-
 	}
 
+	/**
+	 * Metodo que adiciona uma compra de um produto de um fornecedor na conta de um
+	 * cliente com o fornecedor, a partir do cpf do cliente, do nome do fornecedor,
+	 * da data da compra, do nome do produto e da descricao do produto. Se o cliente
+	 * nao tiver nenhuma conta com o fornecedor, uma nova conta deve ser criada.
+	 * 
+	 * @param cpf        Cpf do cliente.
+	 * @param fornecedor Nome do fornecedor.
+	 * @param data       Data da compra.
+	 * @param nome       Nome do produto.
+	 * @param descricao  Descricao do produto.
+	 */
 	public void adicionaCompra(String cpf, String fornecedor, String data, String nome, String descricao) {
 		clienteController.adicionaCompra(cpf, fornecedor, data, nome, descricao);
 	}
 
+	/**
+	 * Metodo que retorna a representacao em string da conta de um cliente com um
+	 * fornecedor, a partir do cpf do cliente e do nome do fornecedor.
+	 * 
+	 * @param cpf        Cpf do cliente.
+	 * @param fornecedor Nome do fornecedor.
+	 * @return a string que representa a conta de um cliente com um fornecedor.
+	 */
 	public String exibeContas(String cpf, String fornecedor) {
 		return clienteController.exibeContas(cpf, fornecedor);
 	}
 
+	/**
+	 * Metodo que retorna a representacao em string de todas as contas de todos os
+	 * fornecedores com qual um cliente possui conta, a partir do cpf do cliente.
+	 * 
+	 * @param cpf Cpf do cliente.
+	 * @return a string que representa todas as contas de todos os fornecedores que
+	 *         um determinado cliente cliente possui conta.
+	 */
 	public String exibeContasClientes(String cpf) {
 		return clienteController.exibeContasClientes(cpf);
 	}
 
+	/**
+	 * Metodo que retorna a string que representa o valor do debito que um cliente
+	 * tem com um fornecedor, a partir do cpf do cliente e do nome do fornecedor.
+	 * 
+	 * @param cpf        Cpf do cliente.
+	 * @param fornecedor Nome do fornecedor.
+	 * @return a representacao em string do debito de um cliente com um fornecedor.
+	 */
 	public String getDebito(String cpf, String fornecedor) {
 		return clienteController.getDebito(cpf, fornecedor);
 	}
