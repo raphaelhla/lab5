@@ -1,7 +1,7 @@
 package saga;
 
 /**
- * Representacao de um produto. Todo produto precisa de um preco, um nome e uma
+ * Representacao de um produto. Todo produto precisa de um nome e uma
  * descricao.
  * 
  * @author Raphael Agra - 119110413
@@ -10,60 +10,21 @@ package saga;
 public class Produto implements Comparable<Produto> {
 
 	/**
-	 * Preco do produto.
-	 */
-	protected double preco;
-
-	/**
 	 * Classe de identificacao do produto que contem o seu nome e sua descricao.
 	 */
-	private IdProduto idProduto;
+	protected IdProduto idProduto;
 
 	/**
-	 * Constroi um produto a partir do seu preco, nome e descricao.
+	 * Constroi um produto a partir do seu nome e descricao.
 	 * 
-	 * @param preco     Preco do produto.
 	 * @param nome      Nome do produto.
 	 * @param descricao Descricao do produto.
 	 */
-	public Produto(double preco, String nome, String descricao) {
+	public Produto(String nome, String descricao) {
 		Validador.validaEntrada(nome, "Erro no cadastro de produto: nome nao pode ser vazio ou nulo.");
 		Validador.validaEntrada(descricao, "Erro no cadastro de produto: descricao nao pode ser vazia ou nula.");
-		if (preco < 0) {
-			throw new IllegalArgumentException("Erro no cadastro de produto: preco invalido.");
-		}
-		this.preco = preco;
+		
 		this.idProduto = new IdProduto(nome, descricao);
-	}
-
-	/**
-	 * Retorna a string que representa um produto. A representacao segue o formato:
-	 * "NOME - DESCRICAO - PRECO".
-	 * 
-	 * @return a representacao em string do produto.
-	 */
-	@Override
-	public String toString() {
-		return String.format("%s - %s - R$%.2f", idProduto.getNome(), idProduto.getDescricao(), this.preco);
-	}
-
-	/**
-	 * Metodo que retorna o valor double que representa o preco do produto.
-	 * 
-	 * @return o valor double que representa o preco do produto.
-	 */
-	public double getPreco() {
-		return preco;
-	}
-
-	/**
-	 * Metodo que altera o preco do produto a partir de um novo preco passado como
-	 * parametro
-	 * 
-	 * @param preco Preco novo que o produto ira receber.
-	 */
-	public void setPreco(double preco) {
-		this.preco = preco;
 	}
 
 	/**
@@ -94,6 +55,17 @@ public class Produto implements Comparable<Produto> {
 		return this.idProduto;
 	}
 
+	/**
+	 * Retorna a string que representa um produto. A representacao segue o formato:
+	 * "NOME - DESCRICAO".
+	 * 
+	 * @return a representacao em string do produto.
+	 */
+	@Override
+	public String toString() {
+		return String.format("%s - %s", idProduto.getNome(), idProduto.getDescricao());
+	}
+	
 	/**
 	 * Retorna um inteiro que representa um produto.
 	 * 

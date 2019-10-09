@@ -19,15 +19,15 @@ class ProdutoTest {
 
 	@BeforeEach
 	public void criaProdutos() {
-		p1 = new Produto(5.00, "Cachorro quente", "Pao com salsicha e carne moida");
-		p2 = new Produto(3.50, "Tapioca", "Tapioca com frango");
-		p3 = new Produto(7.00, "X-tudo", "Hamburguer de carne e frango com queijo e calabresa");
+		p1 = new Produto("Cachorro quente", "Pao com salsicha e carne moida");
+		p2 = new Produto("Tapioca", "Tapioca com frango");
+		p3 = new Produto("X-tudo", "Hamburguer de carne e frango com queijo e calabresa");
 	}
 	
 	@Test
 	public void testCadastraProdutoNomeNulo() {
 		try {
-			new Produto(5.00, null, "Pao com salsicha e carne moida");
+			new Produto(null, "Pao com salsicha e carne moida");
 			fail("Deveria lancar excecao");
 		} catch (NullPointerException e) {
 			assertEquals("Erro no cadastro de produto: nome nao pode ser vazio ou nulo.", e.getMessage());
@@ -37,7 +37,7 @@ class ProdutoTest {
 	@Test
 	public void testCadastraProdutoNomeVazio() {
 		try {
-			new Produto(5.00, "", "Pao com salsicha e carne moida");
+			new Produto("", "Pao com salsicha e carne moida");
 			fail("Deveria lancar excecao");
 		} catch (IllegalArgumentException e) {
 			assertEquals("Erro no cadastro de produto: nome nao pode ser vazio ou nulo.", e.getMessage());
@@ -47,7 +47,7 @@ class ProdutoTest {
 	@Test
 	public void testCadastraProdutoDescricaoNula() {
 		try {
-			new Produto(5.00, "Cachorro quente", null);
+			new Produto("Cachorro quente", null);
 			fail("Deveria lancar excecao");
 		} catch (NullPointerException e) {
 			assertEquals("Erro no cadastro de produto: descricao nao pode ser vazia ou nula.", e.getMessage());
@@ -57,41 +57,11 @@ class ProdutoTest {
 	@Test
 	public void testCadastraProdutoDescricaoVazia() {
 		try {
-			new Produto(5.00, "Cachorro quente", "");
+			new Produto("Cachorro quente", "");
 			fail("Deveria lancar excecao");
 		} catch (IllegalArgumentException e) {
 			assertEquals("Erro no cadastro de produto: descricao nao pode ser vazia ou nula.", e.getMessage());
 		}
-	}
-	
-	@Test
-	public void testCadastraProdutoPrecoInvalido() {
-		try {
-			new Produto(-1, "Cachorro quente", "Pao com salsicha e carne moida");
-			fail("Deveria lancar excecao");
-		} catch (IllegalArgumentException e) {
-			assertEquals("Erro no cadastro de produto: preco invalido.", e.getMessage());
-		}
-	}
-	
-	@Test
-	public void testToString() {
-		assertEquals("Cachorro quente - Pao com salsicha e carne moida - R$5,00", p1.toString());
-	}
-	
-	@Test
-	public void testToString2() {
-		assertEquals("Tapioca - Tapioca com frango - R$3,50", p2.toString());
-	}
-	
-	@Test
-	public void testGetPreco() {
-		assertEquals(7.00, p3.getPreco());
-	}
-	
-	@Test
-	public void testGetPreco2() {
-		assertEquals(3.50, p2.getPreco());
 	}
 	
 	@Test
@@ -127,9 +97,13 @@ class ProdutoTest {
 	}
 	
 	@Test
-	public void testSetPreco() {
-		p1.setPreco(20.00);
-		assertEquals(20.00,p1.getPreco());
+	public void testToString() {
+		assertEquals("Cachorro quente - Pao com salsicha e carne moida", p1.toString());
+	}
+	
+	@Test
+	public void testToString2() {
+		assertEquals("Tapioca - Tapioca com frango", p2.toString());
 	}
 	
 	@Test
@@ -139,7 +113,7 @@ class ProdutoTest {
 	
 	@Test
 	public void testHashCode2() {
-		Produto p4 = new Produto(15.00 ,"Tapioca", "Tapioca com frango");
+		Produto p4 = new Produto("Tapioca", "Tapioca com frango");
 		assertEquals(p2.hashCode(), p4.hashCode());
 	}
 	
@@ -155,7 +129,7 @@ class ProdutoTest {
 	
 	@Test
 	public void testEqualsIdProdutoIguais() {
-		Produto p4 = new Produto(15.00 ,"Tapioca", "Tapioca com frango");
+		Produto p4 = new Produto("Tapioca", "Tapioca com frango");
 		assertTrue(p2.equals(p4));
 	}
 	
@@ -181,16 +155,16 @@ class ProdutoTest {
 		listaProdutos.add(p2);
 		listaProdutos.add(p1);
 		Collections.sort(listaProdutos);
-		assertEquals("[Cachorro quente - Pao com salsicha e carne moida - R$5,00, Tapioca - Tapioca com frango - R$3,50]", listaProdutos.toString());
+		assertEquals("[Cachorro quente - Pao com salsicha e carne moida, Tapioca - Tapioca com frango]", listaProdutos.toString());
 	}
 	
 	@Test
 	public void testCompareToNomeIgual() {
 		List<Produto> listaProdutos = new ArrayList<Produto>();
 		listaProdutos.add(p2);
-		listaProdutos.add(new Produto(6.00, "Tapioca", "A tapioca das galaxias"));
+		listaProdutos.add(new Produto("Tapioca", "A tapioca das galaxias"));
 		Collections.sort(listaProdutos);
-		assertEquals("[Tapioca - A tapioca das galaxias - R$6,00, Tapioca - Tapioca com frango - R$3,50]", listaProdutos.toString());
+		assertEquals("[Tapioca - A tapioca das galaxias, Tapioca - Tapioca com frango]", listaProdutos.toString());
 	}
 	
 	@Test

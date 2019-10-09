@@ -97,7 +97,7 @@ class IdProdutoTest {
 	
 	@Test
 	public void testEqualsComOutraClasse() {
-		Produto p1 = new Produto(5.00, "Cachorro quente", "Pao com salsicha e carne moida");
+		ProdutoSimples p1 = new ProdutoSimples("Cachorro quente", "Pao com salsicha e carne moida", 8.00);
 		assertFalse(id1.equals(p1));
 	}
 

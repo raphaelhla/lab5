@@ -160,13 +160,11 @@ public class Fornecedor implements Comparable<Fornecedor> {
 		if (preco < 0) {
 			throw new IllegalArgumentException("Erro no cadastro de produto: preco invalido.");
 		}
-		Produto p1 = new Produto(preco, nomeProduto, descricao);
-		if (!produtos.containsKey(p1.getIdProduto())) {
-			this.produtos.put(p1.getIdProduto(), p1);
-		} else {
+		ProdutoSimples p1 = new ProdutoSimples(nomeProduto, descricao, preco);
+		if (produtos.containsKey(p1.getIdProduto())) {
 			throw new IllegalArgumentException("Erro no cadastro de produto: produto ja existe.");
-		}
-
+		} 
+		this.produtos.put(p1.getIdProduto(), p1);
 	}
 
 	/**
@@ -181,11 +179,10 @@ public class Fornecedor implements Comparable<Fornecedor> {
 		Validador.validaEntrada(nomeProduto, "Erro na exibicao de produto: nome nao pode ser vazio ou nulo.");
 		Validador.validaEntrada(descricao, "Erro na exibicao de produto: descricao nao pode ser vazia ou nula.");
 		IdProduto idProduto = new IdProduto(nomeProduto, descricao);
-		if (produtos.containsKey(idProduto)) {
-			return produtos.get(idProduto).toString();
-		} else {
+		if (!produtos.containsKey(idProduto)) {
 			throw new IllegalArgumentException("Erro na exibicao de produto: produto nao existe.");
 		}
+		return produtos.get(idProduto).toString();
 
 	}
 
@@ -228,11 +225,11 @@ public class Fornecedor implements Comparable<Fornecedor> {
 			throw new IllegalArgumentException("Erro na edicao de produto: preco invalido.");
 		}
 		IdProduto idProduto = new IdProduto(nomeProduto, descricao);
-		if (produtos.containsKey(idProduto)) {
-			produtos.get(idProduto).setPreco(precoNovo);
-		} else {
+		ProdutoSimples produto = (ProdutoSimples) produtos.get(idProduto);
+		if (!produtos.containsKey(idProduto)) {
 			throw new IllegalArgumentException("Erro na edicao de produto: produto nao existe.");
 		}
+		produto.setPreco(precoNovo);
 	}
 
 	/**
@@ -274,10 +271,10 @@ public class Fornecedor implements Comparable<Fornecedor> {
 	 * @param fator     Fator de desconto do combo.
 	 * @param produtos  Produtos que vao fazer parte do combo.
 	 */
-	public void adicionaCombo(String nome, String descricao, double fator, String produtos) {
+	public void adicionaCombo(String nome, String descricao, double fator, String produtosDoCombo) {
 		Validador.validaEntrada(nome, "Erro no cadastro de combo: nome nao pode ser vazio ou nulo.");
 		Validador.validaEntrada(descricao, "Erro no cadastro de combo: descricao nao pode ser vazia ou nula.");
-		Validador.validaEntrada(produtos, "Erro no cadastro de combo: combo deve ter produtos.");
+		Validador.validaEntrada(produtosDoCombo, "Erro no cadastro de combo: combo deve ter produtos.");
 		if (fator < 0 || fator >= 1) {
 			throw new IllegalArgumentException("Erro no cadastro de combo: fator invalido.");
 		}
@@ -286,8 +283,9 @@ public class Fornecedor implements Comparable<Fornecedor> {
 			throw new IllegalArgumentException("Erro no cadastro de combo: combo ja existe.");
 		}
 
-		String[] listaDeProdutos = produtos.split(", ");
-		double precoCombo = 0;
+		Map<IdProduto, ProdutoSimples> produtosCombo = new HashMap<IdProduto, ProdutoSimples>();
+		String[] listaDeProdutos = produtosDoCombo.split(", ");
+		
 		for (String e : listaDeProdutos) {
 			String nomeProduto = e.split(" - ")[0];
 			String descricaoProduto = e.split(" - ")[1];
@@ -299,15 +297,15 @@ public class Fornecedor implements Comparable<Fornecedor> {
 				throw new IllegalArgumentException(
 						"Erro no cadastro de combo: um combo nao pode possuir combos na lista de produtos.");
 			}
-			precoCombo += this.produtos.get(idProduto).getPreco();
+			produtosCombo.put(idProduto,(ProdutoSimples) produtos.get(idProduto));
 		}
 
-		Combo c1 = new Combo(nome, descricao, precoCombo, fator);
+		Combo c1 = new Combo(nome, descricao, fator, produtosCombo);
 		this.produtos.put(idCombo, c1);
 	}
 
 	/**
-	 * Metodo que edita o preco de um combo a partir de seu nome, descricao e seu
+	 * Metodo que edita o fator de desconto de um combo a partir de seu nome, descricao e seu
 	 * novo fator de desconto.
 	 * 
 	 * @param nome      Nome do combo.
@@ -327,7 +325,7 @@ public class Fornecedor implements Comparable<Fornecedor> {
 		}
 
 		Combo combo = (Combo) produtos.get(idCombo);
-		combo.setPreco(novoFator);
+		combo.setFator(novoFator);
 	}
 
 	/**
@@ -341,7 +339,12 @@ public class Fornecedor implements Comparable<Fornecedor> {
 	 */
 	public double getPrecoProduto(String nome, String descricao) {
 		IdProduto idProduto = new IdProduto(nome, descricao);
-		return produtos.get(idProduto).getPreco();
+		if (produtos.get(idProduto).verificaSeEhCombo()) {
+			Combo combo = (Combo) produtos.get(idProduto);
+			return combo.getPreco();
+		}
+		ProdutoSimples produto = (ProdutoSimples) produtos.get(idProduto);
+		return produto.getPreco();
 	}
 
 	/**
@@ -359,7 +362,6 @@ public class Fornecedor implements Comparable<Fornecedor> {
 		if (!produtos.containsKey(idProduto)) {
 			return false;
 		}
-
 		return true;
 	}
 }
