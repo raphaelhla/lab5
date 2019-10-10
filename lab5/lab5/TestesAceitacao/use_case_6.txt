@@ -1,4 +1,4 @@
-# Parte 2 do SAGA - US6.
+# Parte 2 do SAGA - US5.
 
 ## Cadastrando compras ##
 

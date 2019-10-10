@@ -131,19 +131,10 @@ class FornecedorControllerTest {
 	
 	@Test
 	public void testListarFornecedores() {
-		HashSet<String> listaFornecedores1 = new HashSet<String>();
-		HashSet<String> listaFornecedores2 = new HashSet<String>();
-		
 		fornecedorController.cadastraFornecedor("Seu Olavo", "olavo@gmail.com", "83 99348-1092");
 		fornecedorController.cadastraFornecedor("Raphael", "raphael@gmail.com", "83 98737-2109");
-		listaFornecedores1.add(fornecedorController.exibeFornecedor("Seu Olavo"));
-		listaFornecedores1.add(fornecedorController.exibeFornecedor("Raphael"));
-		
-		String[] x = fornecedorController.exibeFornecedores().split(" \\| ");
-		for (int i = 0; i < x.length; i++) {
-			listaFornecedores2.add(x[i]);
-		}
-		assertEquals(listaFornecedores1,listaFornecedores2);
+		fornecedorController.cadastraFornecedor("Biu Gate", "biu@gmail.com", "83 98787-2109");
+		assertEquals("Biu Gate - biu@gmail.com - 83 98787-2109 | Raphael - raphael@gmail.com - 83 98737-2109 | Seu Olavo - olavo@gmail.com - 83 99348-1092",fornecedorController.exibeFornecedores());
 	}
 	
 	@Test
@@ -485,28 +476,25 @@ class FornecedorControllerTest {
 	}
 	
 	@Test
+	public void testExibeProdutosFornecedorInexistente() {
+		try {
+			fornecedorController.exibeProdutosFornecedor("IRINEU");
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro na exibicao de produto: fornecedor nao existe.", e.getMessage());
+		}
+	}
+	
+	@Test
 	public void testListarProdutosDeUmFornecedor() {
-		HashSet<String> listaProdutos1 = new HashSet<String>();
-		HashSet<String> listaProdutos2 = new HashSet<String>();
-		
 		fornecedorController.cadastraFornecedor("Seu Olavo", "olavo@gmail.com", "83 99348-1092");
 		fornecedorController.cadastraProduto("Seu Olavo", "X-frango","Hamburguer de frango com queijo e calabresa", 5.00);
-		fornecedorController.cadastraProduto("Seu Olavo", "X-burguer","Hamburguer de carne com queijo e calabresa", 4.50);
-		listaProdutos1.add("Seu Olavo - " + fornecedorController.exibeProduto("X-frango", "Hamburguer de frango com queijo e calabresa", "Seu Olavo"));
-		listaProdutos1.add("Seu Olavo - " + fornecedorController.exibeProduto("X-burguer", "Hamburguer de carne com queijo e calabresa", "Seu Olavo"));
-		
-		String[] x = fornecedorController.exibeProdutosFornecedor("Seu Olavo").split(" \\| ");
-		for (int i = 0; i < x.length; i++) {
-			listaProdutos2.add(x[i]);
-		}
-		assertEquals(listaProdutos1,listaProdutos2);
+		fornecedorController.cadastraProduto("Seu Olavo", "Burguer","Hamburguer de carne com queijo e calabresa", 4.50);
+		assertEquals("Seu Olavo - Burguer - Hamburguer de carne com queijo e calabresa - R$4,50 | Seu Olavo - X-frango - Hamburguer de frango com queijo e calabresa - R$5,00", fornecedorController.exibeProdutosFornecedor("Seu Olavo"));
 	}
 	
 	@Test
 	public void testListarProdutosDeTodosFornecedores() {
-		HashSet<String> listaProdutos1 = new HashSet<String>();
-		HashSet<String> listaProdutos2 = new HashSet<String>();
-		
 		fornecedorController.cadastraFornecedor("Seu Olavo", "olavo@gmail.com", "83 99348-1092");
 		fornecedorController.cadastraProduto("Seu Olavo", "X-frango","Hamburguer de frango com queijo e calabresa", 5.00);
 		fornecedorController.cadastraProduto("Seu Olavo", "X-tudo","Hamburguer de frango e carne com queijo e calabresa", 10.00);
@@ -514,17 +502,8 @@ class FornecedorControllerTest {
 		fornecedorController.cadastraFornecedor("Raphael", "raphael@gmail.com", "83 98737-2109");
 		fornecedorController.cadastraProduto("Raphael", "X-burguer","Hamburguer de carne com queijo e calabresa", 4.50);
 		fornecedorController.cadastraProduto("Raphael", "Cachorro Quente","Pao com salsicha e carne moida", 7.00);
-		listaProdutos1.add("Seu Olavo - " + fornecedorController.exibeProduto("X-frango", "Hamburguer de frango com queijo e calabresa", "Seu Olavo"));
-		listaProdutos1.add("Seu Olavo - " + fornecedorController.exibeProduto("X-tudo", "Hamburguer de frango e carne com queijo e calabresa", "Seu Olavo"));
 		
-		listaProdutos1.add("Raphael - " + fornecedorController.exibeProduto("X-burguer", "Hamburguer de carne com queijo e calabresa", "Raphael"));
-		listaProdutos1.add("Raphael - " + fornecedorController.exibeProduto("Cachorro Quente","Pao com salsicha e carne moida", "Raphael"));
-		
-		String[] x = fornecedorController.exibeProdutos().split(" \\| ");
-		for (int i = 0; i < x.length; i++) {
-			listaProdutos2.add(x[i]);
-		}
-		assertEquals(listaProdutos1,listaProdutos2);
+		assertEquals("Raphael - Cachorro Quente - Pao com salsicha e carne moida - R$7,00 | Raphael - X-burguer - Hamburguer de carne com queijo e calabresa - R$4,50 | Seu Olavo - X-frango - Hamburguer de frango com queijo e calabresa - R$5,00 | Seu Olavo - X-tudo - Hamburguer de frango e carne com queijo e calabresa - R$10,00", fornecedorController.exibeProdutos());
 	}
 	
 	@Test
@@ -726,5 +705,228 @@ class FornecedorControllerTest {
 		} catch (IllegalArgumentException e) {
 			assertEquals("Erro na exibicao de produto: produto nao existe.", e.getMessage());
 		}
+	}
+	
+	@Test
+	public void testAdicionaComboFornecedorNulo() {
+		try {
+			fornecedorController.adicionaCombo(null, "Lanche FIT", "Lanche saudavael", 0.5, "Tapioca - Tapioca com frango, Suco - Suco de maracuja");
+			fail("Deveria lancar excecao.");
+		} catch (NullPointerException e) {
+			assertEquals("Erro no cadastro de combo: fornecedor nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaComboFornecedorVazio() {
+		try {
+			fornecedorController.adicionaCombo("", "Lanche FIT", "Lanche saudavael", 0.5, "Tapioca - Tapioca com frango, Suco - Suco de maracuja");
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro de combo: fornecedor nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaComboNomeNulo() {
+		try {
+			fornecedorController.adicionaCombo("Josenilda", null, "Lanche saudavael", 0.5, "Tapioca - Tapioca com frango, Suco - Suco de maracuja");
+			fail("Deveria lancar excecao.");
+		} catch (NullPointerException e) {
+			assertEquals("Erro no cadastro de combo: nome nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaComboNomeVazio() {
+		try {
+			fornecedorController.adicionaCombo("Josenilda", "", "Lanche saudavael", 0.5, "Tapioca - Tapioca com frango, Suco - Suco de maracuja");
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro de combo: nome nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaComboDescricaoNula() {
+		try {
+			fornecedorController.adicionaCombo("Josenilda", "Lanche FIT", null, 0.5, "Tapioca - Tapioca com frango, Suco - Suco de maracuja");
+			fail("Deveria lancar excecao.");
+		} catch (NullPointerException e) {
+			assertEquals("Erro no cadastro de combo: descricao nao pode ser vazia ou nula.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaComboDescricaoVazia() {
+		try {
+			fornecedorController.adicionaCombo("Josenilda", "Lanche FIT", "", 0.5, "Tapioca - Tapioca com frango, Suco - Suco de maracuja");
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro de combo: descricao nao pode ser vazia ou nula.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaComboProdutosNulo() {
+		try {
+			fornecedorController.adicionaCombo("Josenilda", "Lanche FIT", "Lanche saudavael", 0.5, null);
+			fail("Deveria lancar excecao.");
+		} catch (NullPointerException e) {
+			assertEquals("Erro no cadastro de combo: combo deve ter produtos.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaComboProdutoVazio() {
+		try {
+			fornecedorController.adicionaCombo("Josenilda", "Lanche FIT", "Lanche saudavael", 0.5, "");
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro de combo: combo deve ter produtos.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaComboFatorInvalido() {
+		try {
+			fornecedorController.adicionaCombo("Josenilda", "Lanche FIT", "Lanche saudavael", 1, "Tapioca - Tapioca com frango, Suco - Suco de maracuja");
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro de combo: fator invalido.", e.getMessage());
+		}
+		
+		try {
+			fornecedorController.adicionaCombo("Josenilda", "Lanche FIT", "Lanche saudavael", -1, "Tapioca - Tapioca com frango, Suco - Suco de maracuja");
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro de combo: fator invalido.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaComboFornecedorInexistente() {
+		try {
+			fornecedorController.adicionaCombo("IRINEU", "Lanche FIT", "Lanche saudavael", 0.5, "Tapioca - Tapioca com frango, Suco - Suco de maracuja");
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro de combo: fornecedor nao existe.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testEditaComboNomeNulo() {
+		try {
+			fornecedorController.editaCombo(null, "Lanche saudavel", "Josenilda", 0.20);
+			fail("Deveria lancar excecao.");
+		} catch (NullPointerException e) {
+			assertEquals("Erro na edicao de combo: nome nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testEditaComboNomeVazio() {
+		try {
+			fornecedorController.editaCombo("", "Lanche saudavel", "Josenilda", 0.20);
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro na edicao de combo: nome nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testEditaComboDescricaoNula() {
+		try {
+			fornecedorController.editaCombo("Lanche FIT", null, "Josenilda", 0.20);
+			fail("Deveria lancar excecao.");
+		} catch (NullPointerException e) {
+			assertEquals("Erro na edicao de combo: descricao nao pode ser vazia ou nula.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testEditaComboDescricaoVazia() {
+		try {
+			fornecedorController.editaCombo("Lanche FIT", "", "Josenilda", 0.20);
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro na edicao de combo: descricao nao pode ser vazia ou nula.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testEditaComboFornecedorNulo() {
+		try {
+			fornecedorController.editaCombo("Lanche FIT", "Lanche saudavel", null, 0.20);
+			fail("Deveria lancar excecao.");
+		} catch (NullPointerException e) {
+			assertEquals("Erro na edicao de combo: fornecedor nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testEditaComboFornecedorVazio() {
+		try {
+			fornecedorController.editaCombo("Lanche FIT", "Lanche saudavel", "", 0.20);
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro na edicao de combo: fornecedor nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testEditaComboFatorInvalido() {
+		try {
+			fornecedorController.editaCombo("Lanche FIT", "Lanche saudavel", "Josenilda", 1.5);
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro na edicao de combo: fator invalido.", e.getMessage());
+		}
+		
+		try {
+			fornecedorController.editaCombo("Lanche FIT", "Lanche saudavel", "Josenilda", -1);
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro na edicao de combo: fator invalido.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testEditaComboFornecedorInexistente() {
+		try {
+			fornecedorController.editaCombo("Lanche FIT", "Lanche saudavel", "IRINEU", 0.20);
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro na edicao de combo: fornecedor nao existe.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testEditaComboFeliz() {
+		fornecedorController.cadastraFornecedor("Josenilda", "josenilda@gmail.com", "83 99988-0077");
+		fornecedorController.cadastraProduto("Josenilda", "Tapioca", "Tapioca com frango", 5.00);
+		fornecedorController.cadastraProduto("Josenilda", "Suco", "Suco de maracuja", 3.00);
+		fornecedorController.adicionaCombo("Josenilda", "Lanche FIT", "Lanche saudavel", 0.2, "Tapioca - Tapioca com frango, Suco - Suco de maracuja");
+		fornecedorController.editaCombo("Lanche FIT", "Lanche saudavel", "Josenilda", 0.5);
+		assertEquals(4.0, fornecedorController.getPrecoProdutoFornecedor("Josenilda", "Lanche FIT", "Lanche saudavel"), 0.01);
+	}
+	
+	@Test
+	public void testExisteFornecedor() {
+		assertFalse(fornecedorController.existeFornecedor("IRINEU"));
+	}
+	
+	@Test
+	public void testExisteProdutoFornecedor( ){
+		fornecedorController.cadastraFornecedor("Josenilda", "josenilda@gmail.com", "83 99988-0077");
+		fornecedorController.cadastraProduto("Josenilda", "Tapioca", "Tapioca com frango", 5.00);
+		assertTrue(fornecedorController.existeProdutoFornecedor("Josenilda", "Tapioca", "Tapioca com frango"));
+	}
+	
+	@Test
+	public void testGetPrecoProdutoFornecedor() {
+		fornecedorController.cadastraFornecedor("Josenilda", "josenilda@gmail.com", "83 99988-0077");
+		fornecedorController.cadastraProduto("Josenilda", "Tapioca", "Tapioca com frango", 5.00);
+		assertEquals(5.0, fornecedorController.getPrecoProdutoFornecedor("Josenilda", "Tapioca", "Tapioca com frango"), 0.01);
 	}
 }

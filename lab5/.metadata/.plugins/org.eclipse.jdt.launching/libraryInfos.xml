@@ -38,5 +38,4 @@
 <entry path="/usr/lib/jvm/java-8-oracle/jre/lib/endorsed"/>
 </endorsedDirs>
 </libraryInfo>
-<libraryInfo home="/usr/lib/jvm/java-12-oracle" version="12.0.2"/>
 </libraryInfos>

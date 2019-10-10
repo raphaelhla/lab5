@@ -1,7 +1,10 @@
 package saga;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.HashSet;
 
@@ -288,24 +291,14 @@ class FornecedorTest {
 	
 	@Test
 	public void testListarProdutos() {
-		HashSet<String> listaProdutos1 = new HashSet<String>();
-		HashSet<String> listaProdutos2 = new HashSet<String>();
-		
 		fornecedor2.cadastraProduto(5.00, "X-frango","Hamburguer de frango com queijo e calabresa");
 		fornecedor2.cadastraProduto(4.50, "X-burguer","Hamburguer de carne com queijo e calabresa");
-		listaProdutos1.add(fornecedor2.getNome() + " - " + fornecedor2.exibeProduto("X-frango", "Hamburguer de frango com queijo e calabresa"));
-		listaProdutos1.add(fornecedor2.getNome() + " - " + fornecedor2.exibeProduto("X-burguer", "Hamburguer de carne com queijo e calabresa"));
-		
-		String[] x = fornecedor2.listarProdutos().split(" \\| ");
-		for (int i = 0; i < x.length; i++) {
-			listaProdutos2.add(x[i]);
-		}
-		assertEquals(listaProdutos1,listaProdutos2);
+		assertEquals("Raphael - X-burguer - Hamburguer de carne com queijo e calabresa - R$4,50 | Raphael - X-frango - Hamburguer de frango com queijo e calabresa - R$5,00",fornecedor2.listarProdutos());
 	}
 	
 	@Test
 	public void testListarProdutosListaVazia() {
-		assertEquals("",fornecedor3.listarProdutos());
+		assertEquals("Dona Alba -",fornecedor3.listarProdutos());
 	}
 	
 	@Test
@@ -435,5 +428,208 @@ class FornecedorTest {
 		} catch (IllegalArgumentException e) {
 			assertEquals("Erro na exibicao de produto: produto nao existe.", e.getMessage());
 		}
+	}
+	
+	@Test
+	public void testAdicionaComboNomeNulo() {
+		try {
+			fornecedor1.adicionaCombo(null, "Lanche saudavel", 0.5, "Tapioca - Tapioca com frango, Suco - Suco de maracuja");
+			fail("Deveria lancar excecao.");
+		} catch (NullPointerException e) {
+			assertEquals("Erro no cadastro de combo: nome nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaComboNomeVazio() {
+		try {
+			fornecedor1.adicionaCombo("", "Lanche saudavel", 0.5, "Tapioca - Tapioca com frango, Suco - Suco de maracuja");
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro de combo: nome nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaComboDescricaoNula() {
+		try {
+			fornecedor1.adicionaCombo("Lanche FIT", null, 0.5, "Tapioca - Tapioca com frango, Suco - Suco de maracuja");
+			fail("Deveria lancar excecao.");
+		} catch (NullPointerException e) {
+			assertEquals("Erro no cadastro de combo: descricao nao pode ser vazia ou nula.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaComboDescricaoVazia() {
+		try {
+			fornecedor1.adicionaCombo("Lanche FIT", "", 0.5, "Tapioca - Tapioca com frango, Suco - Suco de maracuja");
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro de combo: descricao nao pode ser vazia ou nula.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaComboProdutosNulo() {
+		try {
+			fornecedor1.adicionaCombo("Lanche FIT", "Lanche saudavel", 0.5, null);
+			fail("Deveria lancar excecao.");
+		} catch (NullPointerException e) {
+			assertEquals("Erro no cadastro de combo: combo deve ter produtos.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaComboProdutoVazio() {
+		try {
+			fornecedor1.adicionaCombo("Lanche FIT", "Lanche saudavel", 0.5, "");
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro de combo: combo deve ter produtos.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaComboFatorInvalido() {
+		try {
+			fornecedor1.adicionaCombo("Lanche FIT", "Lanche saudavel", 1.5, "Tapioca - Tapioca com frango, Suco - Suco de maracuja");
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro de combo: fator invalido.", e.getMessage());
+		}
+		
+		try {
+			fornecedor1.adicionaCombo("Lanche FIT", "Lanche saudavel", -1, "Tapioca - Tapioca com frango, Suco - Suco de maracuja");
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro de combo: fator invalido.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaComboExistente() {
+		try {
+			fornecedor1.cadastraProduto(3.00, "Biscoito Salgado", "Bolachinha de cebola");
+			fornecedor1.cadastraProduto(4.00, "Sobremesa", "Mousse de limão");
+			fornecedor1.adicionaCombo("Promo 1", "Bolachinha de cebola + Mousse de limão", 0.10,
+					"Biscoito Salgado - Bolachinha de cebola, Sobremesa - Mousse de limão");
+			fornecedor1.adicionaCombo("Promo 1", "Bolachinha de cebola + Mousse de limão", 0.10,
+					"Biscoito Salgado - Bolachinha de cebola, Sobremesa - Mousse de limão");
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro de combo: combo ja existe.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaComboProdutoInexistente() {
+		try {
+			fornecedor1.cadastraProduto(3.00, "Biscoito Salgado", "Bolachinha de cebola");
+			fornecedor1.cadastraProduto(4.00, "Sobremesa", "Mousse de limão");
+			fornecedor1.adicionaCombo("Promo 1", "Bolachinha de cebola + Mousse de limão", 0.10,
+					"Biscoito Salgado - Bolachinha de cebola, IRINEU - Mousse de limão");
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro de combo: produto nao existe.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testAdicionaComboDentroDeCombo() {
+		try {
+			fornecedor1.cadastraProduto(3.00, "Biscoito Salgado", "Bolachinha de cebola");
+			fornecedor1.cadastraProduto(4.00, "Sobremesa", "Mousse de limão");
+			fornecedor1.adicionaCombo("Promo 1", "Bolachinha de cebola + Mousse de limão", 0.10,
+					"Biscoito Salgado - Bolachinha de cebola, Sobremesa - Mousse de limão");
+			fornecedor1.adicionaCombo("Promo 2", "Bolachinha de cebola + Mousse de limão2", 0.30,
+					"Biscoito Salgado - Bolachinha de cebola, Promo 1 - Bolachinha de cebola + Mousse de limão");
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no cadastro de combo: um combo nao pode possuir combos na lista de produtos.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testEditaComboNomeNulo() {
+		try {
+			fornecedor1.editaCombo(null, "Lanche saudavel", 0.3);
+			fail("Deveria lancar excecao.");
+		} catch (NullPointerException e) {
+			assertEquals("Erro na edicao de combo: nome nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testEditaComboNomeVazio() {
+		try {
+			fornecedor1.editaCombo("", "Lanche saudavel", 0.3);
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro na edicao de combo: nome nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testEditaComboDescricaoNula() {
+		try {
+			fornecedor1.editaCombo("Lanche FIT", null, 0.3);
+			fail("Deveria lancar excecao.");
+		} catch (NullPointerException e) {
+			assertEquals("Erro na edicao de combo: descricao nao pode ser vazia ou nula.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testEditaComboDescricaoVazia() {
+		try {
+			fornecedor1.editaCombo("Lanche FIT", "", 0.3);
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro na edicao de combo: descricao nao pode ser vazia ou nula.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testEditaComboFatorInvalido() {
+		try {
+			fornecedor1.editaCombo("Lanche FIT", "Lanche saudavel", 1);
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro na edicao de combo: fator invalido.", e.getMessage());
+		}
+		
+		try {
+			fornecedor1.editaCombo("Lanche FIT", "Lanche saudavel", -1);
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro na edicao de combo: fator invalido.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testEditaComboInexistente() {
+		try {
+			fornecedor1.editaCombo("Lanche FIT", "Lanche saudavel", 0.5);
+			fail("Deveria lancar excecao.");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro na edicao de combo: produto nao existe.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testEditaComboFeliz() {
+		fornecedor1.cadastraProduto(3.00, "Biscoito Salgado", "Bolachinha de cebola");
+		fornecedor1.cadastraProduto(4.00, "Sobremesa", "Mousse de limão");
+		fornecedor1.adicionaCombo("Promo 1", "Bolachinha de cebola + Mousse de limão", 0.10,
+				"Biscoito Salgado - Bolachinha de cebola, Sobremesa - Mousse de limão");
+		fornecedor1.editaCombo("Promo 1", "Bolachinha de cebola + Mousse de limão", 0.30);
+		assertEquals(4.90, fornecedor1.getPrecoProduto("Promo 1", "Bolachinha de cebola + Mousse de limão"), 0.01);
+	}
+	
+	@Test
+	public void testExisteProduto() {
+		fornecedor1.cadastraProduto(3.00, "Biscoito Salgado", "Bolachinha de cebola");
+		assertTrue(fornecedor1.existeProduto("Biscoito Salgado", "Bolachinha de cebola"));
 	}
 }

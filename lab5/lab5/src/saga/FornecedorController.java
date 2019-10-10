@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Representacao de um controller de fornecedores.
  * 
- * @author Raphael Agra
+ * @author Raphael Agra - 119110413
  *
  */
 public class FornecedorController {
@@ -40,12 +40,11 @@ public class FornecedorController {
 		Validador.validaEntrada(nome, "Erro no cadastro do fornecedor: nome nao pode ser vazio ou nulo.");
 		Validador.validaEntrada(email, "Erro no cadastro do fornecedor: email nao pode ser vazio ou nulo.");
 		Validador.validaEntrada(telefone, "Erro no cadastro do fornecedor: telefone nao pode ser vazio ou nulo.");
-		if (!fornecedores.containsKey(nome)) {
-			this.fornecedores.put(nome, new Fornecedor(nome, email, telefone));
-			return nome;
-		} else {
+		if (fornecedores.containsKey(nome)) {
 			throw new IllegalArgumentException("Erro no cadastro de fornecedor: fornecedor ja existe.");
 		}
+		this.fornecedores.put(nome, new Fornecedor(nome, email, telefone));
+		return nome;
 	}
 
 	/**
@@ -153,7 +152,7 @@ public class FornecedorController {
 	 * @param nomeFornecedor Nome do fornecedor
 	 * @return a representacao em string de um produto.
 	 */
-	public String exibeProduto(String nomeProduto, String descricao, String nomeFornecedor) {
+	public String exibeProduto(String nomeFornecedor, String nomeProduto, String descricao) {
 		Validador.validaEntrada(nomeFornecedor, "Erro na exibicao de produto: fornecedor nao pode ser vazio ou nulo.");
 		Validador.validaEntrada(nomeProduto, "Erro na exibicao de produto: nome nao pode ser vazio ou nulo.");
 		Validador.validaEntrada(descricao, "Erro na exibicao de produto: descricao nao pode ser vazia ou nula.");
@@ -239,6 +238,17 @@ public class FornecedorController {
 		fornecedores.get(nomeFornecedor).removeProduto(nomeProduto, descricao);
 	}
 
+	/**
+	 * Metodo que adiciona um novo combo de produtos para um fornecedor, a partir do
+	 * nome do fornecedor, do nome do combo, descricao do combo, fator de desconto
+	 * do comboe dos produtos que vao fazer parte do combo.
+	 * 
+	 * @param fornecedor Nome do fornecedor.
+	 * @param nome       Nome do combo.
+	 * @param descricao  Descricao do combo.
+	 * @param fator      Fator de desconto do combo.
+	 * @param produtos   Produtos que vao fazer parte do combo.
+	 */
 	public void adicionaCombo(String fornecedor, String nome, String descricao, double fator, String produtos) {
 		Validador.validaEntrada(fornecedor, "Erro no cadastro de combo: fornecedor nao pode ser vazio ou nulo.");
 		Validador.validaEntrada(nome, "Erro no cadastro de combo: nome nao pode ser vazio ou nulo.");
@@ -254,35 +264,71 @@ public class FornecedorController {
 		fornecedores.get(fornecedor).adicionaCombo(nome, descricao, fator, produtos);
 	}
 
+	/**
+	 * Metodo que edita o preco do combo de um fornecedor, a partir do nome do
+	 * fornecedor, do nome do produto, descricao do produto e seu novo fator de
+	 * desconto.
+	 * 
+	 * @param nome       Nome do combo.
+	 * @param descricao  Descricao do combo.
+	 * @param fornecedor Nome do fornecedor.
+	 * @param novoFator  Novo fator de desconto do combo.
+	 */
 	public void editaCombo(String nome, String descricao, String fornecedor, double novoFator) {
 		Validador.validaEntrada(nome, "Erro na edicao de combo: nome nao pode ser vazio ou nulo.");
 		Validador.validaEntrada(descricao, "Erro na edicao de combo: descricao nao pode ser vazia ou nula.");
 		Validador.validaEntrada(fornecedor, "Erro na edicao de combo: fornecedor nao pode ser vazio ou nulo.");
-		if (!fornecedores.containsKey(fornecedor)) {
-			throw new IllegalArgumentException("Erro na edicao de combo: fornecedor nao existe.");
-		}
 		if (novoFator <= 0 || novoFator >= 1) {
 			throw new IllegalArgumentException("Erro na edicao de combo: fator invalido.");
+		}
+		if (!fornecedores.containsKey(fornecedor)) {
+			throw new IllegalArgumentException("Erro na edicao de combo: fornecedor nao existe.");
 		}
 
 		fornecedores.get(fornecedor).editaCombo(nome, descricao, novoFator);
 	}
 
-	public Fornecedor pegaFornecedor(String fornecedor) {
-		return this.fornecedores.get(fornecedor);
-	}
-	
+	/**
+	 * Metodo que verifica se um fornecedor existe, a partir do seu nome. Retorna um
+	 * valor verdade caso ele exista, caso contrario retorna falso.
+	 * 
+	 * @param fornecedor Nome do fornecedor.
+	 * @return um valor verdade caso o fornecedor exista, caso contrario retorna
+	 *         falso.
+	 */
 	public boolean existeFornecedor(String fornecedor) {
 		if (!fornecedores.containsKey(fornecedor)) {
 			return false;
 		}
 		return true;
 	}
-	
+
+	/**
+	 * Metodo que verifica se um fornecedor possui um determinado produto, a partir
+	 * do nome do fornecedor, do nome do produto e sua descricao. Retorna um valor
+	 * booleano verdade caso o produto exista, caso contrario retorna falso.
+	 * 
+	 * @param fornecedor Nome do fornecedor.
+	 * @param nome       Nome do produto.
+	 * @param descricao  Descricao do produto.
+	 * @return um valor booleano verdade caso o produto exista, caso contrario
+	 *         retorna falso.
+	 */
 	public boolean existeProdutoFornecedor(String fornecedor, String nome, String descricao) {
 		return fornecedores.get(fornecedor).existeProduto(nome, descricao);
 	}
 
+	/**
+	 * Metodo que retorna um valor double que representa o preco de um determinado
+	 * produto de um fornecedor, a partir do nome do fornecedor, do nome do produto
+	 * e da sua descricao.
+	 * 
+	 * @param fornecedor Nome do fornecedor.
+	 * @param nome       Nome do produto.
+	 * @param descricao  Descricao do produto.
+	 * @return um valor double que representa o preco de um determinado produto de
+	 *         um fornecedor.
+	 */
 	public double getPrecoProdutoFornecedor(String fornecedor, String nome, String descricao) {
 		return fornecedores.get(fornecedor).getPrecoProduto(nome, descricao);
 	}

@@ -10,7 +10,7 @@ import java.util.Map;
  * Representacao de um cliente. Todo cliente precisa ter um nome, cpf, email e
  * localizacao.
  * 
- * @author Raphael Agra
+ * @author Raphael Agra - 119110413
  *
  */
 public class Cliente implements Comparable<Cliente> {
@@ -35,6 +35,10 @@ public class Cliente implements Comparable<Cliente> {
 	 */
 	private String localizacao;
 
+	/**
+	 * Mapa com todas as contas do cliente com determinados fornecedores,
+	 * identificadas unicamente pelo nome do fornecedor.
+	 */
 	private Map<String, Conta> contas;
 
 	/**
@@ -172,27 +176,70 @@ public class Cliente implements Comparable<Cliente> {
 		return cpf;
 	}
 
-	@Override
+	/**
+	 * Metodo da interface comparable que é utilizado na ordenacao de clientes e
+	 * utiliza o nome do cliente para ordenacao em ordem alfabetica.
+	 * 
+	 * @param o um cliente que vai ser comparado com o cliente atual.
+	 */
 	public int compareTo(Cliente o) {
 		return this.getNome().compareTo(o.getNome());
 	}
 
+	/**
+	 * Metodo que adiciona uma compra de um produto de um fornecedor na conta de um
+	 * cliente com o fornecedor, a partir do nome do fornecedor, da data da compra,
+	 * do nome do produto, da descricao do produto e do preco do produto. Se o
+	 * cliente nao tiver nenhuma conta com o fornecedor, uma nova conta deve ser
+	 * criada.
+	 * 
+	 * @param fornecedor Nome do fornecedor.
+	 * @param data       Data da compra.
+	 * @param nome       Nome do produto.
+	 * @param descricao  Descricao do produto.
+	 * @param preco      Preco do produto.
+	 */
 	public void adicionaCompra(String fornecedor, String data, String nome, String descricao, double preco) {
+		Validador.validaEntrada(fornecedor, "Erro ao cadastrar compra: fornecedor nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(data, "Erro ao cadastrar compra: data nao pode ser vazia ou nula.");
+		Validador.validaEntrada(nome, "Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(descricao,
+				"Erro ao cadastrar compra: descricao do produto nao pode ser vazia ou nula.");
+		if (data.length() != 10) {
+			throw new IllegalArgumentException("Erro ao cadastrar compra: data invalida.");
+		}
 		if (!contas.containsKey(fornecedor)) {
 			contas.put(fornecedor, new Conta(fornecedor));
 		}
 		contas.get(fornecedor).adicionaCompra(nome, data, preco);
 	}
 
+	/**
+	 * Metodo que retorna a representacao em string da conta do cliente com um
+	 * fornecedor, a partir do nome do fornecedor.
+	 * 
+	 * @param fornecedor Nome do fornecedor.
+	 * @return a string que representa a conta do cliente com um determinado
+	 *         fornecedor.
+	 */
 	public String exibeContas(String fornecedor) {
+		Validador.validaEntrada(fornecedor, "Erro ao exibir conta do cliente: fornecedor nao pode ser vazio ou nulo.");
 		if (!contas.containsKey(fornecedor)) {
-			throw new IllegalArgumentException("Erro ao exibir conta do cliente: cliente nao tem nenhuma conta com o fornecedor.");
+			throw new IllegalArgumentException(
+					"Erro ao exibir conta do cliente: cliente nao tem nenhuma conta com o fornecedor.");
 		}
 		String msg = "Cliente: " + this.nome + " | ";
 		msg += contas.get(fornecedor).toString();
 		return msg;
 	}
 
+	/**
+	 * Metodo que retorna a representacao em string de todas as contas de todos os
+	 * fornecedores com quem o cliente possui conta.
+	 * 
+	 * @return a string que representa todas as contas de todos os fornecedores que
+	 *         o cliente possui conta.
+	 */
 	public String exibeContasClientes() {
 		if (contas.size() == 0) {
 			throw new IllegalArgumentException("Erro ao exibir contas do cliente: cliente nao tem nenhuma conta.");
@@ -209,6 +256,13 @@ public class Cliente implements Comparable<Cliente> {
 		return msg;
 	}
 
+	/**
+	 * Metodo que retorna a string que representa o valor do debito que o cliente
+	 * tem com um fornecedor, a partir do nome do fornecedor.
+	 * 
+	 * @param fornecedor Nome do fornecedor
+	 * @return a representacao em string do debito do cliente com um fornecedor.
+	 */
 	public String getDebito(String fornecedor) {
 		Validador.validaEntrada(fornecedor, "Erro ao recuperar debito: fornecedor nao pode ser vazio ou nulo.");
 		if (!contas.containsKey(fornecedor)) {
