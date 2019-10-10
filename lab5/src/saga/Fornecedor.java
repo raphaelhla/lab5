@@ -3,11 +3,13 @@ package saga;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
- * Representacao de um fornecedor. Todo fornecedor precisa ter um seus produtos
+ * Representacao de um fornecedor. Todo fornecedor precisa ter seus produtos
  * e um nome, email e telefone.
  * 
  * @author Raphael Agra - 119110413
@@ -254,7 +256,7 @@ public class Fornecedor implements Comparable<Fornecedor> {
 	 * Metodo da interface comparable que é utilizado na ordenacao de fornecedores e
 	 * utiliza o nome do fornecedor para ordenacao em ordem alfabetica.
 	 * 
-	 * @param um fornecedor que vai ser comparado com o fornecedor atual.
+	 * @param o um fornecedor que vai ser comparado com o fornecedor atual.
 	 */
 	@Override
 	public int compareTo(Fornecedor o) {
@@ -269,7 +271,7 @@ public class Fornecedor implements Comparable<Fornecedor> {
 	 * @param nome      Nome do combo.
 	 * @param descricao Descricao do combo.
 	 * @param fator     Fator de desconto do combo.
-	 * @param produtos  Produtos que vao fazer parte do combo.
+	 * @param produtosDoCombo  Produtos que vao fazer parte do combo.
 	 */
 	public void adicionaCombo(String nome, String descricao, double fator, String produtosDoCombo) {
 		Validador.validaEntrada(nome, "Erro no cadastro de combo: nome nao pode ser vazio ou nulo.");
@@ -283,7 +285,7 @@ public class Fornecedor implements Comparable<Fornecedor> {
 			throw new IllegalArgumentException("Erro no cadastro de combo: combo ja existe.");
 		}
 
-		Map<IdProduto, ProdutoSimples> produtosCombo = new HashMap<IdProduto, ProdutoSimples>();
+		Set<ProdutoSimples> produtosCombo = new HashSet<ProdutoSimples>();
 		String[] listaDeProdutos = produtosDoCombo.split(", ");
 		
 		for (String e : listaDeProdutos) {
@@ -297,7 +299,7 @@ public class Fornecedor implements Comparable<Fornecedor> {
 				throw new IllegalArgumentException(
 						"Erro no cadastro de combo: um combo nao pode possuir combos na lista de produtos.");
 			}
-			produtosCombo.put(idProduto,(ProdutoSimples) produtos.get(idProduto));
+			produtosCombo.add((ProdutoSimples) produtos.get(idProduto));
 		}
 
 		Combo c1 = new Combo(nome, descricao, fator, produtosCombo);

@@ -1,10 +1,10 @@
 package saga;
 
-import java.util.Map;
+import java.util.Set;
 
 /**
- * Representacao de um combo de produtos, todo combo precisa ter o valor do
- * preco dos produtos sem desconto.
+ * Representacao de um combo de produtos. Todo combo precisa ter um fator de
+ * desconto e dos produtos que fazem parte do combo.
  * 
  * @author Raphael Agra - 119110413
  *
@@ -15,18 +15,22 @@ public class Combo extends Produto {
 	 * Preco do combo de produtos antes de aplicar o desconto.
 	 */
 	private double fator;
-	private Map<IdProduto, ProdutoSimples> produtos;
 
 	/**
-	 * Constroi um combo de produtos a partir do nome, descricao, preco sem desconto
-	 * do combo e do fator de desconto do combo.
-	 * 
-	 * @param nome             Nome do combo.
-	 * @param descricao        Descricao do combo.
-	 * @param precoSemDesconto Preco sem desconto do combo.
-	 * @param fator            Fator de desconto do combo.
+	 * Conjunto dos produtos que fazem parte do combo.
 	 */
-	public Combo(String nome, String descricao, double fator, Map<IdProduto, ProdutoSimples> produtos) {
+	private Set<ProdutoSimples> produtos;
+
+	/**
+	 * Constroi um combo de produtos a partir do seu nome, descricao, fator de
+	 * desconto e dos produtos que vao fazer parte do combo.
+	 * 
+	 * @param nome      Nome do combo.
+	 * @param descricao Descricao do combo.
+	 * @param fator     Fator de desconto do combo.
+	 * @param produtos  Produtos que vao fazer parte do combo.
+	 */
+	public Combo(String nome, String descricao, double fator, Set<ProdutoSimples> produtos) {
 		super(nome, descricao);
 		if (fator < 0 || fator >= 1) {
 			throw new IllegalArgumentException("Erro no cadastro de combo: fator invalido.");
@@ -37,21 +41,21 @@ public class Combo extends Produto {
 	}
 
 	/**
-	 * Metodo que retorna o valor double que representa o preco do produto.
+	 * Metodo que retorna o valor double que representa o preco do combo.
 	 * 
-	 * @return o valor double que representa o preco do produto.
+	 * @return o valor double que representa o preco do combo.
 	 */
 	public double getPreco() {
 		double preco = 0;
-		for (ProdutoSimples e : produtos.values()) {
+		for (ProdutoSimples e : produtos) {
 			preco += e.getPreco();
 		}
 		return preco * (1 - this.fator);
 	}
 
 	/**
-	 * Metodo que altera o fator de desconto do combo a partir de um novo fator de desconto
-	 * passado como parametro
+	 * Metodo que altera o fator de desconto do combo a partir de um novo fator de
+	 * desconto passado como parametro
 	 * 
 	 * @param novoFator Novo fator de desconto que o combo ira utilizar.
 	 */
@@ -69,7 +73,7 @@ public class Combo extends Produto {
 	public String toString() {
 		return String.format("%s - %s - R$%.2f", idProduto.getNome(), idProduto.getDescricao(), this.getPreco());
 	}
-	
+
 	/**
 	 * Metodo que retorna o valor booeano verdade se o produto for um combo, caso
 	 * contrario retorna falso.

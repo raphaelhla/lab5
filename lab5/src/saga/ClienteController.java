@@ -22,7 +22,10 @@ public class ClienteController {
 	private FornecedorController fornecedorController;
 
 	/**
-	 * Controi um controller de clientes.
+	 * Constroi um controller de clientes e se relaciona com um controller de
+	 * fornecedor.
+	 * 
+	 * @param fornecedorController Controller de fornecedor.
 	 */
 	public ClienteController(FornecedorController fornecedorController) {
 		this.clientes = new HashMap<String, Cliente>();

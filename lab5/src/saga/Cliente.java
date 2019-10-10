@@ -180,7 +180,7 @@ public class Cliente implements Comparable<Cliente> {
 	 * Metodo da interface comparable que é utilizado na ordenacao de clientes e
 	 * utiliza o nome do cliente para ordenacao em ordem alfabetica.
 	 * 
-	 * @param um cliente que vai ser comparado com o cliente atual.
+	 * @param o um cliente que vai ser comparado com o cliente atual.
 	 */
 	public int compareTo(Cliente o) {
 		return this.getNome().compareTo(o.getNome());

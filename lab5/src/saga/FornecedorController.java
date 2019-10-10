@@ -40,12 +40,11 @@ public class FornecedorController {
 		Validador.validaEntrada(nome, "Erro no cadastro do fornecedor: nome nao pode ser vazio ou nulo.");
 		Validador.validaEntrada(email, "Erro no cadastro do fornecedor: email nao pode ser vazio ou nulo.");
 		Validador.validaEntrada(telefone, "Erro no cadastro do fornecedor: telefone nao pode ser vazio ou nulo.");
-		if (!fornecedores.containsKey(nome)) {
-			this.fornecedores.put(nome, new Fornecedor(nome, email, telefone));
-			return nome;
-		} else {
+		if (fornecedores.containsKey(nome)) {
 			throw new IllegalArgumentException("Erro no cadastro de fornecedor: fornecedor ja existe.");
 		}
+		this.fornecedores.put(nome, new Fornecedor(nome, email, telefone));
+		return nome;
 	}
 
 	/**
@@ -153,7 +152,7 @@ public class FornecedorController {
 	 * @param nomeFornecedor Nome do fornecedor
 	 * @return a representacao em string de um produto.
 	 */
-	public String exibeProduto(String nomeProduto, String descricao, String nomeFornecedor) {
+	public String exibeProduto(String nomeFornecedor, String nomeProduto, String descricao) {
 		Validador.validaEntrada(nomeFornecedor, "Erro na exibicao de produto: fornecedor nao pode ser vazio ou nulo.");
 		Validador.validaEntrada(nomeProduto, "Erro na exibicao de produto: nome nao pode ser vazio ou nulo.");
 		Validador.validaEntrada(descricao, "Erro na exibicao de produto: descricao nao pode ser vazia ou nula.");
@@ -309,10 +308,11 @@ public class FornecedorController {
 	 * do nome do fornecedor, do nome do produto e sua descricao. Retorna um valor
 	 * booleano verdade caso o produto exista, caso contrario retorna falso.
 	 * 
-	 * @param fornecedor
-	 * @param nome
-	 * @param descricao
-	 * @return
+	 * @param fornecedor Nome do fornecedor.
+	 * @param nome       Nome do produto.
+	 * @param descricao  Descricao do produto.
+	 * @return um valor booleano verdade caso o produto exista, caso contrario
+	 *         retorna falso.
 	 */
 	public boolean existeProdutoFornecedor(String fornecedor, String nome, String descricao) {
 		return fornecedores.get(fornecedor).existeProduto(nome, descricao);

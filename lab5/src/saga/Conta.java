@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Representacao de uma conta de um cliente com um fornecedor, toda conta
+ * Representacao de uma conta de um cliente com um fornecedor. Toda conta
  * precisa do nome de um fornecedor, um valor de debito da conta e uma lista das
  * compras dos produtos.
  * 
@@ -149,7 +149,7 @@ public class Conta implements Comparable<Conta> {
 	 * Metodo da interface comparable que é utilizado na ordenacao de contas e
 	 * utiliza o nome do fornecedor para ordenacao em ordem alfabetica.
 	 * 
-	 * @param a conta que vai ser comparado com a conta atual.
+	 * @param o a conta que vai ser comparado com a conta atual.
 	 */
 	@Override
 	public int compareTo(Conta o) {

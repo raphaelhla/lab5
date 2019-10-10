@@ -177,7 +177,7 @@ public class Facade {
 	 * @param nomeFornecedor Nome do fornecedor
 	 * @return a representacao em string de um produto.
 	 */
-	public String exibeProduto(String nomeFornecedor, String nomeProduto, String descricao) {
+	public String exibeProduto(String nomeProduto, String descricao, String nomeFornecedor) {
 		return fornecedorController.exibeProduto(nomeFornecedor, nomeProduto, descricao);
 	}
 
