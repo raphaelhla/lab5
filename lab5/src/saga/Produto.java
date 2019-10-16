@@ -117,15 +117,4 @@ public abstract class Produto implements Comparable<Produto> {
 		}
 		return this.getDescricao().compareTo(o.getDescricao());
 	}
-
-	/**
-	 * Metodo que retorna o valor booeano verdade se o produto for um combo, caso
-	 * contrario retorna falso.
-	 * 
-	 * @return Retorna um valor booleano verdade caso o produto for um combo, caso
-	 *         contrario retorna falso.
-	 */
-	public boolean verificaSeEhCombo() {
-		return false;
-	}
 }

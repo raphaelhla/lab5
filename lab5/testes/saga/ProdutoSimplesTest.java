@@ -1,7 +1,6 @@
 package saga;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -52,11 +51,5 @@ class ProdutoSimplesTest {
 	public void testSetPreco() {
 		p1.setPreco(20.00);
 		assertEquals(20.00,p1.getPreco());
-	}
-	
-	
-	@Test
-	public void testVerificaSeEhCombo() {
-		assertFalse(p1.verificaSeEhCombo());
 	}
 }

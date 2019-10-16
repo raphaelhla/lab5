@@ -19,15 +19,9 @@ public class Conta implements Comparable<Conta> {
 	private String nomeFornecedor;
 
 	/**
-	 * Debito total que um cliente deve pagar ao fornecedor.
+	 * Lista que contem as compras de um cliente com um fornecedor.
 	 */
-	private double debito;
-
-	/**
-	 * Lista que contem o nome do produto e a data de todos os produtos que um
-	 * cliente comprou do fornecedor.
-	 */
-	private List<String> listaCompras;
+	private List<Compra> listaCompras;
 
 	/**
 	 * Controi uma conta a partir do nome do fornecedor.
@@ -37,8 +31,7 @@ public class Conta implements Comparable<Conta> {
 	public Conta(String nomeFornecedor) {
 		Validador.validaEntrada(nomeFornecedor, "Erro ao cadastrar compra: fornecedor nao pode ser vazio ou nulo.");
 		this.nomeFornecedor = nomeFornecedor;
-		this.debito = 0;
-		this.listaCompras = new ArrayList<String>();
+		this.listaCompras = new ArrayList<Compra>();
 	}
 
 	/**
@@ -49,7 +42,7 @@ public class Conta implements Comparable<Conta> {
 	 * @param data     Data da compra.
 	 * @param valor    Valor do produto.
 	 */
-	public void adicionaCompra(String nomeProd, String data, double valor) {
+	public void adicionaCompra(String nomeProd, String data, double preco) {
 		Validador.validaEntrada(nomeProd, "Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo.");
 		Validador.validaEntrada(data, "Erro ao cadastrar compra: data nao pode ser vazia ou nula.");
 		if (data.length() != 10) {
@@ -57,8 +50,7 @@ public class Conta implements Comparable<Conta> {
 		}
 
 		String novoFormatoData = data.replace("/", "-");
-		listaCompras.add(nomeProd + " - " + novoFormatoData);
-		this.debito += valor;
+		listaCompras.add(new Compra(nomeProd, novoFormatoData, preco));
 	}
 
 	/**
@@ -69,8 +61,12 @@ public class Conta implements Comparable<Conta> {
 	 */
 	@Override
 	public String toString() {
-		String msg = "";
-		msg = this.nomeFornecedor + " | " + String.join(" | ", listaCompras);
+		String msg = this.nomeFornecedor + " | ";
+		List<String> stringCompras = new ArrayList<String>();
+		for (int i = 0; i < listaCompras.size(); i++) {
+			stringCompras.add(listaCompras.get(i).toString());
+		}
+		msg += String.join(" | ", stringCompras);
 		return msg;
 	}
 
@@ -89,7 +85,11 @@ public class Conta implements Comparable<Conta> {
 	 * @return a string que representa o debito da conta.
 	 */
 	public String getDebito() {
-		return String.format("%.2f", this.debito).replace(",", ".");
+		double debito = 0;
+		for (Compra compra : listaCompras) {
+			debito += compra.getPreco();
+		}
+		return String.format("%.2f", debito).replace(",", ".");
 	}
 
 	/**
@@ -112,9 +112,6 @@ public class Conta implements Comparable<Conta> {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		long temp;
-		temp = Double.doubleToLongBits(debito);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + listaCompras.hashCode();
 		result = prime * result + nomeFornecedor.hashCode();
 		return result;
@@ -136,8 +133,6 @@ public class Conta implements Comparable<Conta> {
 		if (getClass() != obj.getClass())
 			return false;
 		Conta other = (Conta) obj;
-		if (Double.doubleToLongBits(debito) != Double.doubleToLongBits(other.debito))
-			return false;
 		if (!listaCompras.equals(other.listaCompras))
 			return false;
 		if (!nomeFornecedor.equals(other.nomeFornecedor))

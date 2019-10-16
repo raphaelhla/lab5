@@ -199,12 +199,10 @@ public class Cliente implements Comparable<Cliente> {
 	 * @param descricao  Descricao do produto.
 	 * @param preco      Preco do produto.
 	 */
-	public void adicionaCompra(String fornecedor, String data, String nome, String descricao, double preco) {
+	public void adicionaCompra(String fornecedor, String data, String nome, double preco) {
 		Validador.validaEntrada(fornecedor, "Erro ao cadastrar compra: fornecedor nao pode ser vazio ou nulo.");
 		Validador.validaEntrada(data, "Erro ao cadastrar compra: data nao pode ser vazia ou nula.");
 		Validador.validaEntrada(nome, "Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo.");
-		Validador.validaEntrada(descricao,
-				"Erro ao cadastrar compra: descricao do produto nao pode ser vazia ou nula.");
 		if (data.length() != 10) {
 			throw new IllegalArgumentException("Erro ao cadastrar compra: data invalida.");
 		}
@@ -269,5 +267,13 @@ public class Cliente implements Comparable<Cliente> {
 			throw new IllegalArgumentException("Erro ao recuperar debito: cliente nao tem debito com fornecedor.");
 		}
 		return contas.get(fornecedor).getDebito();
+	}
+
+	public void realizaPagamento(String fornecedor) {
+		Validador.validaEntrada(fornecedor, "Erro no pagamento de conta: fornecedor nao pode ser vazio ou nulo.");
+		if (!contas.containsKey(fornecedor)) {
+			throw new IllegalArgumentException("Erro no pagamento de conta: nao ha debito do cliente associado a este fornecedor.");
+		}
+		contas.remove(fornecedor);
 	}
 }

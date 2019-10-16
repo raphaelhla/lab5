@@ -3,7 +3,6 @@ package saga;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.HashSet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -394,7 +393,7 @@ class FornecedorControllerTest {
 	public void testExibeProdutoFornecedorNulo() {
 		try {
 			fornecedorController.cadastraFornecedor("Seu Olavo", "olavo@gmail.com", "83 99348-1092");
-			fornecedorController.exibeProduto("Tapioca", "Tapioca com frango", null);
+			fornecedorController.exibeProduto(null, "Tapioca", "Tapioca com frango");
 			fail("Deveria lancar excecao.");
 		} catch (NullPointerException e) {
 			assertEquals("Erro na exibicao de produto: fornecedor nao pode ser vazio ou nulo.", e.getMessage());
@@ -405,7 +404,7 @@ class FornecedorControllerTest {
 	public void testExibeProdutoFornecedorVazio() {
 		try {
 			fornecedorController.cadastraFornecedor("Seu Olavo", "olavo@gmail.com", "83 99348-1092");
-			fornecedorController.exibeProduto("Tapioca", "Tapioca com frango", "");
+			fornecedorController.exibeProduto("", "Tapioca", "Tapioca com frango");
 			fail("Deveria lancar excecao.");
 		} catch (IllegalArgumentException e) {
 			assertEquals("Erro na exibicao de produto: fornecedor nao pode ser vazio ou nulo.", e.getMessage());
@@ -416,7 +415,7 @@ class FornecedorControllerTest {
 	public void testExibeProdutoNomeNulo() {
 		try {
 			fornecedorController.cadastraFornecedor("Seu Olavo", "olavo@gmail.com", "83 99348-1092");
-			fornecedorController.exibeProduto(null, "Tapioca com frango", "Seu Olavo");
+			fornecedorController.exibeProduto("Seu Olavo", null, "Tapioca com frango");
 			fail("Deveria lancar excecao.");
 		} catch (NullPointerException e) {
 			assertEquals("Erro na exibicao de produto: nome nao pode ser vazio ou nulo.", e.getMessage());
@@ -427,7 +426,7 @@ class FornecedorControllerTest {
 	public void testExibeProdutoNomeVazio() {
 		try {
 			fornecedorController.cadastraFornecedor("Seu Olavo", "olavo@gmail.com", "83 99348-1092");
-			fornecedorController.exibeProduto("", "Tapioca com frango", "Seu Olavo");
+			fornecedorController.exibeProduto("Seu Olavo", "", "Tapioca com frango");
 			fail("Deveria lancar excecao.");
 		} catch (IllegalArgumentException e) {
 			assertEquals("Erro na exibicao de produto: nome nao pode ser vazio ou nulo.", e.getMessage());
@@ -438,7 +437,7 @@ class FornecedorControllerTest {
 	public void testExibeProdutoDescricaoNula() {
 		try {
 			fornecedorController.cadastraFornecedor("Seu Olavo", "olavo@gmail.com", "83 99348-1092");
-			fornecedorController.exibeProduto("Tapioca", null, "Seu Olavo");
+			fornecedorController.exibeProduto("Seu Olavo", "Tapioca", null);
 			fail("Deveria lancar excecao.");
 		} catch (NullPointerException e) {
 			assertEquals("Erro na exibicao de produto: descricao nao pode ser vazia ou nula.", e.getMessage());
@@ -449,7 +448,7 @@ class FornecedorControllerTest {
 	public void testExibeProdutoDescricaoVazia() {
 		try {
 			fornecedorController.cadastraFornecedor("Seu Olavo", "olavo@gmail.com", "83 99348-1092");
-			fornecedorController.exibeProduto("Tapioca", "", "Seu Olavo");
+			fornecedorController.exibeProduto("Seu Olavo","Tapioca", "");
 			fail("Deveria lancar excecao.");
 		} catch (IllegalArgumentException e) {
 			assertEquals("Erro na exibicao de produto: descricao nao pode ser vazia ou nula.", e.getMessage());
@@ -471,8 +470,8 @@ class FornecedorControllerTest {
 	public void testExibeProdutoValido() {
 		fornecedorController.cadastraFornecedor("Seu Olavo", "olavo@gmail.com", "83 99348-1092");
 		fornecedorController.cadastraProduto("Seu Olavo", "Tapioca", "Tapioca com frango", 10.00);
-		fornecedorController.exibeProduto("Tapioca", "Tapioca com frango", "Seu Olavo");
-		assertEquals("Tapioca - Tapioca com frango - R$10,00",fornecedorController.exibeProduto("Tapioca", "Tapioca com frango", "Seu Olavo"));
+		fornecedorController.exibeProduto("Seu Olavo", "Tapioca", "Tapioca com frango");
+		assertEquals("Tapioca - Tapioca com frango - R$10,00",fornecedorController.exibeProduto("Seu Olavo", "Tapioca", "Tapioca com frango"));
 	}
 	
 	@Test
@@ -607,7 +606,7 @@ class FornecedorControllerTest {
 			fornecedorController.cadastraFornecedor("Raphael", "raphael@gmail.com", "83 98737-2109");
 			fornecedorController.cadastraProduto("Raphael", "Tapioca", "Tapioca com frango", 5.00);
 			fornecedorController.editaProduto("Raphael","Tapioca", "Tapioca com frango", 10.00);
-			assertEquals("Tapioca - Tapioca com frango - R$10,00", fornecedorController.exibeProduto("Tapioca", "Tapioca com frango", "Raphael"));
+			assertEquals("Tapioca - Tapioca com frango - R$10,00", fornecedorController.exibeProduto("Raphael", "Tapioca", "Tapioca com frango"));
 	}
 	
 	@Test
@@ -700,7 +699,7 @@ class FornecedorControllerTest {
 			fornecedorController.cadastraFornecedor("Raphael", "raphael@gmail.com", "83 98737-2109");
 			fornecedorController.cadastraProduto("Raphael", "Tapioca", "Tapioca com frango", 5.00);
 			fornecedorController.removeProduto("Raphael","Tapioca", "Tapioca com frango");
-			fornecedorController.exibeProduto("Tapioca", "Tapioca com frango", "Raphael");
+			fornecedorController.exibeProduto("Raphael", "Tapioca", "Tapioca com frango");
 			fail("Deveria lancar excecao.");
 		} catch (IllegalArgumentException e) {
 			assertEquals("Erro na exibicao de produto: produto nao existe.", e.getMessage());

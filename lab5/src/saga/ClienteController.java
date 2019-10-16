@@ -168,7 +168,7 @@ public class ClienteController {
 			throw new IllegalArgumentException("Erro ao cadastrar compra: produto nao existe.");
 		}
 		double preco = fornecedorController.getPrecoProdutoFornecedor(fornecedor, nome, descricao);
-		this.clientes.get(cpf).adicionaCompra(fornecedor, data, nome, descricao, preco);
+		this.clientes.get(cpf).adicionaCompra(fornecedor, data, nome, preco);
 	}
 
 	/**
@@ -235,5 +235,20 @@ public class ClienteController {
 		}
 
 		return this.clientes.get(cpf).getDebito(fornecedor);
+	}
+
+	public void realizaPagamento(String cpf, String fornecedor) {
+		Validador.validaEntrada(cpf, "Erro no pagamento de conta: cpf nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(fornecedor, "Erro no pagamento de conta: fornecedor nao pode ser vazio ou nulo.");
+		if (cpf.length() != 11) {
+			throw new IllegalArgumentException("Erro no pagamento de conta: cpf invalido.");
+		}
+		if (!clientes.containsKey(cpf)) {
+			throw new IllegalArgumentException("Erro no pagamento de conta: cliente nao existe.");
+		}
+		if (!fornecedorController.existeFornecedor(fornecedor)) {
+			throw new IllegalArgumentException("Erro no pagamento de conta: fornecedor nao existe.");
+		}
+		this.clientes.get(cpf).realizaPagamento(fornecedor);
 	}
 }

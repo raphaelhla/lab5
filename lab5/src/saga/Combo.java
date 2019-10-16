@@ -73,15 +73,4 @@ public class Combo extends Produto {
 	public String toString() {
 		return String.format("%s - %s - R$%.2f", getNome(), getDescricao(), this.getPreco());
 	}
-
-	/**
-	 * Metodo que retorna o valor booeano verdade se o produto for um combo, caso
-	 * contrario retorna falso.
-	 * 
-	 * @return Retorna um valor booleano verdade caso o produto for um combo, caso
-	 *         contrario retorna falso.
-	 */
-	public boolean verificaSeEhCombo() {
-		return true;
-	}
 }

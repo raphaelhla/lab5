@@ -1,7 +1,6 @@
 package saga;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.HashSet;
@@ -61,11 +60,6 @@ class ComboTest {
 	@Test
 	public void testGetPreco() {
 		assertEquals(5.5, c1.getPreco());
-	}
-
-	@Test
-	public void testEhCombo() {
-		assertTrue(c2.verificaSeEhCombo());
 	}
 
 	@Test
