@@ -314,4 +314,12 @@ public class Facade {
 	public void realizaPagamento(String cpf, String fornecedor) {
 		clienteController.realizaPagamento(cpf, fornecedor);
 	}
+	
+	public void ordenaPor(String criterio) {
+		clienteController.ordenaPor(criterio);
+	}
+	
+	public String listarCompras () {
+		return clienteController.listarCompras();
+	}
 }

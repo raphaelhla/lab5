@@ -1,6 +1,7 @@
 package saga;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -42,7 +43,7 @@ public class Conta implements Comparable<Conta> {
 	 * @param data     Data da compra.
 	 * @param valor    Valor do produto.
 	 */
-	public void adicionaCompra(String nomeProd, String data, double preco) {
+	public void adicionaCompra(String cliente, String fornecedor, String nomeProd, String data, double preco) {
 		Validador.validaEntrada(nomeProd, "Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo.");
 		Validador.validaEntrada(data, "Erro ao cadastrar compra: data nao pode ser vazia ou nula.");
 		if (data.length() != 10) {
@@ -50,7 +51,7 @@ public class Conta implements Comparable<Conta> {
 		}
 
 		String novoFormatoData = data.replace("/", "-");
-		listaCompras.add(new Compra(nomeProd, novoFormatoData, preco));
+		listaCompras.add(new Compra(cliente, fornecedor, nomeProd, novoFormatoData, preco));
 	}
 
 	/**
@@ -104,43 +105,6 @@ public class Conta implements Comparable<Conta> {
 	}
 
 	/**
-	 * Retorna um inteiro que representa uma conta.
-	 * 
-	 * @return um inteiro que representa um conta.
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + listaCompras.hashCode();
-		result = prime * result + nomeFornecedor.hashCode();
-		return result;
-	}
-
-	/**
-	 * Metodo que verifica a se duas contas sao iguais. Retorna um valor booleano
-	 * verdade caso sejam iguais, caso contrario retorna falso.
-	 * 
-	 * @return Retorna um valor booleano verdade caso as contas sejam iguais, caso
-	 *         contrario retorna falso.
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Conta other = (Conta) obj;
-		if (!listaCompras.equals(other.listaCompras))
-			return false;
-		if (!nomeFornecedor.equals(other.nomeFornecedor))
-			return false;
-		return true;
-	}
-
-	/**
 	 * Metodo da interface comparable que é utilizado na ordenacao de contas e
 	 * utiliza o nome do fornecedor para ordenacao em ordem alfabetica.
 	 * 
@@ -149,5 +113,9 @@ public class Conta implements Comparable<Conta> {
 	@Override
 	public int compareTo(Conta o) {
 		return this.getNomeFornecedor().compareTo(o.getNomeFornecedor());
+	}
+	
+	public String ordenaPorCliente() {
+		Collections.sort(listaCompras, new OrdenadorCliente());
 	}
 }

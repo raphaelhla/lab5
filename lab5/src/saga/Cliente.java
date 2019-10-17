@@ -199,17 +199,17 @@ public class Cliente implements Comparable<Cliente> {
 	 * @param descricao  Descricao do produto.
 	 * @param preco      Preco do produto.
 	 */
-	public void adicionaCompra(String fornecedor, String data, String nome, double preco) {
+	public void adicionaCompra(String fornecedor, String data, String nomeProd, double preco) {
 		Validador.validaEntrada(fornecedor, "Erro ao cadastrar compra: fornecedor nao pode ser vazio ou nulo.");
 		Validador.validaEntrada(data, "Erro ao cadastrar compra: data nao pode ser vazia ou nula.");
-		Validador.validaEntrada(nome, "Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(nomeProd, "Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo.");
 		if (data.length() != 10) {
 			throw new IllegalArgumentException("Erro ao cadastrar compra: data invalida.");
 		}
 		if (!contas.containsKey(fornecedor)) {
 			contas.put(fornecedor, new Conta(fornecedor));
 		}
-		contas.get(fornecedor).adicionaCompra(nome, data, preco);
+		contas.get(fornecedor).adicionaCompra(this.nome, fornecedor, nomeProd, data, preco);
 	}
 
 	/**

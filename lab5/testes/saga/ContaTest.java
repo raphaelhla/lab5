@@ -1,9 +1,6 @@
 package saga;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
@@ -117,60 +114,6 @@ class ContaTest {
 		c2.adicionaCompra("Tapioca", "10/10/2019", 10.0);
 		c2.adicionaCompra("Suco", "19/10/2019", 8.0);
 		assertEquals(2, c2.getQtdCompras());
-	}
-	
-	@Test
-	public void testHashCodeObjetosDiferentes() {
-		assertNotEquals(c1.hashCode(), c2.hashCode());;
-	}
-	
-	@Test
-	public void testHashCodeObjetosIguais() {
-		assertEquals(c1.hashCode(), c1.hashCode());;
-	}
-	
-	@Test
-	public void testEqualsObjetosIguais() {
-		assertTrue(c1.equals(c1));
-	}
-	
-	@Test
-	public void testEqualsObjetosDiferentes() {
-		assertFalse(c1.equals(c2));
-	}
-	
-	@Test
-	public void testEqualsComNull() {
-		assertFalse(c1.equals(null));
-	}
-	
-	@Test
-	public void testEqualsObjetosClassesDiferentes() {
-		assertFalse(c1.equals(new Fornecedor("Jose", "jose@gmail.com", "83 99889-7766")));
-	}
-	
-	@Test
-	public void testEqualsObjetosMesmoNomeFornecedor() {
-		c2.adicionaCompra("Tapioca", "10/10/2019", 10.0);
-		Conta c4 = new Conta("Raphael");
-		c4.adicionaCompra("Tapioca", "10/10/2019", 15.0);
-		assertFalse(c2.equals(c4));
-	}
-	
-	@Test
-	public void testEqualsObjetosMesmoNomeFornecedor2() {
-		c1.adicionaCompra("Tapioca", "10/10/2019", 10.0);
-		Conta c4 = new Conta("Raphael");
-		c4.adicionaCompra("Suco", "15/10/2019", 10.0);
-		assertFalse(c1.equals(c4));
-	}
-	
-	@Test
-	public void testEqualsObjetosIguais2() {
-		c2.adicionaCompra("Tapioca", "10/10/2019", 10.0);
-		Conta c4 = new Conta("Raphael");
-		c4.adicionaCompra("Tapioca", "10/10/2019", 10.0);
-		assertTrue(c2.equals(c4));
 	}
 	
 	@Test

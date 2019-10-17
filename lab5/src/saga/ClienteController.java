@@ -2,6 +2,7 @@ package saga;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,7 @@ public class ClienteController {
 	 */
 	private Map<String, Cliente> clientes;
 	private FornecedorController fornecedorController;
+	private Comparator ordenador;
 
 	/**
 	 * Constroi um controller de clientes e se relaciona com um controller de
@@ -250,5 +252,28 @@ public class ClienteController {
 			throw new IllegalArgumentException("Erro no pagamento de conta: fornecedor nao existe.");
 		}
 		this.clientes.get(cpf).realizaPagamento(fornecedor);
+	}
+
+	public void ordenaPor(String criterio) {
+		switch (criterio) {
+		case "Cliente":
+			ordenador = new OrdenadorCliente();
+			break;
+		case "Fornecedor":
+			ordenador = new OrdenadorFornecedor();
+			break;
+		case "Data":
+			ordenador = new OrdenadorData();
+			break;
+		default:
+			throw new IllegalArgumentException("Erro na listagem de compras: criterio nao oferecido pelo sistema.");
+		}
+		
+	}
+	
+	public String listarCompras() {
+		List<Cliente> listaClientes = new ArrayList<>(clientes.values());
+		Collections.sort(listaClientes, ordenador);
+		return null;
 	}
 }
