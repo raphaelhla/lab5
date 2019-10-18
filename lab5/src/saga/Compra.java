@@ -41,9 +41,15 @@ public class Compra {
 		return data;
 	}
 	
-	public String restoOrdenaCliente() {
-		return fornecedor + ", " + nomeProduto + ", " + data;
+	public String exibeOrdenaCliente() {
+		return cliente + ", " + fornecedor + ", " + nomeProduto + ", " + data;
 	}
 	
+	public String exibeOrdenaFornecedor() {
+		return fornecedor + ", " + cliente + ", " + nomeProduto + ", " + data;
+	}
 	
+	public String exibeOrdenaData() {
+		return data + ", " + fornecedor + ", " + nomeProduto + ", " + data;
+	}
 }

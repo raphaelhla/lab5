@@ -2,6 +2,7 @@ package saga;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -17,21 +18,22 @@ public class Conta implements Comparable<Conta> {
 	/**
 	 * Nome do fornecedor com quem um cliente mantem uma conta.
 	 */
-	private String nomeFornecedor;
+	private String fornecedor;
 
 	/**
 	 * Lista que contem as compras de um cliente com um fornecedor.
 	 */
 	private List<Compra> listaCompras;
+	private Comparator ordenador;
 
 	/**
 	 * Controi uma conta a partir do nome do fornecedor.
 	 * 
 	 * @param nomeFornecedor Nome do fornecedor.
 	 */
-	public Conta(String nomeFornecedor) {
-		Validador.validaEntrada(nomeFornecedor, "Erro ao cadastrar compra: fornecedor nao pode ser vazio ou nulo.");
-		this.nomeFornecedor = nomeFornecedor;
+	public Conta(String fornecedor) {
+		Validador.validaEntrada(fornecedor, "Erro ao cadastrar compra: fornecedor nao pode ser vazio ou nulo.");
+		this.fornecedor = fornecedor;
 		this.listaCompras = new ArrayList<Compra>();
 	}
 
@@ -62,7 +64,7 @@ public class Conta implements Comparable<Conta> {
 	 */
 	@Override
 	public String toString() {
-		String msg = this.nomeFornecedor + " | ";
+		String msg = this.fornecedor + " | ";
 		List<String> stringCompras = new ArrayList<String>();
 		for (int i = 0; i < listaCompras.size(); i++) {
 			stringCompras.add(listaCompras.get(i).toString());
@@ -77,7 +79,7 @@ public class Conta implements Comparable<Conta> {
 	 * @return a string que representa o nome do fornecedor.
 	 */
 	public String getNomeFornecedor() {
-		return this.nomeFornecedor;
+		return this.fornecedor;
 	}
 
 	/**
@@ -115,7 +117,12 @@ public class Conta implements Comparable<Conta> {
 		return this.getNomeFornecedor().compareTo(o.getNomeFornecedor());
 	}
 	
-	public String ordenaPorCliente() {
-		Collections.sort(listaCompras, new OrdenadorCliente());
+	public String listarCompras() {
+		String msg = "";
+		
+		return msg;
 	}
+//	public String ordenaPorCliente() {
+//		Collections.sort(listaCompras, new OrdenadorCliente());
+//	}
 }
