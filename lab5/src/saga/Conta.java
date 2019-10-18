@@ -24,7 +24,7 @@ public class Conta implements Comparable<Conta> {
 	 * Lista que contem as compras de um cliente com um fornecedor.
 	 */
 	private List<Compra> listaCompras;
-	private Comparator ordenador;
+
 
 	/**
 	 * Controi uma conta a partir do nome do fornecedor.
@@ -117,12 +117,7 @@ public class Conta implements Comparable<Conta> {
 		return this.getNomeFornecedor().compareTo(o.getNomeFornecedor());
 	}
 	
-	public String listarCompras() {
-		String msg = "";
-		
-		return msg;
+	public List<Compra> getCompras(){
+		return this.listaCompras;
 	}
-//	public String ordenaPorCliente() {
-//		Collections.sort(listaCompras, new OrdenadorCliente());
-//	}
 }

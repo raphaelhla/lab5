@@ -22,6 +22,7 @@ public class ClienteController {
 	private Map<String, Cliente> clientes;
 	private FornecedorController fornecedorController;
 	private Comparator ordenador;
+	private String criterio;
 
 	/**
 	 * Constroi um controller de clientes e se relaciona com um controller de
@@ -255,6 +256,7 @@ public class ClienteController {
 	}
 
 	public void ordenaPor(String criterio) {
+		this.criterio = criterio;
 		switch (criterio) {
 		case "Cliente":
 			ordenador = new OrdenadorCliente();
@@ -268,12 +270,34 @@ public class ClienteController {
 		default:
 			throw new IllegalArgumentException("Erro na listagem de compras: criterio nao oferecido pelo sistema.");
 		}
-		
 	}
 	
 	public String listarCompras() {
-		List<Cliente> listaClientes = new ArrayList<>(clientes.values());
-		Collections.sort(listaClientes, ordenador);
-		return null;
+		List<Compra> listaCompras = new ArrayList<>();
+		for (Cliente e : clientes.values()) {
+			for (Compra compra : e.getCompras()) {
+				listaCompras.add(compra);
+			}
+		}
+		Collections.sort(listaCompras, ordenador);
+		List<String> stringCompras = new ArrayList<>();
+		switch (this.criterio) {
+		case "Cliente":
+			for (Compra e : listaCompras) {
+				stringCompras.add(e.exibeOrdenaCliente());
+			}
+			break;
+		case "Fornecedor":
+			for (Compra e : listaCompras) {
+				stringCompras.add(e.exibeOrdenaFornecedor());
+			}
+			break;
+		case "Data":
+			for (Compra e : listaCompras) {
+				stringCompras.add(e.exibeOrdenaData());
+			}break;
+		}
+		String msg = String.join(" | ", stringCompras);
+		return msg;
 	}
 }

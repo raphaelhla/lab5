@@ -43,7 +43,7 @@ class ContaTest {
 	@Test
 	public void testAdicionaContaNomeProdutoNulo() {
 		try {
-			c1.adicionaCompra(null, "10/12/2019", 10.0);;
+			c1.adicionaCompra("Raphael", "Josenilda", null, "10/12/2019", 10.0);;
 			fail("Deveria lancar excecao");
 		} catch (NullPointerException e) {
 			assertEquals("Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo.", e.getMessage());
@@ -53,7 +53,7 @@ class ContaTest {
 	@Test
 	public void testAdicionaContaNomeProdutoVazio() {
 		try {
-			c1.adicionaCompra("", "10/12/2019", 10.0);;
+			c1.adicionaCompra("Raphael", "Josenilda", "", "10/12/2019", 10.0);;
 			fail("Deveria lancar excecao");
 		} catch (IllegalArgumentException e) {
 			assertEquals("Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo.", e.getMessage());
@@ -63,7 +63,7 @@ class ContaTest {
 	@Test
 	public void testAdicionaContaDataVazia() {
 		try {
-			c1.adicionaCompra("Tapioca", "", 10.0);;
+			c1.adicionaCompra("Raphael", "Josenilda", "Tapioca", "", 10.0);;
 			fail("Deveria lancar excecao");
 		} catch (IllegalArgumentException e) {
 			assertEquals("Erro ao cadastrar compra: data nao pode ser vazia ou nula.", e.getMessage());
@@ -73,7 +73,7 @@ class ContaTest {
 	@Test
 	public void testAdicionaContaDataNula() {
 		try {
-			c1.adicionaCompra("Tapioca", null, 10.0);;
+			c1.adicionaCompra("Raphael", "Josenilda", "Tapioca", null, 10.0);;
 			fail("Deveria lancar excecao");
 		} catch (NullPointerException e) {
 			assertEquals("Erro ao cadastrar compra: data nao pode ser vazia ou nula.", e.getMessage());
@@ -83,7 +83,7 @@ class ContaTest {
 	@Test
 	public void testAdicionaContaDataInvalida() {
 		try {
-			c1.adicionaCompra("Tapioca", "10/1000/20000", 10.0);
+			c1.adicionaCompra("Raphael", "Josenilda", "Tapioca", "10/1000/20000", 10.0);
 			fail("Deveria lancar excecao");
 		} catch (IllegalArgumentException e) {
 			assertEquals("Erro ao cadastrar compra: data invalida.", e.getMessage());
@@ -92,8 +92,8 @@ class ContaTest {
 	
 	@Test
 	public void testToString() {
-		c2.adicionaCompra("Tapioca", "10/10/2019", 10.0);
-		c2.adicionaCompra("Suco", "19/10/2019", 8.0);
+		c2.adicionaCompra("Raphael", "Josenilda", "Tapioca", "10/10/2019", 10.0);
+		c2.adicionaCompra("Raphael", "Josenilda", "Suco", "19/10/2019", 8.0);
 		assertEquals("Raphael | Tapioca - 10-10-2019 | Suco - 19-10-2019", c2.toString());
 	}
 	
@@ -104,15 +104,15 @@ class ContaTest {
 	
 	@Test
 	public void testGetDebito() {
-		c2.adicionaCompra("Tapioca", "10/10/2019", 10.0);
-		c2.adicionaCompra("Suco", "19/10/2019", 8.0);
+		c2.adicionaCompra("Raphael", "Josenilda", "Tapioca", "10/10/2019", 10.0);
+		c2.adicionaCompra("Raphael", "Josenilda", "Suco", "19/10/2019", 8.0);
 		assertEquals("18.00", c2.getDebito());
 	}
 	
 	@Test
 	public void testGetQtdContas() {
-		c2.adicionaCompra("Tapioca", "10/10/2019", 10.0);
-		c2.adicionaCompra("Suco", "19/10/2019", 8.0);
+		c2.adicionaCompra("Raphael", "Josenilda", "Tapioca", "10/10/2019", 10.0);
+		c2.adicionaCompra("Raphael", "Josenilda", "Suco", "19/10/2019", 8.0);
 		assertEquals(2, c2.getQtdCompras());
 	}
 	
@@ -121,8 +121,8 @@ class ContaTest {
 		List<Conta> contas = new ArrayList<Conta>();
 		contas.add(c2);
 		contas.add(c1);
-		c1.adicionaCompra("Tapioca", "10/10/2019", 10.0);
-		c2.adicionaCompra("Suco", "19/10/2019", 8.0);
+		c1.adicionaCompra("Raphael", "Josenilda", "Tapioca", "10/10/2019", 10.0);
+		c2.adicionaCompra("Raphael", "Josenilda", "Suco", "19/10/2019", 8.0);
 		Collections.sort(contas);
 		assertEquals("[Josenilda | Tapioca - 10-10-2019, Raphael | Suco - 19-10-2019]", contas.toString());
 	}

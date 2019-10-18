@@ -276,4 +276,18 @@ public class Cliente implements Comparable<Cliente> {
 		}
 		contas.remove(fornecedor);
 	}
+
+	public void ordenaPor(String criterio) {
+
+	}
+	
+	public List<Compra> getCompras() {
+		List<Compra> compras = new ArrayList<>();
+		for (Conta e : contas.values()) {
+			for (Compra compra : e.getCompras()) {
+				compras.add(compra);
+			}
+		}
+		return compras;
+	}
 }
