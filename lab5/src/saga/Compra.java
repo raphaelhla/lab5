@@ -1,24 +1,31 @@
 package saga;
 
+import java.text.SimpleDateFormat;
+
 public class Compra {
 
 	private String cliente;
 	private String fornecedor;
 	private String nomeProduto;
+	private String descricaoProd;
 	private String data;
 	private double preco;
+	SimpleDateFormat formato;
 	
-	public Compra(String cliente, String fornecedor, String nomeProduto, String data, double preco) {
+	public Compra(String cliente, String fornecedor, String nomeProduto, String descricaoProd, String data, double preco) {
 		this.cliente = cliente;
 		this.fornecedor = fornecedor;
 		this.nomeProduto = nomeProduto;
+		this.descricaoProd = descricaoProd;
 		this.data = data;
 		this.preco = preco;
+		formato = new SimpleDateFormat();
 	}
 
 	@Override
 	public String toString() {
-		return nomeProduto + " - " + data;
+		
+		return nomeProduto + " - " + data.replace("/", "-");
 	}
 	
 	public double getPreco() {
@@ -36,20 +43,25 @@ public class Compra {
 	public String getNomeProduto() {
 		return nomeProduto;
 	}
+	
+	public String getDescricaoProduto() {
+		return descricaoProd;
+	}
 
 	public String getData() {
 		return data;
 	}
 	
 	public String exibeOrdenaCliente() {
-		return cliente + ", " + fornecedor + ", " + nomeProduto + ", " + data;
+		return cliente + ", " + fornecedor + ", " + descricaoProd + ", " + data;
 	}
 	
 	public String exibeOrdenaFornecedor() {
-		return fornecedor + ", " + cliente + ", " + nomeProduto + ", " + data;
+		return fornecedor + ", " + cliente + ", " + descricaoProd + ", " + data;
 	}
 	
 	public String exibeOrdenaData() {
-		return data + ", " + fornecedor + ", " + nomeProduto + ", " + data;
+		return data + ", " + cliente + ", " + fornecedor + ", " + descricaoProd;
 	}
 }
+

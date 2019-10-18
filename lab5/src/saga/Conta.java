@@ -45,15 +45,15 @@ public class Conta implements Comparable<Conta> {
 	 * @param data     Data da compra.
 	 * @param valor    Valor do produto.
 	 */
-	public void adicionaCompra(String cliente, String fornecedor, String nomeProd, String data, double preco) {
+	public void adicionaCompra(String cliente, String fornecedor, String nomeProd, String descricaoProd, String data, double preco) {
 		Validador.validaEntrada(nomeProd, "Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo.");
 		Validador.validaEntrada(data, "Erro ao cadastrar compra: data nao pode ser vazia ou nula.");
 		if (data.length() != 10) {
 			throw new IllegalArgumentException("Erro ao cadastrar compra: data invalida.");
 		}
 
-		String novoFormatoData = data.replace("/", "-");
-		listaCompras.add(new Compra(cliente, fornecedor, nomeProd, novoFormatoData, preco));
+		
+		listaCompras.add(new Compra(cliente, fornecedor, nomeProd, descricaoProd, data, preco));
 	}
 
 	/**

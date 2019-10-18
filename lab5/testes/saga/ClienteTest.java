@@ -226,7 +226,7 @@ class ClienteTest {
 	@Test
 	public void testAdicionaCompraFornecedorNulo() {
 		try {
-			cliente1.adicionaCompra(null, "10/10/2019", "Tapioca", 5.00);
+			cliente1.adicionaCompra(null, "10/10/2019", "Tapioca", "Tapioca com frango", 5.00);
 			fail("Deveria lancar excecao");
 		} catch (NullPointerException e) {
 			assertEquals("Erro ao cadastrar compra: fornecedor nao pode ser vazio ou nulo.", e.getMessage());
@@ -236,7 +236,7 @@ class ClienteTest {
 	@Test
 	public void testAdicionaCompraFornecedorVazio() {
 		try {
-			cliente1.adicionaCompra("", "10/10/2019", "Tapioca", 5.00);
+			cliente1.adicionaCompra("", "10/10/2019", "Tapioca", "Tapioca com frango", 5.00);
 			fail("Deveria lancar excecao");
 		} catch (IllegalArgumentException e) {
 			assertEquals("Erro ao cadastrar compra: fornecedor nao pode ser vazio ou nulo.", e.getMessage());
@@ -246,7 +246,7 @@ class ClienteTest {
 	@Test
 	public void testAdicionaCompraDataNula() {
 		try {
-			cliente1.adicionaCompra("Josenilda", null, "Tapioca", 5.00);
+			cliente1.adicionaCompra("Josenilda", null, "Tapioca", "Tapioca com frango", 5.00);
 			fail("Deveria lancar excecao");
 		} catch (NullPointerException e) {
 			assertEquals("Erro ao cadastrar compra: data nao pode ser vazia ou nula.", e.getMessage());
@@ -256,7 +256,7 @@ class ClienteTest {
 	@Test
 	public void testAdicionaCompraDataVazia() {
 		try {
-			cliente1.adicionaCompra("Josenilda", "", "Tapioca", 5.00);
+			cliente1.adicionaCompra("Josenilda", "", "Tapioca", "Tapioca com frango", 5.00);
 			fail("Deveria lancar excecao");
 		} catch (IllegalArgumentException e) {
 			assertEquals("Erro ao cadastrar compra: data nao pode ser vazia ou nula.", e.getMessage());
@@ -266,7 +266,7 @@ class ClienteTest {
 	@Test
 	public void testAdicionaCompraNomeNulo() {
 		try {
-			cliente1.adicionaCompra("Josenilda", "10/10/2019", null, 5.00);
+			cliente1.adicionaCompra("Josenilda", "10/10/2019", null, "Tapioca com frango", 5.00);
 			fail("Deveria lancar excecao");
 		} catch (NullPointerException e) {
 			assertEquals("Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo.", e.getMessage());
@@ -276,7 +276,7 @@ class ClienteTest {
 	@Test
 	public void testAdicionaCompraNomeVazio() {
 		try {
-			cliente1.adicionaCompra("Josenilda", "10/10/2019", "", 5.00);
+			cliente1.adicionaCompra("Josenilda", "10/10/2019", "", "Tapioca com frango", 5.00);
 			fail("Deveria lancar excecao");
 		} catch (IllegalArgumentException e) {
 			assertEquals("Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo.", e.getMessage());
@@ -286,7 +286,7 @@ class ClienteTest {
 	@Test
 	public void testAdicionaCompraDataInvalida() {
 		try {
-			cliente1.adicionaCompra("Josenilda", "10/103/2019", "Tapioca", 5.00);
+			cliente1.adicionaCompra("Josenilda", "10/103/2019", "Tapioca", "Tapioca com frango", 5.00);
 			fail("Deveria lancar excecao");
 		} catch (IllegalArgumentException e) {
 			assertEquals("Erro ao cadastrar compra: data invalida.", e.getMessage());
@@ -325,8 +325,8 @@ class ClienteTest {
 	
 	@Test
 	public void testExibeContasFeliz() {
-		cliente1.adicionaCompra("Josenilda", "12/10/2019", "Tapioca", 5.00);
-		cliente1.adicionaCompra("Josenilda", "20/10/2019", "Suco", 3.00);
+		cliente1.adicionaCompra("Josenilda", "12/10/2019", "Tapioca", "Tapioca com frango", 5.00);
+		cliente1.adicionaCompra("Josenilda", "20/10/2019", "Suco", "Suco de maracuja", 3.00);
 		assertEquals("Cliente: Raphael Agra | Josenilda | Tapioca - 12-10-2019 | Suco - 20-10-2019", cliente1.exibeContas("Josenilda"));
 	}
 	
@@ -341,9 +341,9 @@ class ClienteTest {
 	}
 	@Test
 	public void testExibeContasClientesFeliz() {
-		cliente1.adicionaCompra("Josenilda", "01/04/2019", "Biscoito salgado", 5.00);
-		cliente1.adicionaCompra("Dona Ines", "01/03/2019", "Lanche FIT", 3.00);
-		cliente1.adicionaCompra("Dona Ines", "29/04/2019", "Salada", 3.00);
+		cliente1.adicionaCompra("Josenilda", "01/04/2019", "Biscoito salgado", "Biscoito com sal", 5.00);
+		cliente1.adicionaCompra("Dona Ines", "01/03/2019", "Lanche FIT", "Tapioca + suco", 3.00);
+		cliente1.adicionaCompra("Dona Ines", "29/04/2019", "Salada", "Salada de frutas", 3.00);
 		assertEquals("Cliente: Raphael Agra | Dona Ines | Lanche FIT - 01-03-2019 | Salada - 29-04-2019 | Josenilda | Biscoito salgado - 01-04-2019", cliente1.exibeContasClientes());
 	}
 	
@@ -379,8 +379,8 @@ class ClienteTest {
 	
 	@Test
 	public void testGetDebitoFeliz() {
-		cliente1.adicionaCompra("Dona Ines", "01/03/2019", "Lanche FIT", 3.00);
-		cliente1.adicionaCompra("Dona Ines", "29/04/2019", "Salada", 3.00);
+		cliente1.adicionaCompra("Dona Ines", "01/03/2019", "Lanche FIT", "Tapioca + suco", 3.00);
+		cliente1.adicionaCompra("Dona Ines", "29/04/2019", "Salada", "Salada de frutas", 3.00);
 		assertEquals("6.00", cliente1.getDebito("Dona Ines"));
 	}
 }
