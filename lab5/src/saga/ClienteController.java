@@ -306,19 +306,4 @@ public class ClienteController {
 		String msg = String.join(" | ", stringCompras);
 		return msg;
 	}
-	
-//	07/04/1998, Lucio Correia, Marcos, Coxao de frango com presunto e queijo | 
-//	11/12/1998, Lucio Correia, Marcos, Refrigerante (lata) | 
-//	11/11/2011, Lucio Correia, Dona Alba, Feijao com arroz e queijo coalho | 
-//	01/11/2016, Ana Amari, Marcos, Coxao de frango com cheddar | 
-//	01/11/2016, Ana Amari, Marcos, Refrigerante (lata) | 
-//	04/11/2018, Dalton, Severo, Cocada de doce de leite com amendoim e agua gelada | 
-//	05/11/2018, Zana, Severo, Cocada de doce de leite com pedacos de amendoim | 
-//	06/11/2018, Dalton, Joabe, Um Bolo e uma Trufa | 
-//	07/11/2018, Joao Neto, Joabe, Doce sabor beijinho | 
-//	08/11/2018, Amigao Fernandes, Marcos, Coxao de frango com cheddar | 
-//	08/11/2018, Joao Neto, Joabe, Bolo de trigo com cobertura de chocolate |
-//	08/11/2018, Joao Neto, Severo, Garrafa de agua 500ml>
-
-
 }

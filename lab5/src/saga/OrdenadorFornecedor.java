@@ -7,8 +7,8 @@ public class OrdenadorFornecedor implements Comparator<Compra>{
 	@Override
 	public int compare(Compra o1, Compra o2) {
 		if (o1.getFornecedor().equals(o2.getFornecedor())) {
-			String msgO1 = o1.getCliente() + ", " + o1.getDescricaoProduto() + ", " + o1.getData();
-			String msgO2 = o2.getCliente() + ", " + o2.getDescricaoProduto() + ", " + o2.getData();
+			String msgO1 = o1.getCliente() + ", " + o1.getDescricaoProduto() + ", " + o1.getStringData();
+			String msgO2 = o2.getCliente() + ", " + o2.getDescricaoProduto() + ", " + o2.getStringData();
 			return msgO1.compareTo(msgO2);
 		}
 		return o1.getFornecedor().compareTo(o2.getFornecedor());

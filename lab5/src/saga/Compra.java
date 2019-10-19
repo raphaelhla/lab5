@@ -1,6 +1,8 @@
 package saga;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Compra {
 
@@ -8,24 +10,27 @@ public class Compra {
 	private String fornecedor;
 	private String nomeProduto;
 	private String descricaoProd;
-	private String data;
+	private Date data;
 	private double preco;
 	SimpleDateFormat formato;
 	
 	public Compra(String cliente, String fornecedor, String nomeProduto, String descricaoProd, String data, double preco) {
+		formato = new SimpleDateFormat("dd/MM/yyyy");
 		this.cliente = cliente;
 		this.fornecedor = fornecedor;
 		this.nomeProduto = nomeProduto;
 		this.descricaoProd = descricaoProd;
-		this.data = data;
 		this.preco = preco;
-		formato = new SimpleDateFormat();
+		try {
+			this.data = formato.parse(data);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public String toString() {
-		
-		return nomeProduto + " - " + data.replace("/", "-");
+		return nomeProduto + " - " + getStringData().replace("/", "-");
 	}
 	
 	public double getPreco() {
@@ -48,20 +53,24 @@ public class Compra {
 		return descricaoProd;
 	}
 
-	public String getData() {
+	public String getStringData() {
+		return formato.format(data);
+	}
+	
+	public Date getData() {
 		return data;
 	}
 	
 	public String exibeOrdenaCliente() {
-		return cliente + ", " + fornecedor + ", " + descricaoProd + ", " + data;
+		return cliente + ", " + fornecedor + ", " + descricaoProd + ", " + getStringData();
 	}
 	
 	public String exibeOrdenaFornecedor() {
-		return fornecedor + ", " + cliente + ", " + descricaoProd + ", " + data;
+		return fornecedor + ", " + cliente + ", " + descricaoProd + ", " + getStringData();
 	}
 	
 	public String exibeOrdenaData() {
-		return data + ", " + cliente + ", " + fornecedor + ", " + descricaoProd;
+		return getStringData() + ", " + cliente + ", " + fornecedor + ", " + descricaoProd;
 	}
 }
 
