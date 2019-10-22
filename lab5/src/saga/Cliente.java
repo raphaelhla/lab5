@@ -269,18 +269,27 @@ public class Cliente implements Comparable<Cliente> {
 		return contas.get(fornecedor).getDebito();
 	}
 
+	/**
+	 * Metodo responsavel por pagar totalmente o debito do cliente com um
+	 * fornecedor, a partir do nome do fornecedor. Quando a divida estiver paga, a
+	 * conta do cliente com o fornecedor deve ser removida.
+	 * 
+	 * @param fornecedor Nome do fornecedor.
+	 */
 	public void realizaPagamento(String fornecedor) {
 		Validador.validaEntrada(fornecedor, "Erro no pagamento de conta: fornecedor nao pode ser vazio ou nulo.");
 		if (!contas.containsKey(fornecedor)) {
-			throw new IllegalArgumentException("Erro no pagamento de conta: nao ha debito do cliente associado a este fornecedor.");
+			throw new IllegalArgumentException(
+					"Erro no pagamento de conta: nao ha debito do cliente associado a este fornecedor.");
 		}
 		contas.remove(fornecedor);
 	}
 
-	public void ordenaPor(String criterio) {
-
-	}
-	
+	/**
+	 * Metodo que retorna uma lista com todas as compras do cliente.
+	 * 
+	 * @return uma lista com todas as compras do cliente.
+	 */
 	public List<Compra> getCompras() {
 		List<Compra> compras = new ArrayList<>();
 		for (Conta e : contas.values()) {

@@ -241,6 +241,14 @@ public class ClienteController {
 		return this.clientes.get(cpf).getDebito(fornecedor);
 	}
 
+	/**
+	 * Metodo responsavel por pagar totalmente o debito de um determinado cliente
+	 * com um fornecedor, a partir do cpf do cliente e do nome do fornecedor. Quando
+	 * a divida estiver paga, a conta do cliente com o fornecedor deve ser removida.
+	 * 
+	 * @param cpf Cpf do cliente.
+	 * @param fornecedor Nome do fornecedor.
+	 */
 	public void realizaPagamento(String cpf, String fornecedor) {
 		Validador.validaEntrada(cpf, "Erro no pagamento de conta: cpf nao pode ser vazio ou nulo.");
 		Validador.validaEntrada(fornecedor, "Erro no pagamento de conta: fornecedor nao pode ser vazio ou nulo.");
@@ -256,6 +264,13 @@ public class ClienteController {
 		this.clientes.get(cpf).realizaPagamento(fornecedor);
 	}
 
+	/**
+	 * Metodo que define o criterio de ordenacao da listagem de todas as compras de
+	 * todos os clientes, a partir de um criterio que sera usado como base para a
+	 * ordenacao das compras.
+	 * 
+	 * @param criterio Criterio de ordenacao da compras.
+	 */
 	public void ordenaPor(String criterio) {
 		Validador.validaEntrada(criterio, "Erro na listagem de compras: criterio nao pode ser vazio ou nulo.");
 		this.criterio = criterio;
@@ -273,10 +288,19 @@ public class ClienteController {
 			throw new IllegalArgumentException("Erro na listagem de compras: criterio nao oferecido pelo sistema.");
 		}
 	}
-	
+
+	/**
+	 * Metodo que retorna a representacao em string da lista de todas as compras de
+	 * todos os clientes cadastrados no sistema.
+	 * 
+	 * @return a representacao em string da lista de todas as compras de todos os
+	 *         clientes cadastrados no sistema.
+	 * 
+	 */
 	public String listarCompras() {
 		if (criterio == null) {
-			throw new IllegalArgumentException("Erro na listagem de compras: criterio ainda nao definido pelo sistema.");
+			throw new IllegalArgumentException(
+					"Erro na listagem de compras: criterio ainda nao definido pelo sistema.");
 		}
 		List<Compra> listaCompras = new ArrayList<>();
 		for (Cliente e : clientes.values()) {
@@ -302,7 +326,7 @@ public class ClienteController {
 				stringCompras.add(e.exibeOrdenaData());
 			}
 			break;
-		} 
+		}
 		String msg = String.join(" | ", stringCompras);
 		return msg;
 	}

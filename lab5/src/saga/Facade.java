@@ -310,16 +310,39 @@ public class Facade {
 	public String getDebito(String cpf, String fornecedor) {
 		return clienteController.getDebito(cpf, fornecedor);
 	}
-	
+
+	/**
+	 * Metodo responsavel por pagar totalmente o debito de um determinado cliente
+	 * com um fornecedor, a partir do cpf do cliente e do nome do fornecedor. Quando
+	 * a divida estiver paga, a conta do cliente com o fornecedor deve ser removida.
+	 * 
+	 * @param cpf        Cpf do cliente.
+	 * @param fornecedor Nome do fornecedor.
+	 */
 	public void realizaPagamento(String cpf, String fornecedor) {
 		clienteController.realizaPagamento(cpf, fornecedor);
 	}
-	
+
+	/**
+	 * Metodo que define o criterio de ordenacao da listagem de todas as compras de
+	 * todos os clientes, a partir de um criterio que sera usado como base para a
+	 * ordenacao das compras.
+	 * 
+	 * @param criterio Criterio de ordenacao da compras.
+	 */
 	public void ordenaPor(String criterio) {
 		clienteController.ordenaPor(criterio);
 	}
-	
-	public String listarCompras () {
+
+	/**
+	 * Metodo que retorna a representacao em string da lista de todas as compras de
+	 * todos os clientes cadastrados no sistema.
+	 * 
+	 * @return a representacao em string da lista de todas as compras de todos os
+	 *         clientes cadastrados no sistema.
+	 * 
+	 */
+	public String listarCompras() {
 		return clienteController.listarCompras();
 	}
 }

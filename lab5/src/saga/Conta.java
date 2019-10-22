@@ -25,7 +25,6 @@ public class Conta implements Comparable<Conta> {
 	 */
 	private List<Compra> listaCompras;
 
-
 	/**
 	 * Controi uma conta a partir do nome do fornecedor.
 	 * 
@@ -45,14 +44,14 @@ public class Conta implements Comparable<Conta> {
 	 * @param data     Data da compra.
 	 * @param valor    Valor do produto.
 	 */
-	public void adicionaCompra(String cliente, String fornecedor, String nomeProd, String descricaoProd, String data, double preco) {
+	public void adicionaCompra(String cliente, String fornecedor, String nomeProd, String descricaoProd, String data,
+			double preco) {
 		Validador.validaEntrada(nomeProd, "Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo.");
 		Validador.validaEntrada(data, "Erro ao cadastrar compra: data nao pode ser vazia ou nula.");
 		if (data.length() != 10) {
 			throw new IllegalArgumentException("Erro ao cadastrar compra: data invalida.");
 		}
 
-		
 		listaCompras.add(new Compra(cliente, fornecedor, nomeProd, descricaoProd, data, preco));
 	}
 
@@ -116,8 +115,13 @@ public class Conta implements Comparable<Conta> {
 	public int compareTo(Conta o) {
 		return this.getNomeFornecedor().compareTo(o.getNomeFornecedor());
 	}
-	
-	public List<Compra> getCompras(){
+
+	/**
+	 * Metodo que retorna a lista de compras que a conta possui.
+	 * 
+	 * @return a lista de compras que a conta possui.
+	 */
+	public List<Compra> getCompras() {
 		return this.listaCompras;
 	}
 }
