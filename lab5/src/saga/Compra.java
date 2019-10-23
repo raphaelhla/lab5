@@ -62,6 +62,14 @@ public class Compra {
 	 */
 	public Compra(String cliente, String fornecedor, String nomeProduto, String descricaoProd, String data,
 			double preco) {
+		Validador.validaEntrada(cliente, "Erro ao cadastrar compra: cliente nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(fornecedor, "Erro ao cadastrar compra: fornecedor nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(nomeProduto, "Erro ao cadastrar compra: nome do produto nao pode ser vazio ou nulo.");
+		Validador.validaEntrada(descricaoProd, "Erro ao cadastrar compra: descricao do produto nao pode ser vazia ou nula.");
+		Validador.validaEntrada(data, "Erro ao cadastrar compra: data nao pode ser vazia ou nula.");
+		if (data.length() != 10) {
+			throw new IllegalArgumentException("Erro ao cadastrar compra: data invalida.");
+		}
 		formato = new SimpleDateFormat("dd/MM/yyyy");
 		this.cliente = cliente;
 		this.fornecedor = fornecedor;
