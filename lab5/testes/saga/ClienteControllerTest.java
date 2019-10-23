@@ -711,4 +711,164 @@ class ClienteControllerTest {
 		clienteController.adicionaCompra("10290935474", "Josenilda", "15/10/2019", "Suco", "Suco de maracuja");
 		assertEquals("8.00", clienteController.getDebito("10290935474", "Josenilda"));
 	}
+	
+	@Test
+	public void testRealizaPagamentoCpfNulo() {
+		try {
+			clienteController.realizaPagamento(null, "Teste");
+			fail("Deveria lancar excecao");
+		} catch (NullPointerException e) {
+			assertEquals("Erro no pagamento de conta: cpf nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testRealizaPagamentoCpfVazio() {
+		try {
+			clienteController.realizaPagamento("", "Teste");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no pagamento de conta: cpf nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testRealizaPagamentoFornecedorNulo() {
+		try {
+			clienteController.realizaPagamento("12345678900", null);
+			fail("Deveria lancar excecao");
+		} catch (NullPointerException e) {
+			assertEquals("Erro no pagamento de conta: fornecedor nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testRealizaPagamentoFornecedorVazio() {
+		try {
+			clienteController.realizaPagamento("12345678900", "");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no pagamento de conta: fornecedor nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testRealizaPagamentoCpfInvalido() {
+		try {
+			clienteController.realizaPagamento("12345", "Teste");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no pagamento de conta: cpf invalido.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testRealizaPagamentoClienteInexistente() {
+		try {
+			clienteController.realizaPagamento("12345678900", "Teste");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no pagamento de conta: cliente nao existe.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testRealizaPagamentoFornecedorInexistente() {
+		try {
+			clienteController.cadastraCliente("Raphael Agra", "12345678900", "raphael.agra@gmail.com", "LCC3");
+			clienteController.realizaPagamento("12345678900", "Teste");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no pagamento de conta: fornecedor nao existe.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testRealizaPagamentoFeliz() {
+		try {
+			clienteController.cadastraCliente("Raphael Agra", "12345678900", "raphael.agra@gmail.com", "LCC3");
+			fornecedorController.cadastraFornecedor("Josenilda", "josenilda@example.com", "83 93322-1199");
+			fornecedorController.cadastraProduto("Josenilda", "Tapioca", "Tapioca com frango", 5.00);
+			clienteController.adicionaCompra("12345678900", "Josenilda", "12/10/2019", "Tapioca", "Tapioca com frango");
+			clienteController.realizaPagamento("12345678900", "Josenilda");
+			clienteController.exibeContas("12345678900", "Josenilda");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro ao exibir conta do cliente: cliente nao tem nenhuma conta com o fornecedor.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testOrdenarPorCriterioNulo() {
+		try {
+			clienteController.ordenaPor(null);
+			fail("Deveria lancar excecao");
+		} catch (NullPointerException e) {
+			assertEquals("Erro na listagem de compras: criterio nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testOrdenarPorCriterioVazio() {
+		try {
+			clienteController.ordenaPor("");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro na listagem de compras: criterio nao pode ser vazio ou nulo.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testOrdenarPorCriterioInvalido() {
+		try {
+			clienteController.ordenaPor("IRINEU");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro na listagem de compras: criterio nao oferecido pelo sistema.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testListarComprasPorCliente() {
+		clienteController.cadastraCliente("Raphael Agra", "12345678900", "raphael.agra@gmail.com", "LCC3");
+		fornecedorController.cadastraFornecedor("Josenilda", "josenilda@example.com", "83 93322-1199");
+		fornecedorController.cadastraProduto("Josenilda", "Tapioca", "Tapioca com frango", 5.00);
+		clienteController.adicionaCompra("12345678900", "Josenilda", "12/10/2019", "Tapioca", "Tapioca com frango");
+		clienteController.ordenaPor("Cliente");
+		assertEquals("Raphael Agra, Josenilda, Tapioca com frango, 12/10/2019", clienteController.listarCompras());
+	}
+	
+	@Test
+	public void testListarComprasPorFornecedor() {
+		clienteController.cadastraCliente("Raphael Agra", "12345678900", "raphael.agra@gmail.com", "LCC3");
+		fornecedorController.cadastraFornecedor("Josenilda", "josenilda@example.com", "83 93322-1199");
+		fornecedorController.cadastraProduto("Josenilda", "Tapioca", "Tapioca com frango", 5.00);
+		clienteController.adicionaCompra("12345678900", "Josenilda", "12/10/2019", "Tapioca", "Tapioca com frango");
+		clienteController.ordenaPor("Fornecedor");
+		assertEquals("Josenilda, Raphael Agra, Tapioca com frango, 12/10/2019", clienteController.listarCompras());
+	}
+	
+	@Test
+	public void testListarComprasPorData() {
+		clienteController.cadastraCliente("Raphael Agra", "12345678900", "raphael.agra@gmail.com", "LCC3");
+		fornecedorController.cadastraFornecedor("Josenilda", "josenilda@example.com", "83 93322-1199");
+		fornecedorController.cadastraProduto("Josenilda", "Tapioca", "Tapioca com frango", 5.00);
+		clienteController.adicionaCompra("12345678900", "Josenilda", "12/10/2019", "Tapioca", "Tapioca com frango");
+		clienteController.ordenaPor("Data");
+		assertEquals("12/10/2019, Raphael Agra, Josenilda, Tapioca com frango", clienteController.listarCompras());
+	}
+	
+	@Test
+	public void testListarComprasCriterioIndefinido() {
+		try {
+			clienteController.cadastraCliente("Raphael Agra", "12345678900", "raphael.agra@gmail.com", "LCC3");
+			fornecedorController.cadastraFornecedor("Josenilda", "josenilda@example.com", "83 93322-1199");
+			fornecedorController.cadastraProduto("Josenilda", "Tapioca", "Tapioca com frango", 5.00);
+			clienteController.adicionaCompra("12345678900", "Josenilda", "12/10/2019", "Tapioca", "Tapioca com frango");
+			clienteController.listarCompras();
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro na listagem de compras: criterio ainda nao definido pelo sistema.", e.getMessage());
+		}
+	}
 }

@@ -195,7 +195,7 @@ public class Cliente implements Comparable<Cliente> {
 	 * 
 	 * @param fornecedor Nome do fornecedor.
 	 * @param data       Data da compra.
-	 * @param nome       Nome do produto.
+	 * @param nomeProd   Nome do produto.
 	 * @param descricao  Descricao do produto.
 	 * @param preco      Preco do produto.
 	 */
@@ -277,7 +277,6 @@ public class Cliente implements Comparable<Cliente> {
 	 * @param fornecedor Nome do fornecedor.
 	 */
 	public void realizaPagamento(String fornecedor) {
-		Validador.validaEntrada(fornecedor, "Erro no pagamento de conta: fornecedor nao pode ser vazio ou nulo.");
 		if (!contas.containsKey(fornecedor)) {
 			throw new IllegalArgumentException(
 					"Erro no pagamento de conta: nao ha debito do cliente associado a este fornecedor.");

@@ -2,8 +2,18 @@ package saga;
 
 import java.util.Comparator;
 
-public class OrdenadorCliente implements Comparator<Compra>{
+/**
+ * Representacao de um ordenador de compras utilizando o cliente como criterio.
+ * 
+ * @author Raphael Agra - 119110413
+ *
+ */
+public class OrdenadorCliente implements Comparator<Compra> {
 
+	/**
+	 * Metodo que faz a comparacao entre duas contas utilizando o cliente como
+	 * criterio de ordenacao.
+	 */
 	@Override
 	public int compare(Compra o1, Compra o2) {
 		if (o1.getCliente().equals(o2.getCliente())) {

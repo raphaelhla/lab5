@@ -265,9 +265,9 @@ public class Fornecedor implements Comparable<Fornecedor> {
 		IdProduto idProduto = new IdProduto(nomeProduto, descricao);
 		if (!produtos.containsKey(idProduto)) {
 			throw new IllegalArgumentException("Erro na remocao de produto: produto nao existe.");
-		} else if (produtosSimples.containsKey(idProduto)) {
+		} if (produtosSimples.containsKey(idProduto)) {
 			produtosSimples.remove(idProduto);
-		} else if (combos.containsKey(idProduto)) {
+		} if (combos.containsKey(idProduto)) {
 			combos.remove(idProduto);
 		}
 		produtos.remove(idProduto);

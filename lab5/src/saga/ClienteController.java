@@ -3,7 +3,6 @@ package saga;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +21,7 @@ public class ClienteController {
 	 */
 	private Map<String, Cliente> clientes;
 	private FornecedorController fornecedorController;
-	private Comparator ordenador;
+	private Comparator<Compra> ordenador;
 	private String criterio;
 
 	/**

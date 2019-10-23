@@ -1,8 +1,6 @@
 package saga;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -28,7 +26,7 @@ public class Conta implements Comparable<Conta> {
 	/**
 	 * Controi uma conta a partir do nome do fornecedor.
 	 * 
-	 * @param nomeFornecedor Nome do fornecedor.
+	 * @param fornecedor Nome do fornecedor.
 	 */
 	public Conta(String fornecedor) {
 		Validador.validaEntrada(fornecedor, "Erro ao cadastrar compra: fornecedor nao pode ser vazio ou nulo.");
@@ -37,12 +35,15 @@ public class Conta implements Comparable<Conta> {
 	}
 
 	/**
-	 * Metodo que adiciona uma compra na conta, a partir do nome do produto, da data
-	 * e do valor do produto.
+	 * Metodo que adiciona uma compra na conta, a partir do nome cliente, nome do
+	 * fornecedor, nome e descricao do produto, da data e do valor do produto.
 	 * 
-	 * @param nomeProd Nome do produto.
-	 * @param data     Data da compra.
-	 * @param valor    Valor do produto.
+	 * @param cliente       Nome do cliente.
+	 * @param fornecedor    Nome do fornecedor.
+	 * @param nomeProd      Nome do produto.
+	 * @param descricaoProd Descricao do produto.
+	 * @param data          Data da compra.
+	 * @param preco         Preco do produto.
 	 */
 	public void adicionaCompra(String cliente, String fornecedor, String nomeProd, String descricaoProd, String data,
 			double preco) {

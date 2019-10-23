@@ -383,4 +383,33 @@ class ClienteTest {
 		cliente1.adicionaCompra("Dona Ines", "29/04/2019", "Salada", "Salada de frutas", 3.00);
 		assertEquals("6.00", cliente1.getDebito("Dona Ines"));
 	}
+	
+	@Test
+	public void testRealizaPagamentoFeliz() {
+		try {
+			cliente1.adicionaCompra("Dona Ines", "01/03/2019", "Lanche FIT", "Tapioca + suco", 3.00);
+			cliente1.realizaPagamento("Dona Ines");
+			cliente1.exibeContas("Dona Ines");
+			fail("Deveria lancar excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro ao exibir conta do cliente: cliente nao tem nenhuma conta com o fornecedor.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testRealizaPagamentoSemDebito() {
+		try {
+			cliente1.realizaPagamento("IRINEU");
+			fail("Deveria ter lancado excecao");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Erro no pagamento de conta: nao ha debito do cliente associado a este fornecedor.", e.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetCompras() {
+		cliente1.adicionaCompra("Dona Ines", "01/03/2019", "Lanche FIT", "Tapioca + suco", 3.00);
+		cliente1.adicionaCompra("Dona Ines", "29/04/2019", "Salada", "Salada de frutas", 3.00);
+		assertEquals("[Lanche FIT - 01-03-2019, Salada - 29-04-2019]", cliente1.getCompras().toString());
+	}
 }
